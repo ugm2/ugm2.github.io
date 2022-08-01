@@ -3599,11 +3599,11 @@ Main components
 }
 @media only screen and (min-width: 1170px) {
 	.cd-timeline-img {
-	width: 30px;
-	height: 30px;
-	left: 50%;
+	width: 50px;
+	height: 50px;
+	left: 49.3%;
 	margin-left: -15px;
-	margin-top: 15px;
+	margin-top: 4px;
 	/* Force Hardware Acceleration in WebKit */
 	-webkit-transform: translateZ(0);
 	-webkit-backface-visibility: hidden;
@@ -3722,8 +3722,8 @@ Main components
 	.cd-timeline-content .cd-date {
 	position: absolute;
 	width: 100%;
-	left: 122%;
-	top: 6px;
+	left: 103.5%;
+	top: 20px;
 	font-size: 16px;
 	font-size: 1rem;
 	}
@@ -3742,7 +3742,7 @@ Main components
 	}
 	.cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
 	left: auto;
-	right: 122%;
+	right: 103%;
 	text-align: right;
 	}
 }
