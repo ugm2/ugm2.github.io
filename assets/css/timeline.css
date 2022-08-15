@@ -116,9 +116,8 @@ html, body {
 }
 
 .timeline-content .timeline-content-info {
-    
     padding: 10px 5px;
-    font-size: 12px;
+    font-size: 16px;
     border-radius: 2px;
 }
 
@@ -139,7 +138,7 @@ html, body {
 }
 
 .timeline-content .content-skills {
-    font-size: 12px;
+    font-size: 14px;
     padding: 0;
     margin-bottom: 0;
     display: flex;
@@ -196,16 +195,13 @@ html, body {
 
 @media only screen and (min-width: 768px) {
     .timeline-content h2 {
-        font-size: 20px;
-        font-size: 1.25rem;
+        font-size: 24px;
     }
     .timeline-content p {
-        font-size: 16px;
-        font-size: 1rem;
+        font-size: 18px;
     }
     .timeline-content .cd-read-more, .timeline-content .cd-date {
         font-size: 14px;
-        font-size: 0.875rem;
     }
 }
 
@@ -217,7 +213,7 @@ html, body {
         margin: 0 5%;
     }
     .timeline-content::before {
-        top: 24px;
+        top: 30px;
         left: 100%;
         border-color: transparent;
         border-left-color: #333C42;
@@ -234,7 +230,7 @@ html, body {
         float: right;
     }
     .timeline-block:nth-child(even) .timeline-content::before {
-        top: 24px;
+        top: 30px;
         left: auto;
         right: 100%;
         border-color: transparent;
