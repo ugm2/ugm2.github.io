@@ -2917,7 +2917,8 @@ input, select, textarea {
 		background-color: #4686a0;
 		color: rgba(255, 255, 255, 0.75);
 		background-attachment: scroll;
-		background-image: url('images/DJI_0165.jpg');
+		/* background-image: url('images/DJI_0165.jpg'); */
+		background-image: url('images/DJI_0270_no_matte.jpeg');
 		background-position: center center;
 		background-size: cover;
 		overflow: hidden;
@@ -3121,11 +3122,23 @@ input, select, textarea {
 		padding: 6em 0 6em 0 ;
 		background-color: #4686a0;
 		color: rgba(255, 255, 255, 0.75);
-		background-attachment: fixed,							fixed,							fixed;
-		background-image: url("images/overlay2.png"), url("images/overlay4.svg"), linear-gradient(45deg, #4361c2, #4fa49a 50%, #9dc66b 95%);
-		background-position: top left,						center center,					center center;
-		background-size: auto,							cover,							cover;
+		background-attachment: scroll;
+		/* background-image: url('images/DJI_0270_no_matte.jpeg'); */
+		background-image: url('images/DJI_0165.jpg');
+		background-position: center center;
+		background-size: cover;
+		overflow: hidden;
+		position: relative;
 		text-align: center;
+	}
+	#footer::before {
+		content: "";
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		left: 0px;
+		background-color: rgba(0,0,0,0.55);
 	}
 
 		#footer a {
@@ -3225,6 +3238,7 @@ input, select, textarea {
 				line-height: 1em;
 				margin-left: 1em;
 				padding: 0 0 0 1em;
+				color: white;
 			}
 
 				#footer .copyright li:first-child {
