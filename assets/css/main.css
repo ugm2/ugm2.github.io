@@ -2917,7 +2917,6 @@ input, select, textarea {
 		background-color: #4686a0;
 		color: rgba(255, 255, 255, 0.75);
 		background-attachment: scroll;
-		/* background-image: url('images/DJI_0165.jpg'); */
 		background-image: url('images/DJI_0270_no_matte.jpeg');
 		background-position: center center;
 		background-size: cover;
@@ -3048,10 +3047,10 @@ input, select, textarea {
 			}
 
 		#header .inner {
-			-moz-transition: -moz-transform 1.5s ease, opacity 2s ease;
-			-webkit-transition: -webkit-transform 1.5s ease, opacity 2s ease;
-			-ms-transition: -ms-transform 1.5s ease, opacity 2s ease;
-			transition: transform 1.5s ease, opacity 2s ease;
+			-moz-transition: -moz-transform 0.5s ease, opacity 1s ease;
+			-webkit-transition: -webkit-transform 0.5s ease, opacity 1s ease;
+			-ms-transition: -ms-transform 0.5s ease, opacity 1s ease;
+			transition: transform 0.5s ease, opacity 1s ease;
 			-moz-transition-delay: 0.25s;
 			-webkit-transition-delay: 0.25s;
 			-ms-transition-delay: 0.25s;
@@ -3066,10 +3065,10 @@ input, select, textarea {
 		}
 
 			#header .inner .actions {
-				-moz-transition: -moz-transform 1.25s ease;
-				-webkit-transition: -webkit-transform 1.25s ease;
-				-ms-transition: -ms-transform 1.25s ease;
-				transition: transform 1.25s ease;
+				-moz-transition: -moz-transform 0.75s ease;
+				-webkit-transition: -webkit-transform 0.75s ease;
+				-ms-transition: -ms-transform 0.75s ease;
+				transition: transform 0.75s ease;
 				-moz-transition-delay: 1s;
 				-webkit-transition-delay: 1s;
 				-ms-transition-delay: 1s;
