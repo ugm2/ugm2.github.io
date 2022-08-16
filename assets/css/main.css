@@ -3081,10 +3081,10 @@ input, select, textarea {
 			}
 
 		#header:after {
-			-moz-transition: opacity 1s ease;
-			-webkit-transition: opacity 1s ease;
-			-ms-transition: opacity 1s ease;
-			transition: opacity 1s ease;
+			-moz-transition: opacity 0.5s ease;
+			-webkit-transition: opacity 0.5s ease;
+			-ms-transition: opacity 0.5s ease;
+			transition: opacity 0.5s ease;
 			background-image: linear-gradient(45deg, #4fa49a, #4361c2);
 			content: '';
 			height: 100%;
@@ -3104,10 +3104,10 @@ input, select, textarea {
 	}
 
 		body.is-preload #header .inner .actions {
-			-moz-transform: translateY(30em);
-			-webkit-transform: translateY(30em);
-			-ms-transform: translateY(30em);
-			transform: translateY(30em);
+			-moz-transform: translateY(5em);
+			-webkit-transform: translateY(5em);
+			-ms-transform: translateY(5em);
+			transform: translateY(5em);
 			opacity: 0;
 		}
 

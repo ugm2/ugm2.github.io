@@ -82,6 +82,13 @@
 		align-items: center;
 		justify-content: center;
     }
+	.grid-item {
+		font-size: 3rem;
+	}
+	.text_container {
+		padding-left: 5.35rem;
+		padding-right: 5.35rem;
+	}
 }
 
 @media only screen and (max-width: 590px) {
@@ -91,7 +98,12 @@
 		justify-content: center;
 		position: relative;
 		height: 380px;
+		font-size: 2.5rem;
     }
+	.text_container {
+		padding-left: 3.85rem;
+		padding-right: 3.85rem;
+	}
 }
 
 @media only screen and (max-width: 452px) {
@@ -101,5 +113,10 @@
 		justify-content: center;
 		position: relative;
 		height: 280px;
+		font-size: 2rem;
     }
+	.text_container {
+		padding-left: 2.72rem;
+		padding-right: 2.72rem;
+	}
 }
