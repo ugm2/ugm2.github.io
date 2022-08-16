@@ -3224,6 +3224,19 @@ input, select, textarea {
 			margin: 0;
 		}
 
+		#footer .fa-twitter:hover {
+			color: #1da1f2;
+		}
+		#footer .fa-instagram:hover {
+			color: #e4405f;
+		}
+		#footer .fa-github:hover {
+			color: #333333;
+		}
+		#footer .fa-envelope:hover {
+			color: #d44638;
+		}
+
 		#footer .copyright {
 			font-size: 0.8em;
 			list-style: none;
