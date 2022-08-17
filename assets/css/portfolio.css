@@ -34,7 +34,6 @@
 	font-weight: 600;
 	color: #ffffff;
 	background: rgb(0, 0, 0);
-	/* box-shadow: inset 0px 0px 0px 1px #edeef4; */
 	transform: translate(0, 0);
 	transform: translate3d(0, 0, 0);
 	transition: transform 0.14s ease-in, text-shadow 0.1s ease-in;
@@ -42,6 +41,7 @@
 	cursor: pointer;
 	line-height: 1.7;
 	padding-left: 0;
+	box-shadow: 0px 10px 10px 0px #bbbbbb;
 }
 .grid-item:before {
 	content: "";
@@ -61,16 +61,14 @@
 	transform: translate(0, -20px);
 	transform: translate3d(0, -20px, 0);
 }
-.grid-item:hover:before {
-	opacity: 1;
-}
+
 .text_container {
 	background: #0000006a;
 	padding-left: 3.5rem;
 	padding-right: 3.5rem;
 }
 
-.grid .item1 {
+.grid-item:nth-of-type(1) {
 	background-image: url("images/grocery_classifier.png");
 	background-size: cover;
 	opacity: 1;
