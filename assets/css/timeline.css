@@ -116,8 +116,7 @@ html, body {
 }
 
 .timeline-content .timeline-content-info {
-    padding: 10px 5px;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 2px;
 }
 
@@ -208,7 +207,7 @@ html, body {
 @media only screen and (min-width: 1170px) {
     .timeline-content {
         margin-left: 0;
-        padding: 1.6em;
+        padding: 0.9em;
         width: 36%;
         margin: 0 5%;
     }
@@ -223,7 +222,7 @@ html, body {
         width: 100%;
         left: 122%;
         top: 6px;
-        font-size: 16px;
+        font-size: 14px;
         font-size: 1rem;
     }
     .timeline-block:nth-child(even) .timeline-content {
