@@ -129,13 +129,6 @@ html, body {
     display: inline-block;
 }
 
-@media (max-width: 500px) {
-    .timeline-content .timeline-content-info .timeline-content-info-title, .timeline-content .timeline-content-info .timeline-content-info-date {
-        display: block;
-        width: 100%;
-    }
-}
-
 .timeline-content .content-skills {
     font-size: 14px;
     padding: 0;
@@ -154,6 +147,7 @@ html, body {
     margin: 3px 2px;
     text-align: center;
     flex-grow: 1;
+    font-weight: bold;
 }
 
 .timeline-content:after {

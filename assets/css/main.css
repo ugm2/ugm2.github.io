@@ -3221,6 +3221,7 @@ input, select, textarea {
 				margin-left: 1em;
 				padding: 0 0 0 1em;
 				color: white;
+				font-weight: bold;
 			}
 
 				#footer .copyright li:first-child {
@@ -3322,7 +3323,7 @@ input, select, textarea {
 		/* Main */
 
 			.main {
-				padding: 5em 3em 3em 3em ;
+				padding: 0em 3em 3em 3em ;
 			}
 
 		/* Header */
@@ -3347,6 +3348,14 @@ input, select, textarea {
 
 			#two {
 				text-align: center;
+			}
+		
+		/* Image */
+			.image.fit img {
+				width: 50%;
+			}
+			.image img {
+				display: initial;
 			}
 
 	}
@@ -3413,7 +3422,7 @@ input, select, textarea {
 		/* Main */
 
 			.main {
-				padding: 3em 1.5em 1em 1.5em ;
+				padding: 0em 1.5em 1em 1.5em ;
 			}
 
 		/* Header */
@@ -3450,7 +3459,7 @@ input, select, textarea {
 		/* Main */
 
 			.main {
-				padding: 2em 1.5em 0.1em 1.5em ;
+				padding: 0em 1.5em 0.1em 1.5em ;
 			}
 
 		/* Header */
@@ -3495,7 +3504,7 @@ input, select, textarea {
 		/* Main */
 
 			.main {
-				padding: 2em 1em 0.1em 1em ;
+				padding: 0em 1em 0.1em 1em ;
 			}
 
 		/* Header */
