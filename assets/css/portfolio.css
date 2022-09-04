@@ -72,8 +72,18 @@
 	padding-right: 3.5rem;
 }
 
+.item2 .text_container {
+	padding-left: 5.9rem;
+	padding-right: 5.9rem;
+}
+
 .grid-item:nth-of-type(1) {
 	background-image: url("images/grocery_classifier.png");
+	background-size: cover;
+	opacity: 1;
+}
+.grid-item:nth-of-type(2) {
+	background-image: url("images/neural_search.png");
 	background-size: cover;
 	opacity: 1;
 }
