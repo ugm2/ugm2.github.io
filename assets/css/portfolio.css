@@ -102,6 +102,10 @@
 		padding-left: 5.35rem;
 		padding-right: 5.35rem;
 	}
+	.item2 .text_container {
+		padding-left: 7.3rem;
+		padding-right: 7.3rem;
+	}
 }
 
 @media only screen and (max-width: 590px) {
@@ -117,6 +121,10 @@
 		padding-left: 3.85rem;
 		padding-right: 3.85rem;
 	}
+	.item2 .text_container {
+		padding-left: 5.8rem;
+		padding-right: 5.8rem;
+	}
 }
 
 @media only screen and (max-width: 452px) {
@@ -131,5 +139,9 @@
 	.text_container {
 		padding-left: 2.72rem;
 		padding-right: 2.72rem;
+	}
+	.item2 .text_container {
+		padding-left: 4.1rem;
+		padding-right: 4.1rem;
 	}
 }
