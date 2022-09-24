@@ -3193,6 +3193,9 @@ input, select, textarea {
 			padding-top: 32px;
 		}
 
+		#footer .fa-linkedin:hover {
+			color: #3570AE;
+		}
 		#footer .fa-twitter:hover {
 			color: #1da1f2;
 		}
