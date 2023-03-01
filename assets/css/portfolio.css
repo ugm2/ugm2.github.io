@@ -77,6 +77,11 @@
 	padding-right: 5.9rem;
 }
 
+.item3 .text_container {
+	padding-left: 3.2rem;
+	padding-right: 3.2rem;
+}
+
 .grid-item:nth-of-type(1) {
 	background-image: url("images/grocery_classifier.png");
 	background-size: cover;
@@ -84,6 +89,11 @@
 }
 .grid-item:nth-of-type(2) {
 	background-image: url("images/neural_search.png");
+	background-size: cover;
+	opacity: 1;
+}
+.grid-item:nth-of-type(3) {
+	background-image: url("images/wepaintyou.png");
 	background-size: cover;
 	opacity: 1;
 }
@@ -106,6 +116,10 @@
 		padding-left: 7.3rem;
 		padding-right: 7.3rem;
 	}
+	.item3 .text_container {
+		padding-left: 5.1rem;
+		padding-right: 5.1rem;
+	}
 }
 
 @media only screen and (max-width: 590px) {
@@ -125,6 +139,10 @@
 		padding-left: 5.8rem;
 		padding-right: 5.8rem;
 	}
+	.item3 .text_container {
+		padding-left: 3.8rem;
+		padding-right: 3.8rem;
+	}
 }
 
 @media only screen and (max-width: 452px) {
@@ -143,5 +161,9 @@
 	.item2 .text_container {
 		padding-left: 4.1rem;
 		padding-right: 4.1rem;
+	}
+	.item3 .text_container {
+		padding-left: 2.5rem;
+		padding-right: 2.5rem;
 	}
 }
