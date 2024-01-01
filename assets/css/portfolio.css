@@ -1,7 +1,5 @@
-
-
 .project-container {
-    padding: 2em 0 4em 0 ;
+	padding: 2em 0 4em 0;
 }
 
 .grid {
@@ -45,6 +43,7 @@
 	line-height: 1.7;
 	padding-left: 0;
 }
+
 .grid-item:before {
 	content: "";
 	position: absolute;
@@ -59,13 +58,16 @@
 	will-change: opacity;
 	opacity: 0;
 }
+
 .grid-item:hover {
 	transform: translate(0, -20px);
 	transform: translate3d(0, -20px, 0);
 }
+
 .grid-item:hover:before {
 	opacity: 1;
 }
+
 .text_container {
 	background: #0000006a;
 	padding-left: 3.5rem;
@@ -87,35 +89,41 @@
 	background-size: cover;
 	opacity: 1;
 }
+
 .grid-item:nth-of-type(2) {
 	background-image: url("images/neural_search.png");
 	background-size: cover;
 	opacity: 1;
 }
+
 .grid-item:nth-of-type(3) {
-	background-image: url("images/wepaintyou.png");
+	background-image: url("images/guexit.jpg");
 	background-size: cover;
 	opacity: 1;
 }
 
 
 @media only screen and (max-width: 1170px) {
-    .grid {
-        align-content: center;
+	.grid {
+		align-content: center;
 		align-items: center;
 		justify-content: center;
-    }
+	}
+
 	.grid-item {
 		font-size: 3rem;
 	}
+
 	.text_container {
 		padding-left: 5.35rem;
 		padding-right: 5.35rem;
 	}
+
 	.item2 .text_container {
 		padding-left: 7.3rem;
 		padding-right: 7.3rem;
 	}
+
 	.item3 .text_container {
 		padding-left: 5.1rem;
 		padding-right: 5.1rem;
@@ -123,22 +131,25 @@
 }
 
 @media only screen and (max-width: 590px) {
-    .grid-item {
-        flex-basis: 420px;
+	.grid-item {
+		flex-basis: 420px;
 		align-items: center;
 		justify-content: center;
 		position: relative;
 		height: 380px;
 		font-size: 2.5rem;
-    }
+	}
+
 	.text_container {
 		padding-left: 3.85rem;
 		padding-right: 3.85rem;
 	}
+
 	.item2 .text_container {
 		padding-left: 5.8rem;
 		padding-right: 5.8rem;
 	}
+
 	.item3 .text_container {
 		padding-left: 3.8rem;
 		padding-right: 3.8rem;
@@ -146,22 +157,25 @@
 }
 
 @media only screen and (max-width: 452px) {
-    .grid-item {
-        flex-basis: 320px;
+	.grid-item {
+		flex-basis: 320px;
 		align-items: center;
 		justify-content: center;
 		position: relative;
 		height: 280px;
 		font-size: 2rem;
-    }
+	}
+
 	.text_container {
 		padding-left: 2.72rem;
 		padding-right: 2.72rem;
 	}
+
 	.item2 .text_container {
 		padding-left: 4.1rem;
 		padding-right: 4.1rem;
 	}
+
 	.item3 .text_container {
 		padding-left: 2.5rem;
 		padding-right: 2.5rem;
