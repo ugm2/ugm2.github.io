@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     height: 100%;
     box-sizing: border-box;
 }
@@ -39,6 +40,7 @@ html, body {
         margin-top: 3em;
         margin-bottom: 3em;
     }
+
     #timeline::before {
         left: 50%;
         margin-left: -2px;
@@ -68,9 +70,11 @@ html, body {
     .timeline-block {
         margin: 4em 0;
     }
+
     .timeline-block:first-child {
         margin-top: 0;
     }
+
     .timeline-block:last-child {
         margin-bottom: 0;
     }
@@ -124,7 +128,8 @@ html, body {
     margin-right: 5px;
 }
 
-.timeline-content .timeline-content-info .timeline-content-info-title, .timeline-content .timeline-content-info .timeline-content-info-date {
+.timeline-content .timeline-content-info .timeline-content-info-title,
+.timeline-content .timeline-content-info .timeline-content-info-date {
     width: calc(50% - 2px);
     display: inline-block;
 }
@@ -161,7 +166,8 @@ html, body {
     margin-bottom: 5px;
 }
 
-.timeline-content p, .timeline-content .cd-date {
+.timeline-content p,
+.timeline-content .cd-date {
     font-size: 13px;
     font-size: 0.8125rem;
 }
@@ -190,10 +196,13 @@ html, body {
     .timeline-content h2 {
         font-size: 24px;
     }
+
     .timeline-content p {
         font-size: 18px;
     }
-    .timeline-content .cd-read-more, .timeline-content .cd-date {
+
+    .timeline-content .cd-read-more,
+    .timeline-content .cd-date {
         font-size: 14px;
     }
 }
@@ -205,12 +214,14 @@ html, body {
         width: 36%;
         margin: 0 5%;
     }
+
     .timeline-content::before {
         top: 30px;
         left: 100%;
         border-color: transparent;
         border-left-color: #333C42;
     }
+
     .timeline-content .cd-date {
         position: absolute;
         width: 100%;
@@ -219,9 +230,11 @@ html, body {
         font-size: 14px;
         font-size: 1rem;
     }
+
     .timeline-block:nth-child(even) .timeline-content {
         float: right;
     }
+
     .timeline-block:nth-child(even) .timeline-content::before {
         top: 30px;
         left: auto;
@@ -229,9 +242,11 @@ html, body {
         border-color: transparent;
         border-right-color: #333C42;
     }
+
     .timeline-block:nth-child(even) .timeline-content .cd-read-more {
         float: right;
     }
+
     .timeline-block:nth-child(even) .timeline-content .cd-date {
         left: auto;
         right: 122%;
