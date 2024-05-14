@@ -1,0 +1,86 @@
+/* Icon */
+
+#footer .icon {
+    text-decoration: none;
+    border-bottom: none;
+    position: relative;
+}
+
+#footer .icon:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    text-transform: none !important;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 400;
+}
+
+#footer .icon>.label {
+    display: none;
+}
+
+#footer .icon:before {
+    line-height: inherit;
+}
+
+#footer .icon.solid:before {
+    font-weight: 900 !important;
+}
+
+#footer .icon.brands:before {
+    font-family: 'Font Awesome 5 Brands';
+}
+
+#footer .icon.style1:before {
+    color: #c3e895;
+}
+
+#footer .icon.style2:before {
+    color: #8addaa;
+}
+
+#footer .icon.style3:before {
+    color: #6bd4c8;
+}
+
+#footer .icon.style4:before {
+    color: #57aed3;
+}
+
+#footer .icon.style5:before {
+    color: #4a87d3;
+}
+
+#footer .icon.style6:before {
+    color: #6b88e6;
+}
+
+#footer .icon.major {
+    text-decoration: none;
+    color: #555;
+    cursor: default;
+    display: inline-block;
+    margin: 0 0 1.5em 0;
+}
+
+#footer .icon.major:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    text-transform: none !important;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 400;
+}
+
+#footer .icon.major:before {
+    font-size: 4em;
+    line-height: 1em;
+}
