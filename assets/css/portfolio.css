@@ -79,13 +79,13 @@
 	padding-right: 5.9rem;
 }
 
-.item3 .text_container {
+.item1 .text_container {
 	padding-left: 3.2rem;
 	padding-right: 3.2rem;
 }
 
 .grid-item:nth-of-type(1) {
-	background-image: url("images/grocery_classifier.png");
+	background-image: url("images/guexit.png");
 	background-size: cover;
 	opacity: 1;
 }
@@ -97,7 +97,7 @@
 }
 
 .grid-item:nth-of-type(3) {
-	background-image: url("images/guexit.jpg");
+	background-image: url("images/grocery_classifier.png");
 	background-size: cover;
 	opacity: 1;
 }
@@ -124,7 +124,7 @@
 		padding-right: 7.3rem;
 	}
 
-	.item3 .text_container {
+	.item1 .text_container {
 		padding-left: 5.1rem;
 		padding-right: 5.1rem;
 	}
@@ -150,7 +150,7 @@
 		padding-right: 5.8rem;
 	}
 
-	.item3 .text_container {
+	.item1 .text_container {
 		padding-left: 3.8rem;
 		padding-right: 3.8rem;
 	}
@@ -176,7 +176,7 @@
 		padding-right: 4.1rem;
 	}
 
-	.item3 .text_container {
+	.item1 .text_container {
 		padding-left: 2.5rem;
 		padding-right: 2.5rem;
 	}
