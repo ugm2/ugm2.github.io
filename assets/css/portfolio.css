@@ -389,23 +389,44 @@ body.modal-open {
 .modal-footer {
     padding: 20px 30px;
     border-top: 1px solid #eee;
-    text-align: right;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
 }
 
 .visit-button {
-    display: inline-block;
-    padding: 12px 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
     background-color: #2fb3b3;
     color: white;
     text-decoration: none;
     border-radius: 25px;
     transition: all 0.2s;
+    font-size: 0.95em;
+}
+
+.visit-button i {
+    font-size: 1.1em;
+}
+
+.visit-button.github {
+    background-color: #333;
 }
 
 .visit-button:hover {
     background-color: #248f8f;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(47, 179, 179, 0.3);
+}
+
+.visit-button.github:hover {
+    background-color: #000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (max-width: 768px) {

@@ -218,7 +218,7 @@
 			<li class="grid-item item1" onclick="openProjectModal('guexit-modal')">
 				<div class="text_container">Image Generation</div>
 			</li>
-			<li class="grid-item item2" onclick="window.open('https://huggingface.co/spaces/ugaray96/neural-search')">
+			<li class="grid-item item2" onclick="openProjectModal('neural-search-modal')">
 				<div class="text_container">Neural Search</div>
 			</li>
 			<li class="grid-item item3"
@@ -282,6 +282,69 @@
 			</div>
 			<div class="modal-footer">
 				<a href="https://github.com/Guexit" target="_blank" class="visit-button">Visit Project</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Neural Search Modal -->
+	<div id="neural-search-modal" class="project-modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="modal-title">
+					<img src="assets/css/images/neural_search.png" alt="Neural Search Logo" class="modal-logo">
+					<div class="title-text">
+						<h2>Neural Search</h2>
+						<span class="subtitle">Semantic Document Search</span>
+					</div>
+				</div>
+				<button class="close-modal" aria-label="Close modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="modal-image">
+					<div class="carousel">
+						<div class="carousel-container">
+							<img src="assets/css/images/neural_search.png" alt="Neural Search - Search Interface" class="carousel-slide active">
+							<img src="assets/css/images/neural_search_2.png" alt="Neural Search - Index Interface" class="carousel-slide active">
+							<img src="assets/css/images/neural_search_3.png" alt="Neural Search - Home Interface" class="carousel-slide active">
+						</div>
+						<div class="carousel-button prev" role="button" aria-label="Previous image"></div>
+						<div class="carousel-button next" role="button" aria-label="Next image"></div>
+					</div>
+				</div>
+				<div class="modal-description">
+					<h3>About the Project</h3>
+					<p>A semantic document search engine that uses state-of-the-art transformer models to understand the meaning behind search queries and find relevant documents. The system goes beyond keyword matching to deliver contextually relevant results.</p>
+					
+					<h3>Key Features</h3>
+					<ul>
+						<li>Semantic understanding of search queries</li>
+						<li>Context-aware document matching</li>
+						<li>Semantic Ranker</li>
+						<li>Multi-language support</li>
+						<li>Audio Transcription</li>
+					</ul>
+					
+					<h3>Technologies Used</h3>
+					<div class="tech-stack">
+						<span>Python</span>
+						<span>Haystack</span>
+						<span>Streamlit</span>
+						<span>Transformers</span>
+						<span>Hugging Face Spaces</span>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="modal-buttons">
+					<a href="https://github.com/ugm2/neural-search-demo" target="_blank" class="visit-button github">
+						<i class="fab fa-github"></i>
+						View Code
+					</a>
+					<a href="https://huggingface.co/spaces/ugaray96/neural-search" target="_blank" class="visit-button">
+						<i class="fas fa-external-link-alt"></i>
+						Visit Demo
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
