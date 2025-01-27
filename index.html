@@ -215,7 +215,7 @@
 	</div>
 	<section id="projects" class="project-container">
 		<ul class="grid">
-			<li class="grid-item item1" onclick="window.open('https://guexit.com')">
+			<li class="grid-item item1" onclick="openProjectModal('guexit-modal')">
 				<div class="text_container">Image Generation</div>
 			</li>
 			<li class="grid-item item2" onclick="window.open('https://huggingface.co/spaces/ugaray96/neural-search')">
@@ -227,6 +227,65 @@
 			</li>
 		</ul>
 	</section>
+	
+	<!-- Project Modals -->
+	<div id="guexit-modal" class="project-modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="modal-title">
+					<img src="assets/css/images/guexit-logo.svg" alt="Guexit Logo" class="modal-logo">
+					<div class="title-text">
+						<h2>Guexit</h2>
+						<span class="subtitle">AI Image Generation</span>
+					</div>
+				</div>
+				<button class="close-modal" aria-label="Close modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="modal-image">
+					<div class="carousel">
+						<div class="carousel-container">
+							<img src="assets/css/images/guexit.png" alt="Guexit Project - Main Interface" class="carousel-slide active">
+							<img src="assets/css/images/guexit-screenshot.png" alt="Guexit Project - Screenshot" class="carousel-slide">
+							<img src="assets/css/images/guexit2.png" alt="Guexit Project - Card 1" class="carousel-slide">
+							<img src="assets/css/images/guexit3.png" alt="Guexit Project - Card 2" class="carousel-slide">
+							<img src="assets/css/images/guexit4.png" alt="Guexit Project - Card 3" class="carousel-slide">
+							<img src="assets/css/images/guexit-diagram.png" alt="Guexit Project - Diagram" class="carousel-slide">
+						</div>
+						<div class="carousel-button prev" role="button" aria-label="Previous image"></div>
+						<div class="carousel-button next" role="button" aria-label="Next image"></div>
+					</div>
+				</div>
+				<div class="modal-description">
+					<h3>About the Project</h3>
+					<p>Guexit is an AI-driven web based guessing game where players compete using cards created with AI-generated art. The game combines creativity and deduction in an engaging multiplayer experience.</p>
+					
+					<h3>Key Features</h3>
+					<ul>
+						<li>Text-to-image generation using Transformer models</li>
+						<li>Interactive multiplayer card game</li>
+						<li>High-quality AI art generation</li>
+						<li>Scalable cloud architecture</li>
+					</ul>
+					
+					<h3>Technologies Used</h3>
+					<div class="tech-stack">
+						<span>Angular</span>
+						<span>.NET</span>
+						<span>Python</span>
+						<span>Transformers</span>
+						<span>FastAPI</span>
+						<span>Docker</span>
+						<span>Azure</span>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="https://github.com/Guexit" target="_blank" class="visit-button">Visit Project</a>
+			</div>
+		</div>
+	</div>
+
 	<!-- Research and Patents -->
 	<div id="research_patents_divider" class="divider">
 		<span></span>
@@ -326,6 +385,137 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+
+	<script>
+		// Modal functionality
+		function openProjectModal(modalId) {
+			const modal = document.getElementById(modalId);
+			modal.style.display = "block";
+			document.body.classList.add('modal-open');
+		}
+
+		function closeModal(modal) {
+			modal.classList.add('fade-out');
+			setTimeout(() => {
+				modal.style.display = "none";
+				modal.classList.remove('fade-out');
+				document.body.classList.remove('modal-open');
+			}, 300); // Match the CSS transition duration
+		}
+
+		// Close modal when clicking the close button or outside the modal
+		document.querySelectorAll('.close-modal').forEach(button => {
+			button.onclick = function() {
+				const modal = button.closest('.project-modal');
+				closeModal(modal);
+			}
+		});
+
+		window.onclick = function(event) {
+			if (event.target.classList.contains('project-modal')) {
+				closeModal(event.target);
+			}
+		}
+
+		// Close modal with escape key
+		document.addEventListener('keydown', function(event) {
+			if (event.key === "Escape") {
+				document.querySelectorAll('.project-modal').forEach(modal => {
+					if (modal.style.display === "block") {
+						closeModal(modal);
+					}
+				});
+			}
+		});
+	</script>
+
+	<script>
+		// Carousel functionality
+		function initializeCarousel(carouselElement) {
+			const slides = carouselElement.querySelectorAll('.carousel-slide');
+			let currentSlide = 0;
+			let autoplayInterval;
+
+			// Update active state
+			function updateSlides() {
+				slides.forEach((slide, index) => {
+					slide.classList.toggle('active', index === currentSlide);
+				});
+			}
+
+			// Navigation functions
+			function goToSlide(index) {
+				currentSlide = index;
+				updateSlides();
+			}
+
+			function nextSlide() {
+				currentSlide = (currentSlide + 1) % slides.length;
+				updateSlides();
+			}
+
+			function prevSlide() {
+				currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+				updateSlides();
+			}
+
+			// Autoplay functions
+			function startAutoplay() {
+				autoplayInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+			}
+
+			function stopAutoplay() {
+				clearInterval(autoplayInterval);
+			}
+
+			// Add button listeners
+			carouselElement.querySelector('.prev').addEventListener('click', () => {
+				prevSlide();
+				stopAutoplay();
+				startAutoplay(); // Reset the timer after manual navigation
+			});
+
+			carouselElement.querySelector('.next').addEventListener('click', () => {
+				nextSlide();
+				stopAutoplay();
+				startAutoplay(); // Reset the timer after manual navigation
+			});
+
+			// Pause on hover
+			carouselElement.addEventListener('mouseenter', stopAutoplay);
+			carouselElement.addEventListener('mouseleave', startAutoplay);
+
+			// Initialize first slide and start autoplay
+			updateSlides();
+			startAutoplay();
+
+			// Clean up when modal closes
+			const modal = carouselElement.closest('.project-modal');
+			const observer = new MutationObserver((mutations) => {
+				mutations.forEach((mutation) => {
+					if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+						if (modal.style.display === 'none') {
+							stopAutoplay();
+						}
+					}
+				});
+			});
+			observer.observe(modal, { attributes: true });
+		}
+
+		// Initialize all carousels when opening modals
+		function openProjectModal(modalId) {
+			const modal = document.getElementById(modalId);
+			modal.style.display = "block";
+			document.body.classList.add('modal-open');
+			
+			// Initialize carousel
+			const carousel = modal.querySelector('.carousel');
+			if (carousel) {
+				initializeCarousel(carousel);
+			}
+		}
+	</script>
 
 </body>
 
