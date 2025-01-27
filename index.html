@@ -221,8 +221,7 @@
 			<li class="grid-item item2" onclick="openProjectModal('neural-search-modal')">
 				<div class="text_container">Neural Search</div>
 			</li>
-			<li class="grid-item item3"
-				onclick="window.open('https://huggingface.co/spaces/ugaray96/grocery-classifier-demo')">
+			<li class="grid-item item3" onclick="openProjectModal('grocery-classifier-modal')">
 				<div class="text_container">Grocery Classifier</div>
 			</li>
 		</ul>
@@ -281,7 +280,16 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<a href="https://github.com/Guexit" target="_blank" class="visit-button">Visit Project</a>
+				<div class="modal-buttons">
+					<a href="https://github.com/Guexit" target="_blank" class="visit-button github">
+						<i class="fab fa-github"></i>
+						View Code
+					</a>
+					<a href="https://www.instagram.com/reel/C6gke9usAIr/" target="_blank" class="visit-button instagram">
+						<i class="fab fa-instagram"></i>
+						View Demo
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -313,7 +321,7 @@
 				</div>
 				<div class="modal-description">
 					<h3>About the Project</h3>
-					<p>A semantic document search engine that uses state-of-the-art transformer models to understand the meaning behind search queries and find relevant documents. The system goes beyond keyword matching to deliver contextually relevant results.</p>
+					<p>A semantic document search engine that uses transformer models to understand the meaning behind search queries and find relevant documents.</p>
 					
 					<h3>Key Features</h3>
 					<ul>
@@ -343,6 +351,67 @@
 					<a href="https://huggingface.co/spaces/ugaray96/neural-search" target="_blank" class="visit-button">
 						<i class="fas fa-external-link-alt"></i>
 						Visit Demo
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Grocery Classifier Modal -->
+	<div id="grocery-classifier-modal" class="project-modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="modal-title">
+					<img src="assets/css/images/grocery_classifier.png" alt="Grocery Classifier Logo" class="modal-logo">
+					<div class="title-text">
+						<h2>Grocery Classifier</h2>
+						<span class="subtitle">AI-Powered Product Recognition</span>
+					</div>
+				</div>
+				<button class="close-modal" aria-label="Close modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="modal-image">
+					<div class="carousel">
+						<div class="carousel-container">
+							<img src="assets/css/images/grocery_classifier.png" alt="Grocery Classifier - Main Interface" class="carousel-slide active">
+							<img src="assets/css/images/grocery_classifier_2.png" alt="Grocery Classifier - Results View" class="carousel-slide">
+							<img src="assets/css/images/grocery_classifier_3.png" alt="Grocery Classifier - Mobile View" class="carousel-slide">
+						</div>
+						<div class="carousel-button prev" role="button" aria-label="Previous image"></div>
+						<div class="carousel-button next" role="button" aria-label="Next image"></div>
+					</div>
+				</div>
+				<div class="modal-description">
+					<h3>About the Project</h3>
+					<p>A computer vision system that can identify and classify grocery products from images. The system uses deep learning to recognize products in images.</p>
+					
+					<h3>Key Features</h3>
+					<ul>
+						<li>Grocery Item Recognition</li>
+						<li>Streamlit Interface</li>
+						<li>Retrain Model in Seconds</li>
+					</ul>
+					
+					<h3>Technologies Used</h3>
+					<div class="tech-stack">
+						<span>Python</span>
+						<span>PyTorch</span>
+						<span>Streamlit</span>
+						<span>Computer Vision</span>
+						<span>Hugging Face Spaces</span>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="modal-buttons">
+					<a href="https://github.com/ugm2/grocery-classifier-demo" target="_blank" class="visit-button github">
+						<i class="fab fa-github"></i>
+						View Code
+					</a>
+					<a href="https://www.instagram.com/p/CzPJXhbIYGK/" target="_blank" class="visit-button instagram">
+						<i class="fab fa-instagram"></i>
+						View Demo
 					</a>
 				</div>
 			</div>
