@@ -102,6 +102,11 @@
 	opacity: 1;
 }
 
+.grid-item:nth-of-type(4) {
+	background-image: url("images/marca-tu-ritmo.png");
+	background-size: cover;
+	opacity: 1;
+}
 
 @media only screen and (max-width: 1170px) {
 	.grid {
