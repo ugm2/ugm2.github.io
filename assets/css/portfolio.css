@@ -124,21 +124,21 @@
 }
 
 .grid-item:nth-of-type(2) .hover-icon {
-	content: url("images/neural_search_app.JPEG");
+	content: url("images/neural_search_app.png");
 	width: 60px;
 	height: 60px;
 	border-radius: 12px;
 }
 
 .grid-item:nth-of-type(3) .hover-icon {
-	content: url("images/grocery_classifier_app.JPEG");
+	content: url("images/grocery_classifier_app.png");
 	width: 60px;
 	height: 60px;
 	border-radius: 12px;
 }
 
 .grid-item:nth-of-type(4) .hover-icon {
-	content: url("images/marca-tu-ritmo-app.JPEG");
+	content: url("images/marca-tu-ritmo-app.PNG");
 	width: 60px;
 	height: 60px;
 	border-radius: 12px;
@@ -279,6 +279,7 @@ body.modal-open {
 .modal-logo {
     height: 50px;
     width: auto;
+    border-radius: 12px;
 }
 
 .title-text {
@@ -554,5 +555,30 @@ body.modal-open {
 @media screen and (max-width: 768px) {
     .carousel-button {
         font-size: 48px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .grid-item:before {
+        opacity: 0.95;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.8)
+        );
+    }
+
+    .grid-item .text_container {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .grid-item .hover-icon {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .grid-item {
+        transform: translateY(0) scale(1);
     }
 }
