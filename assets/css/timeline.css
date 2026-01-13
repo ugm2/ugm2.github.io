@@ -18,14 +18,14 @@ body {
     clear: both;
 }
 
-#timeline {
+.timeline-section {
     position: relative;
     padding: 2em 0;
     margin-top: 2em;
     margin-bottom: 2em;
 }
 
-#timeline::before {
+.timeline-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -36,12 +36,12 @@ body {
 }
 
 @media only screen and (min-width: 1170px) {
-    #timeline {
+    .timeline-section {
         margin-top: 3em;
         margin-bottom: 3em;
     }
 
-    #timeline::before {
+    .timeline-section::before {
         left: 50%;
         margin-left: -2px;
     }
@@ -103,7 +103,9 @@ body {
         margin-top: 15px;
         /* Force Hardware Acceleration in WebKit */
         -webkit-transform: translateZ(0);
+        transform: translateZ(0);
         -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
 }
 
