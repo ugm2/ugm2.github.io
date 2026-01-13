@@ -10,33 +10,43 @@
 }
 
 .features article {
-    background: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
-    flex: 1 1 30%;
-    max-width: 30%;
-    transition: transform 0.2s;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--glass-border-radius);
+    padding: 30px;
+    margin: 15px;
+    flex: 1 1 calc(33.333% - 30px);
+    max-width: calc(33.333% - 30px);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: var(--glass-shadow);
 }
 
 .features article:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(var(--accent-color-rgb), 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .features .icon {
-    font-size: 2em;
-    margin-bottom: 10px;
-    color: #2fb3b3;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    text-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.5);
 }
 
 .features .content h3 {
     margin-top: 0;
-    color: #40484D;
+    color: #fff !important;
+    font-size: 1.25em;
+    font-weight: 700;
 }
 
 .features .content p {
-    color: #40484D;
+    color: #bbb !important;
+    line-height: 1.6;
 }
 
 /* Add padding to Patents header */

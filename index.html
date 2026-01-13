@@ -18,13 +18,17 @@
 	</script>
 	<title>Unai Garay</title>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 	<link rel="stylesheet" href="assets/css/portfolio.css" />
 	<link rel="stylesheet" href="assets/css/research-patents.css" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link rel="stylesheet" href="assets/css/timeline.css" />
 	<link rel="stylesheet" href="assets/css/footer.css" />
+	<link rel="stylesheet" href="assets/css/vibrant.css" />
+	<link rel="stylesheet" href="assets/css/skills.css" />
 	<link rel="icon" type="image/jpg" href="images/unai_circle.png" />
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" />
@@ -37,9 +41,11 @@
 </head>
 
 <body class="is-preload">
+	<div id="custom-cursor"></div>
 
 	<!-- Header -->
 	<section id="header">
+		<canvas id="canvas-bg"></canvas>
 		<div class="inner">
 			<h1>Hi <img src="assets/css/images/wave-3.gif">
 				<br>
@@ -47,18 +53,25 @@
 				<br>
 				AI Engineer
 			</h1>
-			<p style="font-weight: bold">Are you sure I am writing my own code? 🤖</p><br />
+			<!-- <p style="font-weight: bold; color: #ccc;">Are you sure I am writing my own code? 🤖</p> -->
 		</div>
+		<a href="#one" class="scroll-indicator scrolly">
+			<div class="mouse">
+				<div class="wheel"></div>
+			</div>
+		</a>
 	</section>
 
+	<div class="glow-divider"></div>
+
 	<!-- One -->
-	<section id="one" class="main style1">
+	<section id="one" class="main style1 reveal">
 		<div class="container">
+			<header class="major">
+				<h2><i class="fa fa-user"></i> About me</h2>
+			</header>
 			<div class="row gtr-150">
 				<div class="col-6 col-12-medium">
-					<header class="major">
-						<h2>About me </h2>
-					</header>
 					<p>As a Senior AI Engineer specializing in <b>Image and Natural Language Processing</b>, I am
 						dedicated to
 						advancing AI solutions through continuous learning and innovation. I thrive in collaborative
@@ -74,7 +87,6 @@
 					<p>I also love <b>photography</b>, so make sure to check out my
 						<a style="color: rgb(47, 179, 179);" href="https://www.instagram.com/ugmpictures/">Instagram
 							photography channel</a>.
-						The footer and header photos of the website were taken and edited by me ;)
 					</p>
 					<p>
 						My latest <b>Resume</b>: <a style="color: rgb(47, 179, 179);"
@@ -90,12 +102,61 @@
 		</div>
 	</section>
 
+	<div class="glow-divider"></div>
+
+	<!-- Skills Section -->
+	<section id="technical-skills" class="main style2 special reveal">
+		<div class="container">
+			<header class="major">
+				<h2><i class="fa fa-brain"></i> Technical Skills</h2>
+			</header>
+			<div class="skills-grid">
+				<div class="skill-category">
+					<h3><i class="fa fa-brain"></i> AI & Machine Learning</h3>
+					<div class="skill-tags">
+						<span class="skill-tag">LLMs</span>
+						<span class="skill-tag">Generative AI</span>
+						<span class="skill-tag">NLP</span>
+						<span class="skill-tag">Computer Vision</span>
+						<span class="skill-tag">PyTorch</span>
+						<span class="skill-tag">Transformers</span>
+						<span class="skill-tag">Agents</span>
+						<span class="skill-tag">RAG</span>
+					</div>
+				</div>
+				<div class="skill-category">
+					<h3><i class="fa fa-code"></i> Engineering</h3>
+					<div class="skill-tags">
+						<span class="skill-tag">Python</span>
+						<span class="skill-tag">FastAPI</span>
+						<span class="skill-tag">Docker</span>
+						<span class="skill-tag">Google Cloud</span>
+						<span class="skill-tag">Airflow</span>
+						<span class="skill-tag">C# / .NET</span>
+						<span class="skill-tag">Angular</span>
+						<span class="skill-tag">Mobile (React Native)</span>
+					</div>
+				</div>
+				<div class="skill-category">
+					<h3><i class="fa fa-flask"></i> Research</h3>
+					<div class="skill-tags">
+						<span class="skill-tag">Variational Autoencoders</span>
+						<span class="skill-tag">Spiking Neural Networks</span>
+						<span class="skill-tag">Ontology Integration</span>
+						<span class="skill-tag">Feature Engineering</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="glow-divider"></div>
+
 	<!-- Work Experience -->
-	<div class="divider"><span></span><span style="font-weight: bold;">W <i class="fa fa-briefcase"
-				style="color: rgb(47, 179, 179); --darkreader-inline-color:#59d3d3;"
-				data-darkreader-inline-color=""></i> R K</span><span></span>
-	</div>
-	<section class="timeline-section cd-container">
+	<header class="major reveal">
+		<h2><i class="fa fa-briefcase"></i> Work Experience</h2>
+	</header>
+	<section class="timeline-section cd-container reveal">
 
 		<div class="timeline-block">
 			<div class="timeline-img cd-picture">
@@ -241,12 +302,13 @@
 	</section>
 	<!-- End Work Timeline -->
 
+	<div class="glow-divider"></div>
+
 	<!-- Education Experience -->
-	<div class="divider"><span></span><span style="font-weight: bold;">E D U C A T I O N <i class="fa fa-graduation-cap"
-				style="color: rgb(47, 179, 179); --darkreader-inline-color:#59d3d3;"
-				data-darkreader-inline-color=""></i></span><span></span>
-	</div>
-	<section class="timeline-section cd-container">
+	<header class="major reveal">
+		<h2><i class="fa fa-graduation-cap"></i> Education</h2>
+	</header>
+	<section class="timeline-section cd-container reveal">
 
 		<div class="timeline-block">
 			<div class="timeline-img cd-picture">
@@ -319,14 +381,15 @@
 		</div>
 
 	</section>
+
+	<div class="glow-divider"></div>
 	<!-- End Education Timeline -->
 
 	<!-- Portfolio -->
-	<div id="projects_divider" class="divider"><span></span><span style="font-weight: bold">P R <i
-				class="fa fa-folder-open" style="color: rgb(47, 179, 179); --darkreader-inline-color:#59d3d3;"
-				data-darkreader-inline-color=""></i> J E C T S</span><span></span>
-	</div>
-	<section id="projects" class="project-container">
+	<header class="major reveal">
+		<h2><i class="fa fa-folder-open"></i> Projects</h2>
+	</header>
+	<section id="projects" class="project-container reveal">
 		<ul class="grid">
 			<li class="grid-item item1" onclick="openProjectModal('guexit-modal')">
 				<div class="hover-icon"></div>
@@ -628,22 +691,18 @@
 		</div>
 	</div>
 
+	<div class="glow-divider"></div>
+
 	<!-- Research and Patents -->
-	<div id="research_patents_divider" class="divider">
-		<span></span>
-		<span style="font-weight: bold;">
-			R E S E <i class="fa fa-flask" style="color: rgb(47, 179, 179);"></i> R C H / P <i class="fa fa-lightbulb"
-				style="color: rgb(47, 179, 179);"></i> T E N T S
-		</span>
-		<span></span>
-	</div>
-	<section id="research_patents" class="main style1 special">
+	<header class="major reveal">
+		<h2><i class="fa fa-flask"></i> Research & Patents</h2>
+	</header>
+	<section id="research_patents" class="main style1 special reveal">
 		<div class="container">
 			<div class="row gtr-150">
 				<div class="col-12">
-					<header class="major">
-						<h2>Research</h2>
-					</header>
+					<h3 style="color: #2fb3b3; margin-bottom: 1em; text-transform: uppercase; letter-spacing: 0.1em;">
+						Research</h3>
 					<div class="features">
 						<article class="research-article">
 							<span class="icon fa fa-flask"></span>
@@ -667,9 +726,8 @@
 					</div>
 				</div>
 				<div class="col-12">
-					<header class="major">
-						<h2>Patents</h2>
-					</header>
+					<h3 style="color: #2fb3b3; margin-bottom: 1em; text-transform: uppercase; letter-spacing: 0.1em;">
+						Patents</h3>
 					<div class="features">
 						<article>
 							<span class="icon fa fa-lightbulb"></span>

@@ -1,0 +1,66 @@
+.skills-container {
+    padding: 4em 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.skill-category {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--glass-border-radius);
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.skill-category:hover {
+    border-color: rgba(var(--accent-color-rgb), 0.4);
+    box-shadow: 0 10px 40px -10px rgba(var(--accent-color-rgb), 0.2);
+}
+
+.skill-category h3 {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background: rgba(var(--accent-color-rgb), 0.15);
+    color: #eee;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(var(--accent-color-rgb), 0.3);
+}
+
+.skill-tag:hover {
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.5);
+    transform: scale(1.1);
+}
+
+/* Icons for categories */
+.skill-category h3 i {
+    font-size: 1.2rem;
+}
