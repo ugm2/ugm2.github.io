@@ -65,7 +65,8 @@
     .features article {
         flex: 1 1 100%;
         max-width: 100%;
-        margin: 10px 0;
+        margin: 10px 15px;
+        /* Added horizontal margin */
     }
 
     #research_patents .col-12:first-of-type .features {

@@ -395,8 +395,8 @@ header.major:after {
     }
 
     section.main {
-        padding: 4em 0 !important;
-        /* Standardized mobile padding */
+        padding: 4em 15px !important;
+        /* Standardized mobile padding with horizontal margins */
     }
 }
 
