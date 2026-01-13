@@ -24,6 +24,12 @@
     box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.1);
 }
 
+@media only screen and (max-width: 480px) {
+    .timeline-section::before {
+        left: 10px;
+    }
+}
+
 @media only screen and (min-width: 1170px) {
     .timeline-section::before {
         left: 50%;
@@ -70,6 +76,12 @@
     }
 }
 
+@media only screen and (max-width: 480px) {
+    .timeline-img {
+        left: 2px;
+    }
+}
+
 .timeline-block:hover .timeline-img {
     transform: scale(1.5);
     box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 1), 0 0 40px rgba(var(--accent-color-rgb), 0.4);
@@ -88,6 +100,15 @@
     padding: 1.5em;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@media only screen and (max-width: 480px) {
+    .timeline-content {
+        margin-left: 30px;
+        margin-right: 15px;
+        /* Added right margin */
+        padding: 1rem;
+    }
 }
 
 .timeline-content:hover {

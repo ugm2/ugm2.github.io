@@ -65,5 +65,14 @@
     .features article {
         flex: 1 1 100%;
         max-width: 100%;
+        margin: 10px 0;
+    }
+
+    #research_patents .col-12:first-of-type .features {
+        margin-bottom: 3em;
+    }
+
+    #research_patents .major:nth-of-type(2) {
+        padding-top: 3em;
     }
 }

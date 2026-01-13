@@ -552,15 +552,17 @@ body.modal-open {
 @media screen and (max-width: 768px) {
     .modal-content {
         width: 95%;
-        margin: 3vh auto;
+        margin: 2vh auto;
+        border-radius: 16px;
     }
 
     .modal-body {
         padding: 20px;
+        gap: 20px;
     }
 
     .modal-header {
-        padding: 20px 25px;
+        padding: 15px 20px;
     }
 
     .modal-logo {
@@ -568,17 +570,37 @@ body.modal-open {
     }
 
     .modal-header h2 {
-        font-size: 1.6em;
+        font-size: 1.5em;
     }
 
     .modal-header .subtitle {
-        font-size: 1em;
+        font-size: 0.85em;
     }
 
     .close-modal {
-        width: 28px;
-        height: 28px;
-        font-size: 18px;
+        top: 15px;
+        right: 15px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .close-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .modal-footer {
+        padding: 20px;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .visit-button {
+        justify-content: center;
+        width: 100%;
     }
 }
 

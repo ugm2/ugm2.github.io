@@ -139,6 +139,13 @@ p {
     -webkit-text-fill-color: transparent;
 }
 
+@media (max-width: 768px) {
+    #header h1 {
+        font-size: 2.5em;
+        /* Smaller font for mobile */
+    }
+}
+
 /* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
@@ -307,6 +314,18 @@ header.major h2,
     gap: 15px;
 }
 
+@media (max-width: 768px) {
+
+    header.major h2,
+    .section-header h2 {
+        font-size: 1.8em;
+        /* Responsive title size */
+        letter-spacing: 0.05em;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
 header.major h2 i,
 .section-header h2 i {
     color: var(--accent-color);
@@ -367,6 +386,18 @@ header.major:after {
             transparent 100%);
     position: relative;
     margin: 4em 0;
+}
+
+@media (max-width: 768px) {
+    .glow-divider {
+        margin: 2em 0;
+        /* Less margin on mobile */
+    }
+
+    section.main {
+        padding: 4em 0 !important;
+        /* Standardized mobile padding */
+    }
 }
 
 .glow-divider::after {
