@@ -6,8 +6,8 @@
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
     padding: 2rem;
 }
 
@@ -81,4 +81,54 @@
 /* Icons for categories */
 .skill-category h3 i {
     font-size: 1.2rem;
+}
+
+/* ---------------------------------------------------------------
+   Marquee band.
+   JS adds .is-marquee and wraps the tags in a duplicated track;
+   without JS the tags keep their plain wrapped flex layout.
+   --------------------------------------------------------------- */
+.skill-tags.is-marquee {
+    display: block;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.skill-tags.is-marquee .marquee-track {
+    display: flex;
+    gap: 10px;
+    width: max-content;
+    animation: marquee-slide 38s linear infinite;
+}
+
+.skill-category:nth-of-type(even) .skill-tags.is-marquee .marquee-track {
+    animation-direction: reverse;
+}
+
+.skill-tags.is-marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+.skill-tags.is-marquee .skill-tag {
+    white-space: nowrap;
+    flex: none;
+}
+
+/* the track holds the list twice, so -50% is a seamless loop */
+@keyframes marquee-slide {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* scale(1.1) on hover would be clipped by the band's overflow */
+.skill-tags.is-marquee .skill-tag:hover {
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skill-tags.is-marquee .marquee-track {
+        animation: none !important;
+    }
 }

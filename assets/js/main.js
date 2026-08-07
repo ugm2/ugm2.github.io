@@ -172,6 +172,28 @@
 		});
 	});
 
+	// Skill Tag Marquee.
+	// The track holds the tag list twice so translateX(-50%) loops seamlessly;
+	// duration is derived from width so every band scrolls at the same speed.
+	const MARQUEE_SPEED = 40; // px per second
+	document.querySelectorAll('.skill-tags').forEach(band => {
+		const tags = Array.from(band.children);
+		if (!tags.length) return;
+
+		const track = document.createElement('div');
+		track.className = 'marquee-track';
+		tags.forEach(tag => track.appendChild(tag));
+		tags.forEach(tag => {
+			const copy = tag.cloneNode(true);
+			copy.setAttribute('aria-hidden', 'true');
+			track.appendChild(copy);
+		});
+
+		band.appendChild(track);
+		band.classList.add('is-marquee');
+		track.style.animationDuration = ((track.scrollWidth / 2) / MARQUEE_SPEED) + 's';
+	});
+
 	// Magnetic Buttons
 	const magneticElements = document.querySelectorAll('#footer .icons a');
 	magneticElements.forEach(el => {
