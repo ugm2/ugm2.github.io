@@ -185,6 +185,29 @@
     margin-bottom: 1.5em;
 }
 
+/* Bulleted highlights in Timeline */
+.timeline-points {
+    color: #bbb;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5em;
+    list-style: disc;
+    padding-left: 1.1em;
+}
+
+.timeline-points li {
+    padding-left: 0.3em;
+    margin-bottom: 0.8em;
+}
+
+.timeline-points li:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-points li::marker {
+    color: var(--accent-color);
+}
+
 /* Skills in Timeline */
 .content-skills {
     display: flex;
