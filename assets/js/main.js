@@ -150,13 +150,15 @@
 		el.addEventListener('mouseleave', () => { if (cursor) cursor.classList.remove('hover'); });
 	});
 
-	// 3D Tilt Effect
+	// 3D Tilt Effect + cursor spotlight (--mx/--my drive the gradient borders)
 	const tiltElements = document.querySelectorAll('.grid-item, .skill-category, .timeline-content');
 	tiltElements.forEach(el => {
 		el.addEventListener('mousemove', (e) => {
 			const rect = el.getBoundingClientRect();
 			const x = e.clientX - rect.left;
 			const y = e.clientY - rect.top;
+			el.style.setProperty('--mx', x + 'px');
+			el.style.setProperty('--my', y + 'px');
 			const xc = rect.width / 2;
 			const yc = rect.height / 2;
 			const dx = x - xc;

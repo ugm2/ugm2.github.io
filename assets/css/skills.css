@@ -18,30 +18,37 @@
     }
 
     .skill-category {
-        padding: 1.5rem;
+        padding: 1.5rem 0 1.5rem 1.5rem;
     }
 }
 
 .skill-category {
-    background: var(--glass-bg);
+    background:
+        linear-gradient(var(--glass-bg), var(--glass-bg)) padding-box,
+        radial-gradient(20rem circle at var(--mx, 50%) var(--my, 0%),
+            rgba(var(--accent-color-rgb), 0.5), var(--glass-border) 55%) border-box;
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
+    border: 1px solid transparent;
     border-radius: var(--glass-border-radius);
-    padding: 2rem;
-    transition: all 0.3s ease;
+    padding: 1.75rem 0 1.75rem 1.75rem;
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
 .skill-category:hover {
-    border-color: rgba(var(--accent-color-rgb), 0.4);
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07)) padding-box,
+        radial-gradient(20rem circle at var(--mx, 50%) var(--my, 0%),
+            var(--accent-hot), rgba(var(--accent-color-rgb), 0.3) 45%, var(--glass-border) 70%) border-box;
     box-shadow: 0 10px 40px -10px rgba(var(--accent-color-rgb), 0.2);
 }
 
 .skill-category h3 {
     color: #fff;
-    text-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.25rem;
     display: flex;
     align-items: center;
     gap: 10px;
