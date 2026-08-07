@@ -23,13 +23,11 @@
 }
 
 .skill-category {
-    background:
-        linear-gradient(var(--glass-bg), var(--glass-bg)) padding-box,
-        radial-gradient(20rem circle at var(--mx, 50%) var(--my, 0%),
-            rgba(var(--accent-color-rgb), 0.5), var(--glass-border) 55%) border-box;
+    position: relative;
+    background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid transparent;
+    border: 1px solid var(--glass-border);
     border-radius: var(--glass-border-radius);
     padding: 1.75rem 0 1.75rem 1.75rem;
     transition: box-shadow 0.3s ease;
@@ -37,11 +35,34 @@
 }
 
 .skill-category:hover {
-    background:
-        linear-gradient(rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07)) padding-box,
-        radial-gradient(20rem circle at var(--mx, 50%) var(--my, 0%),
-            var(--accent-hot), rgba(var(--accent-color-rgb), 0.3) 45%, var(--glass-border) 70%) border-box;
-    box-shadow: 0 10px 40px -10px rgba(var(--accent-color-rgb), 0.2);
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 10px 40px -10px rgba(var(--accent-color-rgb), 0.15);
+}
+
+/* same 1px masked ring as the timeline cards */
+.skill-category::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    background: radial-gradient(14rem circle at var(--mx, 50%) var(--my, 0%),
+            rgba(var(--accent-color-rgb), 0.85), transparent 65%);
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask-composite: exclude;
+}
+
+.skill-category:hover::after {
+    opacity: 1;
 }
 
 .skill-category h3 {
