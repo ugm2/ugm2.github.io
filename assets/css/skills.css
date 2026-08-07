@@ -112,23 +112,27 @@
 .skill-tags.is-marquee {
     display: block;
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
 }
 
 .skill-tags.is-marquee .marquee-track {
     display: flex;
-    gap: 10px;
     width: max-content;
+    will-change: transform;
     animation: marquee-slide 38s linear infinite;
+}
+
+/* Each copy is padded out to wider than the band, so the same tag is never
+   on screen twice — that repetition is what read as cheap. */
+.skill-tags.is-marquee .marquee-copy {
+    display: flex;
+    gap: 10px;
+    flex: none;
 }
 
 .skill-category:nth-of-type(even) .skill-tags.is-marquee .marquee-track {
     animation-direction: reverse;
-}
-
-.skill-tags.is-marquee:hover .marquee-track {
-    animation-play-state: paused;
 }
 
 .skill-tags.is-marquee .skill-tag {

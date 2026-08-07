@@ -173,25 +173,34 @@
 	});
 
 	// Skill Tag Marquee.
-	// The track holds the tag list twice so translateX(-50%) loops seamlessly;
-	// duration is derived from width so every band scrolls at the same speed.
-	const MARQUEE_SPEED = 40; // px per second
+	// Each copy is padded out wider than the visible band, so the same tag is
+	// never on screen twice; the track holds two copies, so translateX(-50%)
+	// advances exactly one copy and loops seamlessly.
+	const MARQUEE_SPEED = 22; // px per second - a drift, not a scroll
+	const COPY_SLACK = 1.18;  // copy width relative to the band
+
 	document.querySelectorAll('.skill-tags').forEach(band => {
 		const tags = Array.from(band.children);
 		if (!tags.length) return;
 
 		const track = document.createElement('div');
 		track.className = 'marquee-track';
-		tags.forEach(tag => track.appendChild(tag));
-		tags.forEach(tag => {
-			const copy = tag.cloneNode(true);
-			copy.setAttribute('aria-hidden', 'true');
-			track.appendChild(copy);
-		});
 
+		const copy = document.createElement('div');
+		copy.className = 'marquee-copy';
+		tags.forEach(tag => copy.appendChild(tag));
+		track.appendChild(copy);
 		band.appendChild(track);
 		band.classList.add('is-marquee');
-		track.style.animationDuration = ((track.scrollWidth / 2) / MARQUEE_SPEED) + 's';
+
+		const period = Math.max(copy.scrollWidth, Math.round(band.clientWidth * COPY_SLACK));
+		copy.style.width = period + 'px';
+
+		const trailing = copy.cloneNode(true);
+		trailing.setAttribute('aria-hidden', 'true');
+		track.appendChild(trailing);
+
+		track.style.animationDuration = (period / MARQUEE_SPEED) + 's';
 	});
 
 	// Magnetic Buttons
