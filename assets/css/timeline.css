@@ -235,3 +235,89 @@
     background: rgba(var(--accent-color-rgb), 0.2);
     border-color: rgba(var(--accent-color-rgb), 0.4);
 }
+
+/* ---------------------------------------------------------------
+   Scroll-driven progress rail
+   The faint ::before rail stays; ::after is the accent fill that
+   tracks scroll position. Where animation-timeline is unsupported
+   (Firefox stable as of 152) the fill simply sits at full height.
+   --------------------------------------------------------------- */
+.timeline-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 18px;
+    height: 100%;
+    width: 2px;
+    transform-origin: top;
+    background: linear-gradient(to bottom, var(--accent-color), var(--accent-hot));
+    box-shadow: 0 0 12px rgba(var(--accent-color-rgb), 0.45);
+}
+
+@media only screen and (max-width: 480px) {
+    .timeline-section::after {
+        left: 10px;
+    }
+}
+
+@media only screen and (min-width: 1170px) {
+    .timeline-section::after {
+        left: 50%;
+        margin-left: -1px;
+    }
+}
+
+@supports (animation-timeline: view()) {
+    .timeline-section::after {
+        scale: 1 0;
+        animation: timeline-progress linear both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
+    }
+}
+
+@keyframes timeline-progress {
+    to {
+        scale: 1 1;
+    }
+}
+
+/* ---------------------------------------------------------------
+   Current role: animated conic ring.
+   Deliberately one card only — on every card it would mean nothing.
+   --------------------------------------------------------------- */
+@property --ring-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.timeline-block.is-current .timeline-content,
+.timeline-block.is-current .timeline-content:hover {
+    background:
+        linear-gradient(var(--glass-bg), var(--glass-bg)) padding-box,
+        conic-gradient(from var(--ring-angle),
+            var(--glass-border) 0 62%,
+            var(--accent-color) 78%,
+            var(--accent-hot) 84%,
+            var(--glass-border) 94%) border-box;
+    animation: ring-spin 6s linear infinite;
+}
+
+@keyframes ring-spin {
+    to {
+        --ring-angle: 360deg;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .timeline-section::after {
+        animation: none !important;
+        scale: 1 1;
+    }
+
+    .timeline-block.is-current .timeline-content,
+    .timeline-block.is-current .timeline-content:hover {
+        animation: none !important;
+    }
+}
