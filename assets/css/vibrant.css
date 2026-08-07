@@ -155,15 +155,28 @@ p {
     font-weight: 800;
     letter-spacing: -0.02em;
     color: #fff;
-    text-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.5);
+    text-wrap: balance;
 }
 
 #header h1 strong {
     color: var(--accent-color);
-    background: linear-gradient(45deg, #fff, var(--accent-color));
+    background: linear-gradient(100deg,
+            var(--accent-color) 25%,
+            var(--accent-hot) 42%,
+            #fff 50%,
+            var(--accent-hot) 58%,
+            var(--accent-color) 75%);
+    background-size: 250% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: name-sweep 7s linear infinite;
+}
+
+@keyframes name-sweep {
+    to {
+        background-position: -250% 0;
+    }
 }
 
 @media (max-width: 768px) {
@@ -292,7 +305,6 @@ p {
 
 #technical-skills h2 {
     color: #fff !important;
-    text-shadow: 0 0 20px rgba(47, 179, 179, 0.4);
 }
 
 /* Timeline Pulse Animation */
@@ -331,10 +343,10 @@ header.major,
 header.major h2,
 .section-header h2 {
     color: #fff !important;
-    text-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.4);
     font-size: 2.5em;
-    font-weight: 800;
-    letter-spacing: 0.1em;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-wrap: balance;
     text-transform: uppercase;
     display: inline-flex;
     align-items: center;
@@ -366,10 +378,24 @@ header.major:after {
     bottom: -15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 30px;
-    height: 1px;
-    background: var(--accent-color);
-    box-shadow: 0 0 10px var(--accent-color);
+    width: 180px;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent,
+            var(--accent-color) 35%,
+            var(--accent-hot) 50%,
+            var(--accent-color) 65%,
+            transparent);
+}
+
+/* Keyboard focus must stay visible: the page hides the native cursor */
+a:focus-visible,
+button:focus-visible,
+.grid-item:focus-visible,
+[role="button"]:focus-visible {
+    outline: 2px solid var(--accent-hot);
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
 /* Custom Cursor */
@@ -451,4 +477,18 @@ header.major:after {
     background: var(--accent-color);
     box-shadow: 0 0 15px var(--accent-color);
     border-radius: 2px;
+}
+
+/* Respect users who ask for less movement */
+@media (prefers-reduced-motion: reduce) {
+
+    #header h1 strong,
+    .timeline-img,
+    .wheel {
+        animation: none !important;
+    }
+
+    #header h1 strong {
+        background-position: 0 0;
+    }
 }
