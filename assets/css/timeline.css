@@ -8,8 +8,7 @@
 .timeline-section {
     position: relative;
     padding: 4em 0;
-    background: var(--dark-bg);
-    /* Match global dark theme */
+    /* transparent: the body aurora shows through */
 }
 
 /* The Data Track (Central Line) */
