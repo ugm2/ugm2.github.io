@@ -700,3 +700,43 @@ body.modal-open {
         transform: translateY(0) scale(1);
     }
 }
+
+/* ---------------------------------------------------------------
+   Cursor spotlight on the project tiles.
+   ::before already holds the darkening gradient, so this is ::after,
+   layered under the title (z-index 3) and the icon (z-index 2).
+   --------------------------------------------------------------- */
+.grid-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(14rem circle at var(--mx, 50%) var(--my, 50%),
+            rgba(var(--accent-color-rgb), 0.35), transparent 60%);
+}
+
+.grid-item:hover::after {
+    opacity: 1;
+}
+
+/* ---------------------------------------------------------------
+   View transition: the tile morphs into its modal.
+   JS assigns view-transition-name: project-card to the clicked tile
+   and to the modal content, so the browser tweens between them.
+   --------------------------------------------------------------- */
+::view-transition-old(project-card),
+::view-transition-new(project-card) {
+    animation-duration: 420ms;
+    animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    ::view-transition-old(project-card),
+    ::view-transition-new(project-card) {
+        animation-duration: 1ms;
+    }
+}

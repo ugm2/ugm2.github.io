@@ -439,19 +439,19 @@
 	</header>
 	<section id="projects" class="project-container reveal">
 		<ul class="grid">
-			<li class="grid-item item1" onclick="openProjectModal('guexit-modal')">
+			<li class="grid-item item1" onclick="openProjectModal('guexit-modal', this)">
 				<div class="hover-icon"></div>
 				<div class="text_container">Image Generation</div>
 			</li>
-			<li class="grid-item item2" onclick="openProjectModal('neural-search-modal')">
+			<li class="grid-item item2" onclick="openProjectModal('neural-search-modal', this)">
 				<div class="hover-icon"></div>
 				<div class="text_container">Neural Search</div>
 			</li>
-			<li class="grid-item item3" onclick="openProjectModal('grocery-classifier-modal')">
+			<li class="grid-item item3" onclick="openProjectModal('grocery-classifier-modal', this)">
 				<div class="hover-icon"></div>
 				<div class="text_container">Grocery Classifier</div>
 			</li>
-			<li class="grid-item item4" onclick="openProjectModal('marca-tu-ritmo-modal')">
+			<li class="grid-item item4" onclick="openProjectModal('marca-tu-ritmo-modal', this)">
 				<div class="hover-icon"></div>
 				<div class="text_container">Fitness Tracker</div>
 			</li>
@@ -835,14 +835,34 @@
 	<script src="assets/js/main.js"></script>
 
 	<script>
-		// Modal functionality
-		function openProjectModal(modalId) {
-			const modal = document.getElementById(modalId);
-			modal.style.display = "block";
-			document.body.classList.add('modal-open');
+		// Shared name for the tile -> modal view transition. Only ever set on
+		// one element at a time: a duplicate name aborts the transition.
+		const VT_NAME = 'project-card';
+		let vtSource = null;
+
+		function canTransition() {
+			return typeof document.startViewTransition === 'function'
+				&& !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		}
 
 		function closeModal(modal) {
+			const content = modal.querySelector('.modal-content');
+
+			if (canTransition() && content) {
+				content.style.viewTransitionName = VT_NAME;
+				const t = document.startViewTransition(() => {
+					content.style.viewTransitionName = '';
+					if (vtSource) vtSource.style.viewTransitionName = VT_NAME;
+					modal.style.display = "none";
+					document.body.classList.remove('modal-open');
+				});
+				t.finished.finally(() => {
+					if (vtSource) vtSource.style.viewTransitionName = '';
+					vtSource = null;
+				});
+				return;
+			}
+
 			modal.classList.add('fade-out');
 			setTimeout(() => {
 				modal.style.display = "none";
@@ -951,11 +971,30 @@
 			observer.observe(modal, { attributes: true });
 		}
 
-		// Initialize all carousels when opening modals
-		function openProjectModal(modalId) {
+		// Open a project: the tile morphs into the modal where supported.
+		function openProjectModal(modalId, sourceEl) {
 			const modal = document.getElementById(modalId);
-			modal.style.display = "block";
-			document.body.classList.add('modal-open');
+			const content = modal.querySelector('.modal-content');
+
+			const show = () => {
+				modal.style.display = "block";
+				document.body.classList.add('modal-open');
+			};
+
+			if (canTransition() && content && sourceEl) {
+				vtSource = sourceEl;
+				vtSource.style.viewTransitionName = VT_NAME;
+				const t = document.startViewTransition(() => {
+					vtSource.style.viewTransitionName = '';
+					content.style.viewTransitionName = VT_NAME;
+					show();
+				});
+				t.finished.finally(() => {
+					content.style.viewTransitionName = '';
+				});
+			} else {
+				show();
+			}
 
 			// Initialize carousel
 			const carousel = modal.querySelector('.carousel');
