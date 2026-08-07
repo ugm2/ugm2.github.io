@@ -150,7 +150,11 @@
 		el.addEventListener('mouseleave', () => { if (cursor) cursor.classList.remove('hover'); });
 	});
 
-	// 3D Tilt Effect + cursor spotlight (--mx/--my drive the gradient borders)
+	// 3D Tilt Effect + cursor spotlight (--mx/--my drive the gradient borders).
+	// The tilt is normalised to the element's own size and capped, so a
+	// full-width skills band leans as gently as a small project tile; a fixed
+	// divisor made wide elements swing several times further.
+	const MAX_TILT = 3.5; // degrees at the very edge
 	const tiltElements = document.querySelectorAll('.grid-item, .skill-category, .timeline-content');
 	tiltElements.forEach(el => {
 		el.addEventListener('mousemove', (e) => {
@@ -159,15 +163,13 @@
 			const y = e.clientY - rect.top;
 			el.style.setProperty('--mx', x + 'px');
 			el.style.setProperty('--my', y + 'px');
-			const xc = rect.width / 2;
-			const yc = rect.height / 2;
-			const dx = x - xc;
-			const dy = y - yc;
-			el.style.transform = `perspective(1000px) rotateX(${-dy / 40}deg) rotateY(${dx / 40}deg) scale(1.02)`;
+			const nx = (x - rect.width / 2) / (rect.width / 2);
+			const ny = (y - rect.height / 2) / (rect.height / 2);
+			el.style.transform = `perspective(1200px) rotateX(${(-ny * MAX_TILT).toFixed(2)}deg) rotateY(${(nx * MAX_TILT).toFixed(2)}deg) scale(1.01)`;
 			el.style.zIndex = "10";
 		});
 		el.addEventListener('mouseleave', () => {
-			el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+			el.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)';
 			el.style.zIndex = "";
 		});
 	});
