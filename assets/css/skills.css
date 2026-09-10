@@ -1,159 +1,96 @@
-.skills-container {
-    padding: 4em 0;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+/* ---------------------------------------------------------------------------
+   Technical skills.
+
+   The tag rows used to scroll as marquees. They looked lively but they hid
+   content: at any moment two or three tags were behind the fade mask and one
+   was clipped mid-word ("Variational Autoencoders" read as "utoencoders").
+   A skills list is a scanning surface, so the tags are static again and the
+   liveliness moved into the cursor-lit border instead.
+   --------------------------------------------------------------------------- */
 
 .skills-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 2rem;
-}
-
-@media (max-width: 768px) {
-    .skills-grid {
-        padding: 1rem;
-        gap: 1.5rem;
-    }
-
-    .skill-category {
-        padding: 1.5rem 0 1.5rem 1.5rem;
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(21rem, 100%), 1fr));
+  gap: var(--space-s);
 }
 
 .skill-category {
-    position: relative;
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
-    border-radius: var(--glass-border-radius);
-    padding: 1.75rem 0 1.75rem 1.75rem;
-    transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1), background 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
+  position: relative;
+  padding: var(--space-m);
+  background: var(--bg-raised);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-l);
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .skill-category:hover {
-    background: rgba(255, 255, 255, 0.07);
-    box-shadow: 0 10px 40px -10px rgba(var(--accent-color-rgb), 0.15);
+  background: var(--bg-raised-hover);
+  box-shadow: 0 10px 40px -10px rgba(var(--accent-rgb), 0.15);
 }
 
-/* same 1px masked ring as the timeline cards */
+/* A 1px ring lit from the cursor. The usual two-layer background trick will
+   not work over a translucent card, so the gradient is confined to the
+   border strip with a mask. */
 .skill-category::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.45s ease;
-    background: radial-gradient(14rem circle at var(--mx, 50%) var(--my, 0%),
-            rgba(var(--accent-color-rgb), 0.85), transparent 65%);
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    mask-composite: exclude;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  background: radial-gradient(
+    14rem circle at var(--mx, 50%) var(--my, 0%),
+    rgba(var(--accent-rgb), 0.85),
+    transparent 65%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
 
 .skill-category:hover::after {
-    opacity: 1;
+  opacity: 1;
 }
 
 .skill-category h3 {
-    color: #fff;
-    font-size: 1.25rem;
-    letter-spacing: 0.02em;
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+  margin-bottom: var(--space-s);
+  font-size: var(--step-0);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.skill-category h3 i {
+  font-size: 0.95em;
+  color: var(--accent);
 }
 
 .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
 }
 
 .skill-tag {
-    background: rgba(var(--accent-color-rgb), 0.15);
-    color: #eee;
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    border: 1px solid rgba(var(--accent-color-rgb), 0.3);
-}
-
-.skill-tag:hover {
-    background: var(--accent-color);
-    color: #fff;
-    box-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.5);
-    transform: scale(1.1);
-}
-
-/* Icons for categories */
-.skill-category h3 i {
-    font-size: 1.2rem;
-}
-
-/* ---------------------------------------------------------------
-   Marquee band.
-   JS adds .is-marquee and wraps the tags in a duplicated track;
-   without JS the tags keep their plain wrapped flex layout.
-   --------------------------------------------------------------- */
-.skill-tags.is-marquee {
-    display: block;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
-}
-
-.skill-tags.is-marquee .marquee-track {
-    display: flex;
-    width: max-content;
-    will-change: transform;
-    animation: marquee-slide 38s linear infinite;
-}
-
-/* Each copy is padded out to wider than the band, so the same tag is never
-   on screen twice — that repetition is what read as cheap. */
-.skill-tags.is-marquee .marquee-copy {
-    display: flex;
-    gap: 10px;
-    flex: none;
-}
-
-.skill-category:nth-of-type(even) .skill-tags.is-marquee .marquee-track {
-    animation-direction: reverse;
-}
-
-.skill-tags.is-marquee .skill-tag {
-    white-space: nowrap;
-    flex: none;
-}
-
-/* the track holds the list twice, so -50% is a seamless loop */
-@keyframes marquee-slide {
-    to {
-        transform: translateX(-50%);
-    }
-}
-
-/* scale(1.1) on hover would be clipped by the band's overflow */
-.skill-tags.is-marquee .skill-tag:hover {
-    transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .skill-tags.is-marquee .marquee-track {
-        animation: none !important;
-    }
+  padding: 0.32em 0.85em;
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.28);
+  border-radius: var(--radius-s);
+  color: var(--text);
+  font-size: var(--step--1);
+  font-weight: 400;
+  white-space: nowrap;
 }

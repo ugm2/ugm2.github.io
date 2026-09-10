@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+   Icons.
+
+   Font Awesome Free 6.5.2, subset to the 14 glyphs this page renders and
+   served from this origin: ~2.8 KB of font instead of ~274 KB, and no
+   render-blocking stylesheet on a third-party origin.
+
+   Font Awesome Free by Fonticons, Inc. — icons CC BY 4.0, fonts SIL OFL 1.1.
+   See assets/fonts/README.md to regenerate after adding an icon.
+   --------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "FA Solid Subset";
+  src: url("../fonts/fa-solid-subset.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  /* swap, not block: an icon appearing a beat late beats an invisible one */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "FA Brands Subset";
+  src: url("../fonts/fa-brands-subset.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.fa-solid,
+.fa-brands {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-solid {
+  font-family: "FA Solid Subset";
+  font-weight: 900;
+}
+
+.fa-brands {
+  font-family: "FA Brands Subset";
+  font-weight: 400;
+}
+
+/* glyph map — keep in sync with the subset code points */
+.fa-envelope::before {
+  content: "\f0e0";
+}
+.fa-file-lines::before {
+  content: "\f15c";
+}
+.fa-arrow-up-right-from-square::before {
+  content: "\f08e";
+}
+.fa-brain::before {
+  content: "\f5dc";
+}
+.fa-code::before {
+  content: "\f121";
+}
+.fa-flask::before {
+  content: "\f0c3";
+}
+.fa-lightbulb::before {
+  content: "\f0eb";
+}
+.fa-certificate::before {
+  content: "\f0a3";
+}
+.fa-calendar::before {
+  content: "\f133";
+}
+.fa-folder-open::before {
+  content: "\f07c";
+}
+.fa-github::before {
+  content: "\f09b";
+}
+.fa-linkedin::before {
+  content: "\f08c";
+}
+.fa-x-twitter::before {
+  content: "\e61b";
+}
+.fa-instagram::before {
+  content: "\f16d";
+}

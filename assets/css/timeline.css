@@ -1,343 +1,291 @@
+/* ---------------------------------------------------------------------------
+   Work / education timeline.
+
+   Previously the cards alternated left and right of a centre rail above
+   1170px. It looked symmetrical but each card left an equal-sized hole
+   opposite it, so the two timelines alone ran to about 3,600px of mostly
+   empty page. The rail now stays on the left at every width and the cards
+   read as one column, which cuts the height roughly in half and means the
+   reader's eye travels in a straight line.
+   --------------------------------------------------------------------------- */
+
 .cd-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2em 15px;
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
 .timeline-section {
-    position: relative;
-    padding: 4em 0;
-    /* transparent: the body aurora shows through */
+  position: relative;
+  padding-left: 2.4rem;
 }
 
-/* The Data Track (Central Line) */
-.timeline-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 18px;
-    height: 100%;
-    width: 2px;
-    background: rgba(var(--accent-color-rgb), 0.2);
-    box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.1);
-}
-
-@media only screen and (max-width: 480px) {
-    .timeline-section::before {
-        left: 10px;
-    }
-}
-
-@media only screen and (min-width: 1170px) {
-    .timeline-section::before {
-        left: 50%;
-        margin-left: -1px;
-        background: linear-gradient(to bottom,
-                transparent,
-                rgba(var(--accent-color-rgb), 0.4) 10%,
-                rgba(var(--accent-color-rgb), 0.4) 90%,
-                transparent);
-    }
-}
-
-.timeline-block {
-    position: relative;
-    margin: 3em 0;
-}
-
-.timeline-block:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* The Glowing Checkpoint */
-.timeline-img {
-    position: absolute;
-    top: 10px;
-    left: 8px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #000;
-    border: 2px solid var(--accent-color);
-    box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 1);
-    z-index: 2;
-    transition: all 0.3s ease;
-}
-
-@media only screen and (min-width: 1170px) {
-    .timeline-img {
-        left: 50%;
-        margin-left: -10px;
-        top: 25px;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .timeline-img {
-        left: 2px;
-    }
-}
-
-.timeline-block:hover .timeline-img {
-    transform: scale(1.5);
-    box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 1), 0 0 40px rgba(var(--accent-color-rgb), 0.4);
-    background: var(--accent-color);
-}
-
-/* Timeline Content Card */
-.timeline-content {
-    position: relative;
-    margin-left: 50px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
-    border-radius: var(--glass-border-radius);
-    padding: 1.5em;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-@media only screen and (max-width: 480px) {
-    .timeline-content {
-        margin-left: 30px;
-        margin-right: 15px;
-        /* Added right margin */
-        padding: 1rem;
-    }
-}
-
-.timeline-content:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.07);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-}
-
-/* Connector Line (Horizontal) */
-@media only screen and (min-width: 1170px) {
-    .timeline-content {
-        margin-left: 0;
-        width: 42%;
-    }
-
-    .timeline-block:nth-child(odd) .timeline-content {
-        float: left;
-    }
-
-    .timeline-block:nth-child(even) .timeline-content {
-        float: right;
-    }
-
-    /* Subtle connector dot-line */
-    .timeline-content::before {
-        content: '';
-        position: absolute;
-        top: 35px;
-        width: 30px;
-        height: 1px;
-        background: rgba(var(--accent-color-rgb), 0.4);
-        display: block;
-    }
-
-    .timeline-block:nth-child(odd) .timeline-content::before {
-        left: 100%;
-    }
-
-    .timeline-block:nth-child(even) .timeline-content::before {
-        right: 100%;
-    }
-}
-
-/* Typography Enhancements */
-.timeline-content h2 {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5em;
-    letter-spacing: -0.01em;
-}
-
-.timeline-content-info {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 1em;
-    opacity: 0.8;
-}
-
-.timeline-content-info span {
-    font-size: 0.85rem;
-    color: var(--accent-color);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.timeline-content p {
-    color: #bbb;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1.5em;
-}
-
-/* Bulleted highlights in Timeline */
-.timeline-points {
-    color: #bbb;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1.5em;
-    list-style: disc;
-    padding-left: 1.1em;
-}
-
-.timeline-points li {
-    padding-left: 0.3em;
-    margin-bottom: 0.8em;
-}
-
-.timeline-points li:last-child {
-    margin-bottom: 0;
-}
-
-.timeline-points li::marker {
-    color: var(--accent-color);
-}
-
-/* Skills in Timeline */
-.content-skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 0;
-    list-style: none;
-}
-
-.content-skills li {
-    font-size: 0.75rem;
-    padding: 4px 10px;
-    background: rgba(var(--accent-color-rgb), 0.1);
-    border: 1px solid rgba(var(--accent-color-rgb), 0.2);
-    border-radius: 4px;
-    color: var(--accent-color);
-    transition: all 0.2s ease;
-}
-
-.timeline-block:hover .content-skills li {
-    background: rgba(var(--accent-color-rgb), 0.2);
-    border-color: rgba(var(--accent-color-rgb), 0.4);
-}
-
-/* ---------------------------------------------------------------
-   Scroll-driven progress rail
-   The faint ::before rail stays; ::after is the accent fill that
-   tracks scroll position. Where animation-timeline is unsupported
-   (Firefox stable as of 152) the fill simply sits at full height.
-   --------------------------------------------------------------- */
+/* the faint full-height rail */
+.timeline-section::before,
 .timeline-section::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 18px;
-    height: 100%;
-    width: 2px;
-    transform-origin: top;
-    background: linear-gradient(to bottom, var(--accent-color), var(--accent-hot));
-    box-shadow: 0 0 12px rgba(var(--accent-color-rgb), 0.45);
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 5px;
+  width: 2px;
+  border-radius: 2px;
 }
 
-@media only screen and (max-width: 480px) {
-    .timeline-section::after {
-        left: 10px;
-    }
+.timeline-section::before {
+  background: rgba(var(--accent-rgb), 0.18);
 }
 
-@media only screen and (min-width: 1170px) {
-    .timeline-section::after {
-        left: 50%;
-        margin-left: -1px;
-    }
+/* the accent fill that tracks scroll position through the section */
+.timeline-section::after {
+  transform-origin: top;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-hot));
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.45);
 }
 
 @supports (animation-timeline: view()) {
-    .timeline-section::after {
-        scale: 1 0;
-        animation: timeline-progress linear both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-    }
+  .timeline-section::after {
+    scale: 1 0;
+    animation: timeline-progress linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 92%;
+  }
 }
 
 @keyframes timeline-progress {
-    to {
-        scale: 1 1;
-    }
+  to {
+    scale: 1 1;
+  }
 }
 
-/* ---------------------------------------------------------------
-   Current role: animated conic ring.
-   Deliberately one card only — on every card it would mean nothing.
-   --------------------------------------------------------------- */
-@property --ring-angle {
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
+.timeline-block {
+  position: relative;
 }
 
-/* A 1px ring only. The two-layer background trick cannot be used here:
-   --glass-bg is translucent, so a border-box gradient bleeds through the
-   whole card. The mask confines the gradient to the border strip. */
-.timeline-content::after,
-.grid-item.has-ring::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.45s ease;
-    background: radial-gradient(12rem circle at var(--mx, 50%) var(--my, 0%),
-            rgba(var(--accent-color-rgb), 0.85), transparent 65%);
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    mask-composite: exclude;
+.timeline-block + .timeline-block {
+  margin-top: var(--space-s);
+}
+
+/* the checkpoint on the rail */
+.timeline-img {
+  position: absolute;
+  top: 1.55rem;
+  left: -2.4rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.9);
+  transition:
+    transform 0.3s var(--ease-spring),
+    background 0.3s ease;
+}
+
+.timeline-block:hover .timeline-img {
+  transform: scale(1.45);
+  background: var(--accent);
+}
+
+.timeline-content {
+  position: relative;
+  padding: var(--space-m);
+  background: var(--bg-raised);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-l);
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+  background: var(--bg-raised-hover);
+  box-shadow: var(--shadow-lift);
+}
+
+/* same masked 1px cursor-lit ring as the skill cards */
+.timeline-content::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  background: radial-gradient(
+    12rem circle at var(--mx, 50%) var(--my, 0%),
+    rgba(var(--accent-rgb), 0.85),
+    transparent 65%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
 
 .timeline-content:hover::after {
-    opacity: 1;
+  opacity: 1;
+}
+
+.timeline-badge {
+  display: inline-block;
+  margin-bottom: 0.6em;
+  padding: 0.18em 0.7em;
+  border: 1px solid rgba(var(--accent-rgb), 0.45);
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent-hot);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.timeline-content h3 {
+  font-size: var(--step-1);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.timeline-content-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  margin: 0.35em 0 var(--space-s);
+}
+
+.timeline-content-info span {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  color: var(--accent);
+  font-size: var(--step--1);
+  font-weight: 500;
+}
+
+.timeline-content-info-date {
+  color: var(--text-dim) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline-content-info-date i {
+  color: var(--text-dim);
+}
+
+.timeline-content p,
+.timeline-points {
+  /* the card runs the full page width; the prose inside it should not */
+  max-width: 62ch;
+  color: var(--text-muted);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+
+.timeline-points {
+  list-style: disc;
+  padding-left: 1.1em;
+}
+
+.timeline-points li {
+  padding-left: 0.2em;
+}
+
+.timeline-points li + li {
+  margin-top: 0.6em;
+}
+
+.timeline-points li::marker {
+  color: var(--accent);
+}
+
+/* tech chips */
+.content-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: var(--space-s);
+}
+
+.content-skills li {
+  padding: 0.18em 0.6em;
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  border-radius: 5px;
+  color: var(--accent);
+  font-size: 0.75rem;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.timeline-block:hover .content-skills li {
+  background: rgba(var(--accent-rgb), 0.16);
+  border-color: rgba(var(--accent-rgb), 0.38);
+}
+
+/* --- the current role gets an animated ring; deliberately one card only, so
+   it actually signals something ------------------------------------------- */
+
+@property --ring-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
 
 .timeline-block.is-current .timeline-content::after {
-    opacity: 1;
-    background: conic-gradient(from var(--ring-angle),
-            transparent 0 58%,
-            rgba(var(--accent-color-rgb), 0.7) 76%,
-            var(--accent-hot) 82%,
-            transparent 90%);
-    animation: ring-spin 12s linear infinite;
+  opacity: 1;
+  background: conic-gradient(
+    from var(--ring-angle),
+    transparent 0 58%,
+    rgba(var(--accent-rgb), 0.7) 76%,
+    var(--accent-hot) 82%,
+    transparent 90%
+  );
+  animation: ring-spin 12s linear infinite;
 }
 
 @keyframes ring-spin {
-    to {
-        --ring-angle: 360deg;
-    }
+  to {
+    --ring-angle: 360deg;
+  }
+}
+
+.timeline-block.is-current .timeline-img {
+  box-shadow:
+    0 0 0 4px rgba(var(--accent-rgb), 0.15),
+    0 0 14px rgba(var(--accent-rgb), 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .timeline-section::after {
-        animation: none !important;
-        scale: 1 1;
-    }
+  .timeline-section::after {
+    animation: none !important;
+    scale: 1 1;
+  }
 
-    .timeline-block.is-current .timeline-content::after {
-        animation: none !important;
-    }
+  .timeline-block.is-current .timeline-content::after {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-section {
+    padding-left: 1.7rem;
+  }
+
+  .timeline-img {
+    left: -1.7rem;
+    top: 1.35rem;
+  }
+
+  .timeline-content {
+    padding: var(--space-s);
+  }
 }

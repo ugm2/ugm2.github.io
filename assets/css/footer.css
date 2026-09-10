@@ -1,86 +1,98 @@
-/* Icon */
+/* ---------------------------------------------------------------------------
+   Footer: the page's contact call to action.
+   --------------------------------------------------------------------------- */
 
-#footer .icon {
-    text-decoration: none;
-    border-bottom: none;
-    position: relative;
+#footer {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4rem, 9vw, 7rem) 0 clamp(2.5rem, 5vw, 3.5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: #07090a;
+  text-align: center;
 }
 
-#footer .icon:before {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-    text-transform: none !important;
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 400;
+#footer::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  width: 120%;
+  height: 140%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(var(--accent-rgb), 0.09) 0%,
+    transparent 62%
+  );
 }
 
-#footer .icon>.label {
-    display: none;
+.footer__inner {
+  position: relative;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
-#footer .icon:before {
-    line-height: inherit;
+.footer__title {
+  font-size: var(--step-3);
+  letter-spacing: -0.025em;
 }
 
-#footer .icon.solid:before {
-    font-weight: 900 !important;
+.footer__lead {
+  margin-top: var(--space-s);
+  color: var(--text-muted);
+  font-size: var(--step-1);
+  text-wrap: pretty;
 }
 
-#footer .icon.brands:before {
-    font-family: 'Font Awesome 5 Brands';
+.footer__mail {
+  margin-top: var(--space-m);
 }
 
-#footer .icon.style1:before {
-    color: #c3e895;
+.footer__mail a {
+  display: inline-block;
+  color: var(--accent-hot);
+  font-size: var(--step-1);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration-color: rgba(var(--accent-rgb), 0.45);
+  overflow-wrap: anywhere;
 }
 
-#footer .icon.style2:before {
-    color: #8addaa;
+#footer .icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: var(--space-l);
 }
 
-#footer .icon.style3:before {
-    color: #6bd4c8;
+#footer .icons a {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--hairline);
+  color: #fff;
+  font-size: 1.15rem;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
 }
 
-#footer .icon.style4:before {
-    color: #57aed3;
+#footer .icons a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #04191a;
 }
 
-#footer .icon.style5:before {
-    color: #4a87d3;
-}
-
-#footer .icon.style6:before {
-    color: #6b88e6;
-}
-
-#footer .icon.major {
-    text-decoration: none;
-    color: #555;
-    cursor: default;
-    display: inline-block;
-    margin: 0 0 1.5em 0;
-}
-
-#footer .icon.major:before {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-    text-transform: none !important;
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 400;
-}
-
-#footer .icon.major:before {
-    font-size: 4em;
-    line-height: 1em;
+#footer .copyright {
+  margin-top: var(--space-l);
+  color: var(--text-dim);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
 }
