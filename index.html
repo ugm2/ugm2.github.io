@@ -55,7 +55,8 @@
 					if (localStorage.getItem("riso-sound") === "1") c.add("snd");
 				} catch (e) {}
 				var n = navigator.connection;
-				if (c.contains("gl") && !matchMedia("(prefers-reduced-motion: reduce)").matches && !(n && n.saveData)) c.add("tour");
+				if (c.contains("gl") && !matchMedia("(prefers-reduced-motion: reduce)").matches && !(n && n.saveData))
+					c.add("tour");
 				setTimeout(function () {
 					if (!c.contains("m")) c.remove("js", "gl", "tour");
 				}, 6000);
@@ -121,7 +122,9 @@
 				<a href="#research" data-roll>Research</a>
 				<a href="#contact" data-roll>Contact</a>
 				<div class="nav-foot">
-					<a class="nav-mail" href="mailto:unaigaraymaestre@gmail.com" data-copy="unaigaraymaestre@gmail.com">unaigaraymaestre@gmail.com</a>
+					<a class="nav-mail" href="mailto:unaigaraymaestre@gmail.com" data-copy="unaigaraymaestre@gmail.com"
+						>unaigaraymaestre@gmail.com</a
+					>
 					<p class="copied" role="status"></p>
 					<p class="nav-alt">
 						<a href="mailto:unaigaraymaestre@gmail.com">mail app</a> ·
@@ -143,7 +146,9 @@
 						<path class="wv" d="M15.5 9c1.2 1.6 1.2 4.4 0 6M18.2 6.8c2.4 3 2.4 7.4 0 10.4" />
 						<path class="x" d="M16 9.5l5 5m0-5l-5 5" />
 					</svg>
-					<span class="sound-l"><span class="s-off">Click to enable sound</span><span class="s-on">Sound on</span></span>
+					<span class="sound-l"
+						><span class="s-off">Click to enable sound</span><span class="s-on">Sound on</span></span
+					>
 				</button>
 				<a class="bubble" href="#contact" data-mag><span>Say hi</span></a>
 				<button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-mag>
@@ -164,8 +169,8 @@
 						>
 					</h1>
 					<p class="lede">
-						I build <b>agentic RAG systems</b> and <b>production LLM platforms</b> — right now, one that drafts customer SMS behind guardrails, with humans in
-						the loop and <b>evals gating every change</b>.
+						I build <b>agentic RAG systems</b> and <b>production LLM platforms</b> — right now, one that drafts customer
+						SMS behind guardrails, with humans in the loop and <b>evals gating every change</b>.
 					</p>
 					<div class="hero-cta">
 						<a class="btn btn-k" href="#work" data-mag><span>See the work</span></a>
@@ -178,7 +183,8 @@
 				<figure class="art" id="art">
 					<svg class="print-static" viewBox="0 0 1500 900" role="img" aria-labelledby="art-t">
 						<title id="art-t">
-							Unai as a risograph print: a line drawing of him with a man bun and a beard, head tilted, smiling, over pink and yellow ink.
+							Unai as a risograph print: a line drawing of him with a man bun and a beard, head tilted, smiling, over
+							pink and yellow ink.
 						</title>
 						<defs>
 							<path
@@ -199,7 +205,10 @@
 								<feColorMatrix type="matrix" values="0 0 0 0 .04  0 0 0 0 .17  0 0 0 0 .12  -2.4 -4.7 -.9 3.3 0" />
 							</filter>
 							<filter id="f-tone" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
-								<feColorMatrix type="matrix" values="-.66 -1.3 -.25 0 1.75  -.66 -1.3 -.25 0 1.75  -.66 -1.3 -.25 0 1.75  0 0 0 1 0" />
+								<feColorMatrix
+									type="matrix"
+									values="-.66 -1.3 -.25 0 1.75  -.66 -1.3 -.25 0 1.75  -.66 -1.3 -.25 0 1.75  0 0 0 1 0"
+								/>
 							</filter>
 							<filter id="f-dis" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
 								<feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" result="n" />
@@ -263,7 +272,9 @@
 				</figure>
 
 				<p class="vert" aria-hidden="true">© MMXXVI — Impreso en Alicante</p>
-				<a class="scroll" href="#about"><span class="scroll-t">Scroll</span><span class="scroll-l" aria-hidden="true"></span></a>
+				<a class="scroll" href="#about"
+					><span class="scroll-t">Scroll</span><span class="scroll-l" aria-hidden="true"></span
+				></a>
 				<div class="regbar" aria-hidden="true">
 					<i class="rb-y"></i><i class="rb-p"></i><i class="rb-o"></i><i class="rb-k"></i><span>3 inks · 3 passes</span>
 				</div>
@@ -272,12 +283,18 @@
 			<div class="bands" aria-hidden="true">
 				<div class="band band-p" data-band="-1">
 					<div class="band-t">
-						<span>Agentic RAG ✺ Production LLM platforms ✺ Guardrails &amp; human review ✺ LLM-as-judge evals ✺ Real-time voice agents ✺&nbsp;</span>
+						<span
+							>Agentic RAG ✺ Production LLM platforms ✺ Guardrails &amp; human review ✺ LLM-as-judge evals ✺ Real-time
+							voice agents ✺&nbsp;</span
+						>
 					</div>
 				</div>
 				<div class="band band-y" data-band="1">
 					<div class="band-t">
-						<span>Retrieval that actually retrieves ✺ Evals gating every change ✺ Classical ML where it beats a prompt ✺ Shipping since 2018 ✺&nbsp;</span>
+						<span
+							>Retrieval that actually retrieves ✺ Evals gating every change ✺ Classical ML where it beats a prompt ✺
+							Shipping since 2018 ✺&nbsp;</span
+						>
 					</div>
 				</div>
 			</div>
@@ -285,16 +302,19 @@
 			<section class="about sheet" id="about" aria-labelledby="about-h">
 				<p class="label"><span class="num">01</span> What I do</p>
 				<h2 id="about-h" class="statement" data-lines>
-					Retrieval that <em>actually</em> retrieves, guardrails with a human in the loop — and <mark>evals that gate every change</mark>.
+					Retrieval that <em>actually</em> retrieves, guardrails with a human in the loop — and
+					<mark>evals that gate every change</mark>.
 				</h2>
 				<div class="about-grid">
 					<div class="about-copy">
 						<p class="big-p">
-							I care about the unglamorous half: evals, guardrails, infrastructure. It’s what decides whether a demo survives contact with real users — and
-							right now it’s most of my job, on an LLM retention platform at Inulti.
+							I care about the unglamorous half: evals, guardrails, infrastructure. It’s what decides whether a demo
+							survives contact with real users — and right now it’s most of my job, on an LLM retention platform at
+							Inulti.
 						</p>
 						<p class="proof">
-							Shipping production AI since <b>2018</b> · <b>3</b> US patent filings · published research at <b>CIARP 2018</b> (Springer LNCS).
+							Shipping production AI since <b>2018</b> · <b>3</b> US patent filings · published research at
+							<b>CIARP 2018</b> (Springer LNCS).
 						</p>
 						<p class="human">
 							Off the clock: music, bungee jumping, climbing, paddle boarding — and a lot of photography, at
@@ -365,9 +385,9 @@
 									<h3 class="j-co">Inulti <span class="stamp">Now</span></h3>
 									<p class="j-role">Senior AI Engineer</p>
 									<p class="j-what">
-										An LLM retention platform on AWS, end to end: AI-drafted SMS replies behind safety guardrails with human-in-the-loop review, a CRM over
-										ClickHouse, and LLM-as-judge and synthetic-call eval harnesses gating every prompt and model change. Also: real-time voice agents on LiveKit
-										+ SIP.
+										An LLM retention platform on AWS, end to end: AI-drafted SMS replies behind safety guardrails with
+										human-in-the-loop review, a CRM over ClickHouse, and LLM-as-judge and synthetic-call eval harnesses
+										gating every prompt and model change. Also: real-time voice agents on LiveKit + SIP.
 									</p>
 								</li>
 								<li class="job" id="stop-tekever" data-n="4" data-at="the airfield">
@@ -378,8 +398,8 @@
 									<h3 class="j-co">Tekever</h3>
 									<p class="j-role">Senior LLM Engineer / Data Scientist</p>
 									<p class="j-what">
-										A pipeline that turns Signal chats into Jira tickets: semantic and temporal clustering, then LLM-written structured tickets, on Airflow and
-										GCP.
+										A pipeline that turns Signal chats into Jira tickets: semantic and temporal clustering, then
+										LLM-written structured tickets, on Airflow and GCP.
 									</p>
 								</li>
 								<li class="job" id="stop-sorcero" data-n="3" data-at="the medical library">
@@ -387,8 +407,9 @@
 									<h3 class="j-co">Sorcero</h3>
 									<p class="j-role">Senior AI Engineer</p>
 									<p class="j-what">
-										Led AI R&amp;D for an NLU platform over unstructured medical data — theme tagging, NER, summarization, recommendation and a custom neural
-										search engine with RAG and agents. The work behind the three patents.
+										Led AI R&amp;D for an NLU platform over unstructured medical data — theme tagging, NER,
+										summarization, recommendation and a custom neural search engine with RAG and agents. The work behind
+										the three patents.
 									</p>
 								</li>
 								<li class="job" id="stop-accenture" data-n="2" data-at="the ticket sorter">
@@ -398,7 +419,10 @@
 									</p>
 									<h3 class="j-co">Accenture</h3>
 									<p class="j-role">Data Scientist</p>
-									<p class="j-what">NLP and topic modelling over ticketing data to speed up resolution; skills-inference tagging for employee selection.</p>
+									<p class="j-what">
+										NLP and topic modelling over ticketing data to speed up resolution; skills-inference tagging for
+										employee selection.
+									</p>
 								</li>
 								<li class="job" id="stop-smartloto" data-n="1" data-at="the lottery kiosk">
 									<p class="j-when">
@@ -407,7 +431,10 @@
 									</p>
 									<h3 class="j-co">Smartloto</h3>
 									<p class="j-role">AI Engineer</p>
-									<p class="j-what">Deep-learning image validation for lottery tickets on GCP, with on-device inference on Android and iOS.</p>
+									<p class="j-what">
+										Deep-learning image validation for lottery tickets on GCP, with on-device inference on Android and
+										iOS.
+									</p>
 								</li>
 							</ol>
 						</div>
@@ -437,8 +464,8 @@
 				</div>
 				<div class="edu">
 					<p>
-						<b>Education</b> MSc Artificial Intelligence, Valencian International University (2018–19) · BSc Computer Science, University of Alicante (2014–18)
-						· Erasmus year in Athlone, Ireland (2016–17).
+						<b>Education</b> MSc Artificial Intelligence, Valencian International University (2018–19) · BSc Computer
+						Science, University of Alicante (2014–18) · Erasmus year in Athlone, Ireland (2016–17).
 					</p>
 					<a class="btn" href="unai-garay-maestre-cv.pdf" data-mag
 						><span>The full story: CV <small>(PDF)</small></span></a
@@ -461,8 +488,24 @@
 								loading="lazy"
 								decoding="async"
 							/>
-							<img class="t-p" src="assets/css/images/tile-guexit.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
-							<img class="t-k" src="assets/css/images/tile-guexit.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+							<img
+								class="t-p"
+								src="assets/css/images/tile-guexit.webp"
+								alt=""
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
+							<img
+								class="t-k"
+								src="assets/css/images/tile-guexit.webp"
+								alt=""
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
 						</div>
 						<p class="p-no">No. 01</p>
 						<h3 class="p-t">Guexit</h3>
@@ -484,8 +527,24 @@
 								loading="lazy"
 								decoding="async"
 							/>
-							<img class="t-p" src="assets/css/images/tile-neural.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
-							<img class="t-k" src="assets/css/images/tile-neural.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+							<img
+								class="t-p"
+								src="assets/css/images/tile-neural.webp"
+								alt=""
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
+							<img
+								class="t-k"
+								src="assets/css/images/tile-neural.webp"
+								alt=""
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
 						</div>
 						<p class="p-no">No. 02</p>
 						<h3 class="p-t">Neural Search</h3>
@@ -493,7 +552,9 @@
 						<p class="p-tech">Haystack · Transformers · Streamlit</p>
 						<p class="p-links">
 							<a class="pill" href="https://github.com/ugm2/neural-search-demo" data-mag><span>Code ↗</span></a
-							><a class="pill" href="https://huggingface.co/spaces/ugaray96/neural-search" data-mag><span>Demo ↗</span></a>
+							><a class="pill" href="https://huggingface.co/spaces/ugaray96/neural-search" data-mag
+								><span>Demo ↗</span></a
+							>
 						</p>
 					</li>
 					<li class="proj">
@@ -507,8 +568,24 @@
 								loading="lazy"
 								decoding="async"
 							/>
-							<img class="t-p" src="assets/css/images/tile-grocery.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
-							<img class="t-k" src="assets/css/images/tile-grocery.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+							<img
+								class="t-p"
+								src="assets/css/images/tile-grocery.webp"
+								alt=""
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
+							<img
+								class="t-k"
+								src="assets/css/images/tile-grocery.webp"
+								alt=""
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
 						</div>
 						<p class="p-no">No. 03</p>
 						<h3 class="p-t">Grocery Classifier</h3>
@@ -516,7 +593,9 @@
 						<p class="p-tech">PyTorch · computer vision</p>
 						<p class="p-links">
 							<a class="pill" href="https://github.com/ugm2/grocery-classifier-demo" data-mag><span>Code ↗</span></a
-							><a class="pill" href="https://huggingface.co/spaces/ugaray96/grocery-classifier-demo" data-mag><span>Demo ↗</span></a>
+							><a class="pill" href="https://huggingface.co/spaces/ugaray96/grocery-classifier-demo" data-mag
+								><span>Demo ↗</span></a
+							>
 						</p>
 					</li>
 					<li class="proj">
@@ -530,8 +609,24 @@
 								loading="lazy"
 								decoding="async"
 							/>
-							<img class="t-p" src="assets/css/images/tile-fitness.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
-							<img class="t-k" src="assets/css/images/tile-fitness.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+							<img
+								class="t-p"
+								src="assets/css/images/tile-fitness.webp"
+								alt=""
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
+							<img
+								class="t-k"
+								src="assets/css/images/tile-fitness.webp"
+								alt=""
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
 						</div>
 						<p class="p-no">No. 04</p>
 						<h3 class="p-t">Marca Tu Ritmo</h3>
@@ -566,19 +661,22 @@
 						<ol class="pat">
 							<li>
 								<a href="https://uspto.report/patent/app/20210294781"
-									><span class="pat-n">US 2021/0294781</span><span class="pat-t">Feature Engineering With Question Generation</span
+									><span class="pat-n">US 2021/0294781</span
+									><span class="pat-t">Feature Engineering With Question Generation</span
 									><span class="pat-a" aria-hidden="true">↗</span></a
 								>
 							</li>
 							<li>
 								<a href="https://uspto.report/patent/app/20210294829"
-									><span class="pat-n">US 2021/0294829</span><span class="pat-t">Ontology Integration for Document Summarization</span
+									><span class="pat-n">US 2021/0294829</span
+									><span class="pat-t">Ontology Integration for Document Summarization</span
 									><span class="pat-a" aria-hidden="true">↗</span></a
 								>
 							</li>
 							<li>
 								<a href="https://uspto.report/patent/app/20220005463"
-									><span class="pat-n">US 2022/0005463</span><span class="pat-t">Cross-context Natural Language Model Generation</span
+									><span class="pat-n">US 2022/0005463</span
+									><span class="pat-t">Cross-context Natural Language Model Generation</span
 									><span class="pat-a" aria-hidden="true">↗</span></a
 								>
 							</li>
@@ -591,7 +689,9 @@
 							<circle cx="100" cy="100" r="56" />
 							<g class="seal-r">
 								<text>
-									<textPath href="#seal-c" textLength="440" lengthAdjust="spacing">three us patent filings ✺ sorcero ✺</textPath>
+									<textPath href="#seal-c" textLength="440" lengthAdjust="spacing">
+										three us patent filings ✺ sorcero ✺
+									</textPath>
 								</text>
 							</g>
 							<text class="seal-n" x="100" y="121" text-anchor="middle">3</text>
@@ -610,7 +710,9 @@
 					>
 					<p class="copied" role="status"></p>
 					<p class="mail-alt">
-						<span class="ma-hint"><span class="if-f">Click</span><span class="if-t">Tap</span> the address to copy it ·</span>
+						<span class="ma-hint"
+							><span class="if-f">Click</span><span class="if-t">Tap</span> the address to copy it ·</span
+						>
 						<a href="mailto:unaigaraymaestre@gmail.com">open in mail app</a> ·
 						<a href="https://mail.google.com/mail/?view=cm&amp;to=unaigaraymaestre@gmail.com">Gmail&nbsp;↗</a>
 					</p>
@@ -646,7 +748,10 @@
 
 		<footer class="colophon">
 			<p class="co-1">© 2026 Unai Garay Maestre</p>
-			<p class="co-2">Printed in three inks — fluorescent pink, yellow and hunter green — on warm cream. Set in Fraunces &amp; Shantell Sans.</p>
+			<p class="co-2">
+				Printed in three inks — fluorescent pink, yellow and hunter green — on warm cream. Set in Fraunces &amp;
+				Shantell Sans.
+			</p>
 			<p class="co-3">
 				<span class="clock-l">In Alicante it’s <time class="clock" id="clock">—</time> ·</span>
 				Edition 2026

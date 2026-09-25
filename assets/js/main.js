@@ -127,7 +127,11 @@ const snd = (() => {
 		peel: (t) => noise(t, 0.22, "bandpass", 700, 1.25, 5000, 1.2),
 		slap: (t, v = 1) => (noise(t, 0.07, "lowpass", 1800, 1.1 * v), tone(t, 0.06, 240, 90, 0.26 * v)),
 		paper: (t) => (noise(t, 0.36, "bandpass", 2200, 0.5, 800, 0.9), noise(t + 0.1, 0.24, "bandpass", 3200, 0.32, 1400)),
-		drum: (t) => (noise(t, 0.12, "lowpass", 560, 0.75), tone(t, 0.14, 95, 42, 0.31), noise(t + 0.045, 0.05, "highpass", 3000, 0.2)),
+		drum: (t) => (
+			noise(t, 0.12, "lowpass", 560, 0.75),
+			tone(t, 0.14, 95, 42, 0.31),
+			noise(t + 0.045, 0.05, "highpass", 3000, 0.2)
+		),
 	};
 	const play = (name, v, delay = 0) => {
 		if (!on || !ac) return;
@@ -292,7 +296,9 @@ const snd = (() => {
 		{ rootMargin: "-45% 0px -54% 0px" },
 	);
 	[$(".hero"), ...links.map((a) => $(a.hash))].forEach((el) => spy.observe(el));
-	addEventListener("load", () => document.fonts.ready.then(() => ((hashes.ready = true), hashes.sync())), { once: true });
+	addEventListener("load", () => document.fonts.ready.then(() => ((hashes.ready = true), hashes.sync())), {
+		once: true,
+	});
 	document.addEventListener("click", (e) => {
 		const a = e.target.closest('a[href^="#"]');
 		const el = a && !a.closest(".stops") && (a.hash === "#main" ? $("#main") : $(a.hash + ".sheet"));
@@ -300,7 +306,9 @@ const snd = (() => {
 		e.preventDefault();
 		const top = el === $("#main");
 		const h = top ? el : $("h2", el);
-		const y = top ? 0 : el.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
+		const y = top
+			? 0
+			: el.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
 		glide(
 			y,
 			clamp(500 + Math.abs(y - scrollY) * 0.1, 700, 1600),
@@ -643,7 +651,8 @@ for (const a of $$("[data-roll]")) {
 		(s) => () =>
 			((s = (s * 16807) % 2147483647) - 1) / 2147483646
 	)(11);
-	const put = (s) => (s.el.style.transform = `translate3d(${s.x.toFixed(1)}px,${s.y.toFixed(1)}px,0) rotate(${s.a.toFixed(1)}deg)`);
+	const put = (s) =>
+		(s.el.style.transform = `translate3d(${s.x.toFixed(1)}px,${s.y.toFixed(1)}px,0) rotate(${s.a.toFixed(1)}deg)`);
 	const measure = () => {
 		W = box.clientWidth;
 		H = box.clientHeight;
@@ -1071,7 +1080,14 @@ if (root.classList.contains("tour")) {
 				if (k !== -1) {
 					R.poke(k, 0.6);
 					snd.play("paper");
-					tag.textContent = k < 0 ? "vroom vroom" : k === cur ? "you’re here" : k ? `drive to ${$("b", links[k]).textContent} →` : "back to the start";
+					tag.textContent =
+						k < 0
+							? "vroom vroom"
+							: k === cur
+								? "you’re here"
+								: k
+									? `drive to ${$("b", links[k]).textContent} →`
+									: "back to the start";
 				}
 			}
 			tag.style.translate = `${(e.clientX - v.left).toFixed(0)}px ${(e.clientY - v.top).toFixed(0)}px`;
@@ -1252,7 +1268,8 @@ if (root.classList.contains("tour")) {
 			sc = Math.max(0, sc + sv * dt);
 			const yo = ((1 - sc) * ph * side) / 2;
 			pv.style.transform = `translate3d(${x.toFixed(1)}px,${(y + yo).toFixed(1)}px,0) translate(-50%,-50%) rotate(${(rot - 2).toFixed(2)}deg) scale(${sc.toFixed(3)})`;
-			if (Math.abs(tx - x) > 0.4 || Math.abs(rot) > 0.05 || Math.abs(sc - on) + Math.abs(sv) > 0.003) raf = requestAnimationFrame(loop);
+			if (Math.abs(tx - x) > 0.4 || Math.abs(rot) > 0.05 || Math.abs(sc - on) + Math.abs(sv) > 0.003)
+				raf = requestAnimationFrame(loop);
 		};
 		const run = () => {
 			if (!raf) {

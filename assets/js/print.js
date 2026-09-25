@@ -131,7 +131,8 @@ export async function mountPrint(canvas, { src, fig, skin, dpr, onLost }) {
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 	});
 	const U = {};
-	for (const n of ["uImg", "uMask", "uLook", "uY", "uP", "uK", "uPrint", "uPx", "uDpr"]) U[n] = gl.getUniformLocation(pr, n);
+	for (const n of ["uImg", "uMask", "uLook", "uY", "uP", "uK", "uPrint", "uPx", "uDpr"])
+		U[n] = gl.getUniformLocation(pr, n);
 	gl.uniform1i(U.uImg, 0);
 	gl.uniform1i(U.uMask, 1);
 	const cs = getComputedStyle(canvas);

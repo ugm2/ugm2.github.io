@@ -988,7 +988,13 @@ html:not(.gl) .print-live {
 }
 .statement mark {
 	color: inherit;
-	background: linear-gradient(100deg, transparent 0.2em, var(--yellow) 0.3em calc(100% - 0.25em), transparent calc(100% - 0.1em)) 0 64% / 100% 58% no-repeat;
+	background: linear-gradient(
+			100deg,
+			transparent 0.2em,
+			var(--yellow) 0.3em calc(100% - 0.25em),
+			transparent calc(100% - 0.1em)
+		)
+		0 64% / 100% 58% no-repeat;
 	-webkit-box-decoration-break: clone;
 	box-decoration-break: clone;
 	mix-blend-mode: multiply;

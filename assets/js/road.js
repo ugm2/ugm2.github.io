@@ -49,12 +49,18 @@ const _q = new THREE.Quaternion();
 const _e = new THREE.Euler();
 const _p = new V3();
 const _s = new V3();
-const frame = (x, y, z, ry = 0, rx = 0) => new M4().makeRotationY(ry).multiply(new M4().makeRotationX(rx)).setPosition(x, y, z);
+const frame = (x, y, z, ry = 0, rx = 0) =>
+	new M4().makeRotationY(ry).multiply(new M4().makeRotationX(rx)).setPosition(x, y, z);
 function kit(list, base = new M4(), part = 0) {
 	const P = (g, code, x = 0, y = 0, z = 0, sx = 1, sy = sx, sz = sx, rx = 0, ry = 0, rz = 0) => {
 		g = shape(g);
 		_m.compose(_p.set(x, y, z), _q.setFromEuler(_e.set(rx, ry, rz)), _s.set(sx, sy, sz)).premultiply(base);
-		list.push([g.attributes.position.clone().applyMatrix4(_m), g.attributes.normal.clone().applyNormalMatrix(_n.getNormalMatrix(_m)), inks(code), part]);
+		list.push([
+			g.attributes.position.clone().applyMatrix4(_m),
+			g.attributes.normal.clone().applyNormalMatrix(_n.getNormalMatrix(_m)),
+			inks(code),
+			part,
+		]);
 	};
 	P.src = (s) =>
 		s
@@ -134,7 +140,14 @@ function kiosk(P) {
     c k= 1 3.58 0 .05 .34 .05`);
 	K(new THREE.CylinderGeometry(1.115, 1.115, 0.72, 10 * fine, 1, true, -0.95, 1.9), "k3", 0, 1.6, 0);
 	K(new THREE.CylinderGeometry(1.3, 1.3, 0.08, 10 * fine, 1, false, -0.95, 1.9), "y", 0, 1.2, 0);
-	for (let i = 0; i < 12; i++) K(new THREE.ConeGeometry(1.45, 0.62, 2 * fine, 1, true, (i * PI) / 6, PI / 6), i % 2 ? "w=" : i ? "p=" : "p", 0, 2.66, 0);
+	for (let i = 0; i < 12; i++)
+		K(
+			new THREE.ConeGeometry(1.45, 0.62, 2 * fine, 1, true, (i * PI) / 6, PI / 6),
+			i % 2 ? "w=" : i ? "p=" : "p",
+			0,
+			2.66,
+			0,
+		);
 	const wire = new THREE.TorusGeometry(1, 0.045, 4, 18 * fine);
 	const cage = P.part(1);
 	cage(wire, "k", 0, 0, 0, 0.74, 0.74, 0.74, 0, PI / 2);
@@ -255,7 +268,18 @@ function sorter(P) {
 	for (let c = 0; c < 3; c++) {
 		const Q = P.part(10 + c);
 		for (let i = 0; i < 6; i++)
-			Q("x", i % 2 ? "w" : INK[c], 0.03 * Math.sin(i * 2.1 + c), 0.06 + i * 0.12, 0, 0.82, 0.12, 0.6, 0, 0.08 * Math.sin(i * 3.7 + c));
+			Q(
+				"x",
+				i % 2 ? "w" : INK[c],
+				0.03 * Math.sin(i * 2.1 + c),
+				0.06 + i * 0.12,
+				0,
+				0.82,
+				0.12,
+				0.6,
+				0,
+				0.08 * Math.sin(i * 3.7 + c),
+			);
 	}
 	const aim = ([x, z]) => Math.atan2(-(z - A.z), x - A.x);
 	const rest = aim([B1.x, B1.z]);
@@ -285,7 +309,8 @@ function sorter(P) {
 				if (w) ang = rest + Math.atan2(Math.sin(aim(S[c]) - rest), Math.cos(aim(S[c]) - rest)) * w;
 			}
 			pose(9, A.x, A.y, A.z, 0, ang);
-			for (let c = 0; c < 3; c++) pose(10 + c, S[c][0], 0.34, S[c][1], 0, c * 0.5 - 0.3, 0, [1, 0.55 + cnt[c] * 0.15, 1]);
+			for (let c = 0; c < 3; c++)
+				pose(10 + c, S[c][0], 0.34, S[c][1], 0, c * 0.5 - 0.3, 0, [1, 0.55 + cnt[c] * 0.15, 1]);
 		},
 	};
 }
@@ -361,11 +386,14 @@ function airfield(P) {
 	P(HALF, "k3", -1.2, 0.55, 0.62, 1);
 	P(HALF, "w", -1.2, 0.55, -2.4, 1.45, 1.45, 1.45, 0, PI);
 	for (const z of [-2.1, -0.9, 0.3]) P(RIB, "k", -1.2, 0.55, z, 1.47, 1.47, 1);
-	for (let i = 0; i < 6; i++) P(ring(0.3 - i * 0.03, 0.27 - i * 0.03, 0.8), i ? (i % 2 ? "w=" : "p=") : "p", 1.95, 0.8 + i * 0.8, -1.7);
+	for (let i = 0; i < 6; i++)
+		P(ring(0.3 - i * 0.03, 0.27 - i * 0.03, 0.8), i ? (i % 2 ? "w=" : "p=") : "p", 1.95, 0.8 + i * 0.8, -1.7);
 	P.src(`s p 1.95 5.45 -1.7 .32
     x k 1.95 4.6 -1.7 .9 .05 .05`);
 	const sock = P.part(1);
-	[0.26, 0.22, 0.18].forEach((r, i) => sock(ring(r, r - 0.04, 0.4), ["p", "w=", "p="][i], 0.2 + i * 0.4, 0, 0, 1, 1, 1, 0, 0, -PI / 2));
+	[0.26, 0.22, 0.18].forEach((r, i) =>
+		sock(ring(r, r - 0.04, 0.4), ["p", "w=", "p="][i], 0.2 + i * 0.4, 0, 0, 1, 1, 1, 0, 0, -PI / 2),
+	);
 	const BD = frame(1.1, 1.75, 0.35, -0.4);
 	P.in(BD).src(`c k -.9 -.9 -.06 .08 1.8 .08
     c k= .9 -.9 -.06 .08 1.8 .08
@@ -532,11 +560,20 @@ function coupe(P, W, G) {
 			.rotateY(-PI / 2)
 			.translate(w / 2 - b, 0, 0);
 	const pts = (s) => s.split(" ").map((p) => p.split(",").map(Number));
-	P(ext(pts("1.86,.24 1.99,.42 1.97,.55 1.82,.63 1.1,.69 .5,.71 -.9,.73 -1.72,.74 -1.96,.66 -1.99,.44 -1.86,.24"), 1.7, 0.06), "p");
+	P(
+		ext(
+			pts("1.86,.24 1.99,.42 1.97,.55 1.82,.63 1.1,.69 .5,.71 -.9,.73 -1.72,.74 -1.96,.66 -1.99,.44 -1.86,.24"),
+			1.7,
+			0.06,
+		),
+		"p",
+	);
 	P(ext(pts(".52,.7 .02,1 -.46,1.03 -.82,.99 -1.7,.76 -1.62,.7"), 1.12, 0.05), "p=");
 	P(ext(pts(".4,.76 .03,.96 -.44,.99 -.76,.95 -1.38,.78"), 1.18), "k4");
 	const stripe = ext(
-		pts("2,.45 1.99,.575 1.84,.66 1.1,.72 .5,.74 .5,.69 .02,.99 .02,1.035 -.46,1.065 -.82,1.025 -.82,.98 -1.7,.75 -1.72,.77 -1.97,.69 -2,.45 -1.9,.5 1.9,.5"),
+		pts(
+			"2,.45 1.99,.575 1.84,.66 1.1,.72 .5,.74 .5,.69 .02,.99 .02,1.035 -.46,1.065 -.82,1.025 -.82,.98 -1.7,.75 -1.72,.77 -1.97,.69 -2,.45 -1.9,.5 1.9,.5",
+		),
 		0.3,
 	);
 	P(stripe, "yo", 0.18);
@@ -704,9 +741,21 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 		const tan = pts.map((_, i) => curve.getTangentAt(i / NS));
 		const at = (i, o) => [pts[i].x - tan[i].z * o, 0.03, pts[i].z + tan[i].x * o];
 		const pos = [];
-		for (let i = 0; i < NS; i++) pos.push(...at(i, 1.45), ...at(i + 1, 1.45), ...at(i, -1.45), ...at(i, -1.45), ...at(i + 1, 1.45), ...at(i + 1, -1.45));
+		for (let i = 0; i < NS; i++)
+			pos.push(
+				...at(i, 1.45),
+				...at(i + 1, 1.45),
+				...at(i, -1.45),
+				...at(i, -1.45),
+				...at(i + 1, 1.45),
+				...at(i + 1, -1.45),
+			);
 		const up = pos.map((_, i) => +(i % 3 === 1));
-		S.push([new THREE.BufferAttribute(new Float32Array(pos), 3), new THREE.BufferAttribute(new Float32Array(up), 3), inks("w")]);
+		S.push([
+			new THREE.BufferAttribute(new Float32Array(pos), 3),
+			new THREE.BufferAttribute(new Float32Array(up), 3),
+			inks("w"),
+		]);
 		for (let i = 3; i < NS; i += 6) {
 			const t = tan[i];
 			P("x", i > 3 ? "y o l =" : "y o l", pts[i].x, 0.06, pts[i].z, 0.2, 0.03, 0.95, 0, Math.atan2(t.x, t.z));
@@ -715,7 +764,18 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 			for (const o of [-1.85, 1.85]) {
 				const [x, , z] = at(i, o);
 				const [x2, , z2] = at(i + 1, o);
-				P("x", i > 206 || o > 0 ? "w=" : "w", (x + x2) / 2, 0.5, (z + z2) / 2, 0.07, 0.2, Math.hypot(x2 - x, z2 - z) + 0.02, 0, Math.atan2(x2 - x, z2 - z));
+				P(
+					"x",
+					i > 206 || o > 0 ? "w=" : "w",
+					(x + x2) / 2,
+					0.5,
+					(z + z2) / 2,
+					0.07,
+					0.2,
+					Math.hypot(x2 - x, z2 - z) + 0.02,
+					0,
+					Math.atan2(x2 - x, z2 - z),
+				);
 				if (i % 2 === 0) P("x", "k", x, 0.3, z, 0.1, 0.55, 0.1);
 			}
 	}
@@ -772,11 +832,16 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 			}
 		};
 		for (let i = 0; i < (light ? 9 : 15); i++)
-			spot(1, null, 0, (x, z) => P("c", rnd() < 0.6 ? "y5 o" : "s6 o", x, 0.012, z, rnd(3, 6.5), 0.02, rnd(2, 3.6), 0, rnd(0, PI)));
-		for (let i = 0; i < (light ? 14 : 26); i++) spot(1.2, null, -1, (x, z) => tree(P.at(x, 0, z, rnd(0, 6)), rnd(), rnd(0.75, 1.15)));
-		for (let i = 0; i < (light ? 5 : 9); i++) spot(1, null, 1, (x, z) => tree(P.at(x, 0, z, rnd(0, 6)), rnd(0.8, 1), rnd(0.7, 1)));
+			spot(1, null, 0, (x, z) =>
+				P("c", rnd() < 0.6 ? "y5 o" : "s6 o", x, 0.012, z, rnd(3, 6.5), 0.02, rnd(2, 3.6), 0, rnd(0, PI)),
+			);
+		for (let i = 0; i < (light ? 14 : 26); i++)
+			spot(1.2, null, -1, (x, z) => tree(P.at(x, 0, z, rnd(0, 6)), rnd(), rnd(0.75, 1.15)));
+		for (let i = 0; i < (light ? 5 : 9); i++)
+			spot(1, null, 1, (x, z) => tree(P.at(x, 0, z, rnd(0, 6)), rnd(0.8, 1), rnd(0.7, 1)));
 		for (const f of frames.slice(1))
-			for (let j = 0; j < (light ? 1 : 2); j++) spot(1.2, f.u + rnd(-0.04, 0.04), -1, (x, z) => tree(P.at(x, 0, z, rnd(0, 6)), rnd(0, 0.79), rnd(0.8, 1.1)));
+			for (let j = 0; j < (light ? 1 : 2); j++)
+				spot(1.2, f.u + rnd(-0.04, 0.04), -1, (x, z) => tree(P.at(x, 0, z, rnd(0, 6)), rnd(0, 0.79), rnd(0.8, 1.1)));
 	}
 	add(geo(S));
 
@@ -817,7 +882,10 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 	const cs = getComputedStyle(canvas);
 	const ink = (v) => new V3(...rgb(cs.getPropertyValue(v)));
 	const post = new THREE.Mesh(
-		new THREE.BufferGeometry().setAttribute("position", new THREE.BufferAttribute(new Float32Array([-1, -1, 0, 3, -1, 0, -1, 3, 0]), 3)),
+		new THREE.BufferGeometry().setAttribute(
+			"position",
+			new THREE.BufferAttribute(new Float32Array([-1, -1, 0, 3, -1, 0, -1, 3, 0]), 3),
+		),
 		new THREE.RawShaderMaterial({
 			glslVersion: THREE.GLSL3,
 			vertexShader: PV,
@@ -942,7 +1010,8 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 		car.position.copy(_p);
 		car.rotation.y = drive.yaw;
 		let moving = spring(drive.pitch, 140, 13, dt, clamp(-drive.a * 0.005, -0.07, 0.07));
-		moving = spring(drive.roll, 140, 13, dt, clamp((-dy / Math.max(dt, 1e-3)) * stats.speed * 0.012, -0.1, 0.1)) || moving;
+		moving =
+			spring(drive.roll, 140, 13, dt, clamp((-dy / Math.max(dt, 1e-3)) * stats.speed * 0.012, -0.1, 0.1)) || moving;
 		moving = spring(hop, 90, 7, dt) || moving;
 		susp.rotation.set(drive.pitch[0] - hop[0] * 0.12, 0, drive.roll[0]);
 		susp.position.y = Math.abs(hop[0]) * 0.5;
@@ -977,7 +1046,11 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 		const th = mix(A.th, B.th, e) + ptrS[0] * 0.07;
 		const ph = mix(A.ph, B.ph, e) + ptrS[1] * 0.04;
 		const d = Math.exp(mix(Math.log(A.d), Math.log(B.d), e)) * (1 + 0.1 * Math.sin(PI * e));
-		camera.position.set(tgt.x + d * Math.cos(ph) * Math.sin(th), tgt.y + d * Math.sin(ph), tgt.z + d * Math.cos(ph) * Math.cos(th));
+		camera.position.set(
+			tgt.x + d * Math.cos(ph) * Math.sin(th),
+			tgt.y + d * Math.sin(ph),
+			tgt.z + d * Math.cos(ph) * Math.cos(th),
+		);
 		camera.lookAt(tgt);
 		mis += (clamp(Math.abs(vel) * 0.8, 0, 1) - mis) * (1 - Math.exp(-dt * 6));
 		if (born < 0) born = now;
@@ -1007,7 +1080,8 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 			here = k;
 			poke(k, 0.5);
 		} else if (Math.abs(s - k) > 0.3) here = -1;
-		let busy = Math.abs(ptr[0] - ptrS[0]) + Math.abs(ptr[1] - ptrS[1]) > 0.002 || mis > 0.01 || moving || veiled !== vt || intro;
+		let busy =
+			Math.abs(ptr[0] - ptrS[0]) + Math.abs(ptr[1] - ptrS[1]) > 0.002 || mis > 0.01 || moving || veiled !== vt || intro;
 		// only the nearest stop animates; others finish a cycle and hold
 		marks.forEach((m, j) => {
 			let a = spring(m.ax, 70, 6, dt);
