@@ -101,6 +101,20 @@ function geo(list) {
 	return g;
 }
 let LAMP, DOME, VAULT, HALF, RIB, FENDER;
+// monotone cubic through values at 0..n-1 (Fritsch-Butland slopes): smooth, never overshoots
+const mono = (y) => {
+	const d = y.slice(1).map((v, i) => v - y[i]),
+		n = d.length;
+	const m = y.map((_, i) =>
+		i && i < n ? (d[i - 1] * d[i] > 0 ? (2 * d[i - 1] * d[i]) / (d[i - 1] + d[i]) : 0) : d[Math.min(i, n - 1)],
+	);
+	return (x) => {
+		const i = clamp(Math.floor(x), 0, n - 1),
+			t = clamp(x - i, 0, 1),
+			u = 1 - t;
+		return (y[i] * (1 + 2 * t) + m[i] * t) * u * u + (y[i + 1] * (3 - 2 * t) - m[i + 1] * u) * t * t;
+	};
+};
 const ring = (r0, r1, h) => new THREE.CylinderGeometry(r1, r0, h, 14 * fine);
 const ss = (a, b, x) => ((x = clamp((x - a) / (b - a), 0, 1)), x * x * (3 - 2 * x));
 const bump = (x, a, b) => (x > a && x < b ? Math.sin((PI * (x - a)) / (b - a)) : 0);
@@ -587,7 +601,7 @@ function coupe(P, W, G) {
     b k .5 .82 -1.8 .05 .14 .08
     b k= -.5 .82 -1.8 .05 .14 .08`);
 	for (const x of [-1, 1]) {
-		for (const z of [1.18, -1.18]) P(FENDER, "p", x * 0.86, 0.38, z, 0.3, 0.47, 0.58);
+		for (const z of [1.18, -1.18]) P(FENDER, "p", x * 0.76, 0.38, z, 0.3, 0.47, 0.58);
 		P("c", "y l", x * 0.56, 0.54, 1.97, 0.26, 0.06, 0.26, PI / 2);
 		P("b", "k", x * 0.6, 0.6, -1.99, 0.32, 0.08, 0.04);
 		P("c", "k", x * 0.4, 0.3, -2.02, 0.12, 0.2, 0.12, PI / 2);
@@ -601,11 +615,12 @@ function coupe(P, W, G) {
 		L(0.056, 0.056, 0.074, 0.026);
 		L(0.056, -0.056, 0.074, 0.026);
 		L(0.082, -0.026, 0.026, 0.06);
-		W("c", x < 0 ? "k" : "k=", x * 0.84, 0, 0, 0.76, 0.32, 0.76, 0, 0, PI / 2);
-		W("c", "w", x * 0.84, 0, 0, 0.44, 0.34, 0.44, 0, 0, PI / 2);
-		W("c", "p", x * 0.84, 0, 0, 0.16, 0.36, 0.16, 0, 0, PI / 2);
-		W("x", "k o", x * 1.01, 0, 0, 0.02, 0.38, 0.05);
-		W("x", "k o", x * 1.01, 0, 0, 0.02, 0.05, 0.38);
+		// track inset: tyres tuck under the arches
+		W("c", x < 0 ? "k" : "k=", x * 0.7, 0, 0, 0.76, 0.32, 0.76, 0, 0, PI / 2);
+		W("c", "w", x * 0.7, 0, 0, 0.44, 0.34, 0.44, 0, 0, PI / 2);
+		W("c", "p", x * 0.7, 0, 0, 0.16, 0.36, 0.16, 0, 0, PI / 2);
+		W("x", "k o", x * 0.875, 0, 0, 0.02, 0.38, 0.05);
+		W("x", "k o", x * 0.875, 0, 0, 0.02, 0.05, 0.38);
 	}
 	G("c", "s5o", 0, 0.045, 0, 2.3, 0.02, 4.3);
 }
@@ -914,7 +929,10 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 
 	let W = 1;
 	let H = 1;
-	let last = null;
+	let last = null,
+		camT,
+		camP,
+		dCruise = 40;
 	function layout(o) {
 		last = o;
 		const { w, h, x = 0, y = 0, veil = -1, fy = 1 } = o;
@@ -942,6 +960,14 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 		frames[0].t.set(-2, 1, -1);
 		frames[0].th = -0.72;
 		frames[0].ph = 0.52;
+		// framing is a smooth function of journey position (centripetal Catmull-Rom)
+		camT = new THREE.CatmullRomCurve3(
+			frames.map((f) => f.t.clone()),
+			false,
+			"centripetal",
+		);
+		camP = ["th", "ph", "d"].map((k) => mono(frames.map((f) => (k === "d" ? Math.log(f.d) : f[k]))));
+		dCruise = 1.5 * frames[3].d;
 	}
 
 	const tgt = new V3();
@@ -988,11 +1014,25 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 		m.sq[1] += 1.6 * f;
 	}
 	let veiled = 0;
-	function draw(s, vel, ptr, dt, now, card, fdt = dt) {
-		const fresh = now - drive.seen > 400;
+	const fT = new V3(),
+		fP = new V3(),
+		fA = [new V3(), new V3()],
+		fB = [new V3(), new V3()];
+	const frameAt = (x, o = [fT, fP]) => {
+		const q = clamp(x / (frames.length - 1), 0, 1);
+		camT.getPoint(q, o[0]);
+		o[1].set(camP[0](x), camP[1](x), camP[2](x));
+		return o;
+	};
+	let cruise = 0,
+		onTrip = false;
+	// trip: { a, b } while the stop bar drives the car from stop a to b
+	function draw(s, vel, ptr, dt, now, card, fdt = dt, trip = null) {
+		const fresh = now - drive.seen > 1500;
 		drive.seen = now;
-		let [A, B, e] = seg(s);
-		const u = clamp(mix(A.u, B.u, e) - 0.02 * (1 - Math.sin(PI * e)), 0, 1);
+		const [A, B, e] = seg(s);
+		// parked a constant hair short of each stop: no speed swing passing one
+		const u = clamp(mix(A.u, B.u, e) - 0.02, 0, 1);
 		curve.getPointAt(u, _p);
 		if (u < 0.985) curve.getPointAt(u + 0.012, ahead);
 		else ahead.copy(_p).add(curve.getTangentAt(u, _s));
@@ -1009,9 +1049,9 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 		drive.yaw += dy;
 		car.position.copy(_p);
 		car.rotation.y = drive.yaw;
-		let moving = spring(drive.pitch, 140, 13, dt, clamp(-drive.a * 0.005, -0.07, 0.07));
+		let moving = spring(drive.pitch, 140, 13, dt, clamp(-drive.a * 0.005, -0.06, 0.06));
 		moving =
-			spring(drive.roll, 140, 13, dt, clamp((-dy / Math.max(dt, 1e-3)) * stats.speed * 0.012, -0.1, 0.1)) || moving;
+			spring(drive.roll, 140, 13, dt, clamp((-dy / Math.max(dt, 1e-3)) * stats.speed * 0.01, -0.06, 0.06)) || moving;
 		moving = spring(hop, 90, 7, dt) || moving;
 		susp.rotation.set(drive.pitch[0] - hop[0] * 0.12, 0, drive.roll[0]);
 		susp.position.y = Math.abs(hop[0]) * 0.5;
@@ -1035,17 +1075,42 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 			p.m.material.uniforms.uA.value[0] = 1 - p.t;
 			moving = true;
 		}
+		// camera: a softer spring, a beat behind the car
 		const c = drive.cam;
 		c[1] += (17.6 * (s - c[0]) - 8.4 * c[1]) * dt;
 		c[0] += c[1] * dt;
 		moving ||= Math.abs(s - c[0]) > 1e-4;
-		[A, B, e] = seg(c[0]);
+		// scrolling follows the stop curve; a trip blends origin to destination with one zoom-out
+		// (fast scrolls widen by speed)
+		let W = 0,
+			pull;
 		lead.copy(_p).setY(1.2);
-		tgt.lerpVectors(A.t, B.t, e).lerp(lead, 0.38 * Math.sin(PI * e));
+		if (trip && trip.a !== trip.b) {
+			const f = clamp((s - trip.a) / (trip.b - trip.a), 0, 1);
+			c[0] = s;
+			c[1] = vel;
+			frameAt(trip.a, fA);
+			frameAt(trip.b, fB);
+			tgt.lerpVectors(fA[0], fB[0], f);
+			fP.lerpVectors(fA[1], fB[1], f);
+			W = Math.sin(PI * f) * clamp((Math.abs(trip.b - trip.a) - 1) / 1.5, 0, 1);
+			pull = 0.38 * Math.sin(PI * f);
+			onTrip = true;
+		} else {
+			if (onTrip) ((c[0] = s), (c[1] = 0), (onTrip = false));
+			frameAt(c[0]);
+			tgt.copy(fT);
+			pull = 0.38 * Math.sin(PI * (c[0] - Math.floor(c[0])));
+		}
+		cruise += ((trip ? 0 : clamp((Math.abs(c[1]) - 0.9) / 0.8, 0, 1)) - cruise) * (1 - Math.exp(-dt * 3));
+		// a fast-scroll zoom still in progress when a trip starts decays through it, never snaps
+		W = Math.max(W, cruise);
+		tgt.lerp(lead, pull * (1 - W) + W);
 		for (const j of [0, 1]) ptrS[j] += (ptr[j] - ptrS[j]) * (1 - Math.exp(-dt * 4));
-		const th = mix(A.th, B.th, e) + ptrS[0] * 0.07;
-		const ph = mix(A.ph, B.ph, e) + ptrS[1] * 0.04;
-		const d = Math.exp(mix(Math.log(A.d), Math.log(B.d), e)) * (1 + 0.1 * Math.sin(PI * e));
+		const th = fP.x + ptrS[0] * 0.07;
+		const ph = mix(fP.y, Math.max(fP.y, 0.68), 0.7 * W) + ptrS[1] * 0.04;
+		const dF = Math.exp(fP.z);
+		const d = mix(dF, Math.max(dF, dCruise), W);
 		camera.position.set(
 			tgt.x + d * Math.cos(ph) * Math.sin(th),
 			tgt.y + d * Math.sin(ph),
@@ -1076,7 +1141,7 @@ export async function mountRoad(canvas, { light, dpr, onLost }) {
 			}
 		}
 		const k = Math.round(s);
-		if (Math.abs(s - k) < 0.04 && k !== here) {
+		if (Math.abs(s - k) < 0.04 && Math.abs(vel) < 0.3 && k !== here) {
 			here = k;
 			poke(k, 0.5);
 		} else if (Math.abs(s - k) > 0.3) here = -1;

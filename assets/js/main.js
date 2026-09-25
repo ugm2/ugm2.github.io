@@ -23,6 +23,10 @@ const seen = (els, cb, opts = { threshold: 0.3 }) => {
 	}, opts);
 	els.forEach((el) => io.observe(el));
 };
+// Safari 26's floating toolbar: pinned UI stays inside the visible height
+const vis = () => root.style.setProperty("--ih", `${innerHeight}px`);
+vis();
+addEventListener("resize", vis, { passive: true });
 
 let glideRaf = 0,
 	passing = false;
@@ -219,7 +223,8 @@ const snd = (() => {
 		if (document.hidden) (engine(0), ac.suspend().catch(() => {}));
 		else if (on) wakeAudio();
 	});
-	return { play, engine, invite };
+	const audio = () => (on ? init()?.then(() => ({ ac, out, buf })) : null);
+	return { play, engine, invite, audio };
 })();
 
 {
@@ -255,9 +260,10 @@ const snd = (() => {
 			const ok = await copy(addr);
 			if (!ok) getSelection().selectAllChildren(b);
 			st.innerHTML = ok
-				? 'copied ✓<span class="sr"> — the address is on your clipboard</span>'
+				? 'copied <svg class="ic" aria-hidden="true"><use href="#i-ok" /></svg><span class="sr"> — the address is on your clipboard</span>'
 				: `press ${/Mac|iP/.test(navigator.userAgent) ? "⌘" : "Ctrl+"}C`;
-			st.style.left = `${b.offsetLeft + b.offsetWidth - 34}px`;
+			// the stamp stays on screen, even when the address fills a phone's width
+			st.style.left = `${Math.min(b.offsetLeft + b.offsetWidth - 34, st.offsetParent.clientWidth - st.offsetWidth - 6)}px`;
 			st.style.top = `${b.offsetTop - 22}px`;
 			st.classList.remove("on");
 			void st.offsetWidth;
@@ -341,6 +347,7 @@ if (root.classList.contains("gl")) {
 		.then((m) =>
 			m.mountPrint(cv, {
 				src: "images/unai-900.webp",
+				depth: "images/unai-depth.webp",
 				fig: $("#p-fig").getAttribute("d"),
 				skin: $("#p-skin").getAttribute("d"),
 				dpr: Math.min(devicePixelRatio || 1, innerWidth < 700 ? 1.25 : 1.5),
@@ -509,7 +516,7 @@ for (const a of $$("[data-roll]")) {
 		if (!isOpen()) return;
 		if (e.key === "Escape") setMenu(false);
 		if (e.key === "Tab") {
-			const f = [...$$("a, button", nav), mb];
+			const f = [...$$("a, button", nav), $("#sound"), mb];
 			const i = f.indexOf(document.activeElement);
 			const j = e.shiftKey ? (i <= 0 ? f.length - 1 : i - 1) : i === f.length - 1 || i < 0 ? 0 : i + 1;
 			e.preventDefault();
@@ -918,6 +925,7 @@ if (root.classList.contains("tour")) {
 		dirty = true,
 		again = false,
 		hot = -1,
+		trip = null,
 		R = null;
 	const live = () => root.classList.contains("tour");
 	const measure = () => {
@@ -933,12 +941,22 @@ if (root.classList.contains("tour")) {
 		hashes.road = inside() && cur >= 0 ? links[cur].hash : "";
 		hashes.sync();
 	};
+	const ease = (e) => e * 0.5 + (0.5 - 0.5 * Math.cos(Math.PI * e)) * 0.5;
+	const yOf = (x) => {
+		const i = Math.min(N - 1, Math.floor(x));
+		const q = x - i;
+		if (q <= 0) return at(i);
+		let lo = 0,
+			hi = 1;
+		for (let n = 0; n < 18; n++) ease((lo + hi) / 2) < q ? (lo = (lo + hi) / 2) : (hi = (lo + hi) / 2);
+		return top + ((i + DWELL + lo * (1 - 2 * DWELL)) / N) * span;
+	};
 	const read = () => {
 		prog = clamp((scrollY - top) / span, 0, 1);
 		const u = prog * N;
 		const i = Math.min(N - 1, Math.floor(u));
 		const e = clamp((u - i - DWELL) / (1 - 2 * DWELL), 0, 1);
-		sT = i + e * 0.5 + (0.5 - 0.5 * Math.cos(Math.PI * e)) * 0.5;
+		sT = i + ease(e);
 	};
 	const framing = () => {
 		const v = view.getBoundingClientRect();
@@ -995,8 +1013,16 @@ if (root.classList.contains("tour")) {
 		if (!live()) return;
 		const dt = clamp((now - last) / 1000, 0, 0.05);
 		last = now;
-		vD = clamp(vD + (49 * (sT - sD) - 14 * vD) * dt, -VMAX, VMAX);
-		sD += vD * dt;
+		if (trip) {
+			const p = clamp((now - trip.t0) / trip.ms, 0, 1);
+			sD = sT = trip.a + (trip.b - trip.a) * (0.5 - 0.5 * Math.cos(Math.PI * p));
+			vD = (((trip.b - trip.a) * Math.PI) / 2) * Math.sin(Math.PI * p) * (1000 / trip.ms);
+			scrollTo({ top: p < 1 ? yOf(sD) : at(trip.b), behavior: "instant" });
+			if (p >= 1) ((trip = null), (vD = 0));
+		} else {
+			vD = clamp(vD + (49 * (sT - sD) - 14 * vD) * dt, -VMAX, VMAX);
+			sD += vD * dt;
+		}
 		if (passing || !seen) ((sD = sT), (vD = 0), (arrived = Math.round(sT)));
 		if (Math.abs(sT - sD) < 5e-4 && Math.abs(vD) < 2e-3) ((sD = sT), (vD = 0));
 		ui();
@@ -1010,12 +1036,12 @@ if (root.classList.contains("tour")) {
 		if (passing) dirty = true;
 		const idle = !moving && !dirty && again;
 		if (drawn && (moving || dirty || (again && (!idle || now - drawAt > 31)))) {
-			again = R.draw(sD, vD, ptr, clamp((now - drawAt) / 1000, 0, 0.05), now, shown >= 0, dt);
+			again = R.draw(sD, vD, ptr, clamp((now - drawAt) / 1000, 0, 0.05), now, shown >= 0, dt, trip);
 			drawAt = now;
 			dirty = false;
 		} else if (!drawn) again = false;
 		snd.engine(drawn && !passing ? R.speed : 0);
-		if (moving || again) raf = requestAnimationFrame(tick);
+		if (moving || again || trip) raf = requestAnimationFrame(tick);
 		else snd.engine(0);
 	};
 	const wake = () => {
@@ -1035,13 +1061,28 @@ if (root.classList.contains("tour")) {
 		dirty = true;
 		wake();
 	};
+	// stop-bar trips: one ease, ~1.3 s for one stop to ~2.8 s for four; any input cancels
 	const go = (k, focus) => {
 		k = clamp(k, 0, N);
-		const n = Math.max(1, Math.abs(k - prog * N));
-		glide(at(k), 1400 + ((n - 1) / (N - 1)) * 1600);
-		history.replaceState(null, "", links[k].hash);
+		const n = Math.abs(k - sD);
+		trip =
+			RM || n < 0.01
+				? null
+				: { a: sD, b: k, t0: performance.now(), ms: n < 1 ? 500 + 800 * n : Math.min(3000, 1300 + (n - 1) * 500) };
+		if (!trip) scrollTo({ top: at(k), behavior: "instant" });
 		if (focus) links[k].focus({ preventScroll: true });
+		wake();
 	};
+	for (const ev of ["wheel", "touchstart", "keydown", "pointerdown"])
+		addEventListener(
+			ev,
+			() => {
+				if (!trip) return;
+				trip = null;
+				read();
+			},
+			{ capture: true, passive: true },
+		);
 	bar.addEventListener("click", (e) => {
 		const a = e.target.closest("a");
 		if (!a) return;
@@ -1086,8 +1127,10 @@ if (root.classList.contains("tour")) {
 							: k === cur
 								? "you’re here"
 								: k
-									? `drive to ${$("b", links[k]).textContent} →`
+									? `drive to ${$("b", links[k]).textContent} `
 									: "back to the start";
+					if (k > 0 && k !== cur)
+						tag.insertAdjacentHTML("beforeend", '<svg class="ic" aria-hidden="true"><use href="#i-r" /></svg>');
 				}
 			}
 			tag.style.translate = `${(e.clientX - v.left).toFixed(0)}px ${(e.clientY - v.top).toFixed(0)}px`;
@@ -1108,6 +1151,7 @@ if (root.classList.contains("tour")) {
 	});
 	const onScroll = () => {
 		if (innerWidth !== vw) return relayout();
+		if (trip) return roadHash();
 		read();
 		roadHash();
 		wake();
@@ -1365,6 +1409,41 @@ if (root.classList.contains("tour")) {
 	};
 	tick();
 	setInterval(tick, 20000);
+}
+
+{
+	// easter egg: Konami, typing "force" or holding the logo loads crawl.js
+	const run = () =>
+		import("./crawl.js").then(
+			(m) => m.crawl({ RM, snd }),
+			() => {},
+		);
+	const K = "ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight b a";
+	let keys = [];
+	addEventListener("keydown", (e) => {
+		if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest?.("input, textarea, select, [contenteditable]")) return;
+		if ($("dialog[open]")) return;
+		keys = [...keys, e.key.length === 1 ? e.key.toLowerCase() : e.key].slice(-10);
+		if (keys.join(" ") === K || keys.slice(-5).join("") === "force") ((keys = []), run());
+	});
+	const logo = $(".logo");
+	let hold = 0,
+		held = false,
+		x0 = 0,
+		y0 = 0;
+	const end = () => (clearTimeout(hold), logo.classList.remove("hold"));
+	logo.addEventListener("pointerdown", (e) => {
+		if (e.button) return;
+		held = false;
+		x0 = e.clientX;
+		y0 = e.clientY;
+		logo.classList.add("hold");
+		hold = setTimeout(() => (end(), (held = true), run()), 1200);
+	});
+	logo.addEventListener("pointermove", (e) => Math.hypot(e.clientX - x0, e.clientY - y0) > 12 && end());
+	for (const ev of ["pointerup", "pointercancel", "pointerleave"]) logo.addEventListener(ev, end);
+	logo.addEventListener("contextmenu", (e) => e.preventDefault());
+	logo.addEventListener("click", (e) => held && (e.preventDefault(), e.stopImmediatePropagation(), (held = false)));
 }
 
 root.classList.add("m");

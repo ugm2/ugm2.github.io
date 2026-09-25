@@ -5,22 +5,33 @@ in vec2 p;out vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0,1);}`;
 
 const FS = `#version 300 es
 precision highp float;
-uniform sampler2D uImg,uMask;
+uniform sampler2D uImg,uMask,uDepth;
 uniform vec2 uLook;
 uniform vec3 uY,uP,uK;
 uniform vec4 uPrint;
 uniform float uPx,uDpr;
 in vec2 v;out vec4 o;
+// baked relief: 0 paper, H0 the outline and shoulders, 1 the nose
+const float H0=.5;
 float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float lum(vec4 c){return mix(1.,dot(c.rgb,vec3(.299,.587,.114)),c.a);}
 float L(vec2 q,float b){return lum(textureLod(uImg,q,b));}
-float dome(vec2 q){vec2 d=(q-vec2(.54,.5))/vec2(.4,.47);return sqrt(max(0.,1.-dot(d,d)));}
+float D(vec2 q){return textureLod(uDepth,q,0.).r;}
 vec2 eye(vec2 q,vec2 c,vec2 r,vec2 l){float f=smoothstep(1.,.15,length((q-c)/r));return q-l*f*r*.32;}
-vec2 warp(vec2 q,float k){
-  q-=uLook*k*dome(q);
+vec2 eyes(vec2 q){
   vec2 l=uLook*vec2(1,.8);
   q=eye(q,vec2(.548,.537),vec2(.045,.028),l);
   return eye(q,vec2(.691,.633),vec2(.036,.024),l);}
+// steep parallax from the nose down to the outline; the first surface met wins
+vec2 turn(vec2 q,vec2 s){
+  vec2 a=q-s*(1.-H0);float da=D(a)-1.;
+  if(da>=0.)return a;
+  for(int i=1;i<=12;i++){
+    float t=1.-(1.-H0)*float(i)/12.;
+    vec2 b=q-s*(t-H0);float db=D(b)-t;
+    if(db>=0.)return mix(a,b,da/(da-db));
+    a=b;da=db;}
+  return q;}
 float ink(vec2 q){
   float px=.9/900.,m=L(q,0.);
   m=min(m,L(q+vec2(px,0),0.));
@@ -38,19 +49,28 @@ void main(){
   vec2 q=(vb-vec2(600.,0.))/900.;
   vec2 fc=gl_FragCoord.xy/uDpr;
   float n=h(floor(fc/1.5)),mis=1.-uPrint.w;
-  vec2 oY=vec2(-7.,-5.)/900.+uLook*vec2(-.004,-.003)+vec2(-40.,10.)/900.*mis;
-  vec2 oP=vec2(8.,6.)/900.+uLook*vec2(.003,.002)+vec2(30.,-25.)/900.*mis;
-  vec2 qk=warp(q,.036),qp=warp(q-oP,.032),qy=warp(q-oY,.028);
+  // ~±11° yaw, ±6° pitch
+  vec2 s=uLook*vec2(.08,.045);
+  vec2 th=turn(q,s);
+  // plate depths: yellow deepest, ink on top
+  vec2 oY=vec2(-7.,-5.)/900.+vec2(-40.,10.)/900.*mis;
+  vec2 oP=vec2(8.,6.)/900.+vec2(30.,-25.)/900.*mis;
+  vec2 qk=eyes(th),qp=eyes(th+s*.04-oP),qy=eyes(th+s*.09-oY);
   vec4 mp=texture(uMask,qp),my=texture(uMask,qy);
-  vec2 hb=vb+uLook*vec2(6.,4.);
+  // the hatch is paper-deep: it slides the other way under a halftone shadow
+  vec2 qb=q+s*H0*.35;
+  vec2 hb=vb+uLook*vec2(-4.,-3.);
   float inH=step(60.,hb.x)*step(hb.x,1470.)*step(220.,hb.y)*step(hb.y,510.);
-  float halo=textureLod(uMask,qk,3.2).g;
-  float hat=inH*(1.-smoothstep(.02,.1,halo));
-  float y=hat*smoothstep(.3,.2,abs(fract((hb.x-hb.y)*uPx/8.)-.5));
+  float halo=textureLod(uMask,qb,3.2).g;
+  float hat=inH*(1.-smoothstep(.02,.1,halo))*(1.-texture(uMask,qk).g);
+  float sh=smoothstep(.05,.4,textureLod(uMask,qb-vec2(.028,.02)-s*.5,3.4).g)*.7;
+  float y=hat*smoothstep(.3-.12*sh,.2-.12*sh,abs(fract((hb.x-hb.y)*uPx/8.)-.5));
   float fd=1.-smoothstep(.36,.5,length(q-.5))*smoothstep(.5,.72,q.y);
   float fh=mix(dots(fc,.9,5.,fd),1.,step(.999,fd));
   y=max(y,my.g*(1.-my.r)*.95*fh);
-  float dark=1.-L(qp,2.5);
+  // light only as halftone density
+  vec2 g=vec2(D(qp+vec2(.004,0))-D(qp-vec2(.004,0)),D(qp+vec2(0,.004))-D(qp-vec2(0,.004)));
+  float dark=1.-L(qp,2.5)+clamp(dot(g,uLook)*1.6,-.07,.07)*mp.g;
   float ht=dots(fc,.26,5.5,clamp((dark-.12)*1.3,0.,1.))*mp.g*(1.-.35*mp.g*(1.-mp.r));
   float p=max(mp.r*.36,ht*.95)*(1.-mp.b)*fh;
   float k=ink(qk)*smoothstep(.1,.5,textureLod(uMask,qk,2.).g);
@@ -93,16 +113,28 @@ function masks(n, fig, skin) {
 	return c;
 }
 
-export async function mountPrint(canvas, { src, fig, skin, dpr, onLost }) {
+export async function mountPrint(canvas, { src, depth, fig, skin, dpr, onLost }) {
 	const gl = canvas.getContext("webgl2", {
 		alpha: false,
 		antialias: false,
 		powerPreference: "low-power",
 	});
 	if (!gl) throw new Error("webgl2");
-	const img = new Image();
-	img.src = src;
-	await img.decode();
+	const load = (u) => {
+		const i = new Image();
+		i.src = u;
+		return i.decode().then(() => i);
+	};
+	// no relief: a flat map at the pivot depth keeps the head still
+	const flat = () => {
+		const c = document.createElement("canvas");
+		c.width = c.height = 1;
+		const x = c.getContext("2d");
+		x.fillStyle = "rgb(128,128,128)";
+		x.fillRect(0, 0, 1, 1);
+		return c;
+	};
+	const [img, rel] = await Promise.all([load(src), depth ? load(depth).catch(flat) : flat()]);
 	const pr = gl.createProgram();
 	for (const [t, s] of [
 		[gl.VERTEX_SHADER, VS],
@@ -121,7 +153,7 @@ export async function mountPrint(canvas, { src, fig, skin, dpr, onLost }) {
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
 	gl.enableVertexAttribArray(0);
 	gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-	[img, masks(512, fig, skin)].forEach((source, u) => {
+	[img, masks(512, fig, skin), rel].forEach((source, u) => {
 		gl.activeTexture(gl.TEXTURE0 + u);
 		gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source);
@@ -131,10 +163,11 @@ export async function mountPrint(canvas, { src, fig, skin, dpr, onLost }) {
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 	});
 	const U = {};
-	for (const n of ["uImg", "uMask", "uLook", "uY", "uP", "uK", "uPrint", "uPx", "uDpr"])
+	for (const n of ["uImg", "uMask", "uDepth", "uLook", "uY", "uP", "uK", "uPrint", "uPx", "uDpr"])
 		U[n] = gl.getUniformLocation(pr, n);
 	gl.uniform1i(U.uImg, 0);
 	gl.uniform1i(U.uMask, 1);
+	gl.uniform1i(U.uDepth, 2);
 	const cs = getComputedStyle(canvas);
 	gl.uniform3fv(U.uY, rgb(cs.getPropertyValue("--yellow")));
 	gl.uniform3fv(U.uP, rgb(cs.getPropertyValue("--pink")));
