@@ -94,6 +94,7 @@ html {
 	-webkit-text-size-adjust: 100%;
 	text-size-adjust: 100%;
 	overflow-x: clip;
+	font-variant-emoji: text;
 }
 html.ld {
 	scroll-behavior: smooth;
@@ -167,6 +168,20 @@ button {
 	width: 0;
 	height: 0;
 	overflow: hidden;
+}
+/* sprite icons: never emoji, always the text's ink */
+.ic {
+	display: inline-block;
+	width: 0.8em;
+	height: 0.8em;
+	vertical-align: -0.07em;
+	flex: none;
+	overflow: visible;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2.1;
+	stroke-linecap: round;
+	stroke-linejoin: round;
 }
 .skip {
 	position: fixed;
@@ -1304,6 +1319,7 @@ html:not(.tour) .job-now::before {
 	position: sticky;
 	top: 0;
 	height: 100svh;
+	height: min(100svh, var(--ih, 100svh));
 	display: grid;
 	grid-template:
 		"deck ." minmax(0, 1fr)
@@ -2016,6 +2032,10 @@ html:not(.pv-on) .p-t {
 		transform 0.35s var(--spring),
 		background-color 0.25s;
 }
+.pat-a .ic {
+	width: 18px;
+	height: 18px;
+}
 .pat a:focus-visible .pat-t {
 	background-size: 100% 45%;
 }
@@ -2273,6 +2293,7 @@ html:not(.js) .ma-hint {
 .co-top {
 	display: inline-flex;
 	align-items: center;
+	gap: 0.3em;
 	min-height: 44px;
 	color: var(--ink);
 	font-weight: 700;
@@ -2445,8 +2466,16 @@ html:not(.js) .ma-hint {
 		overflow: hidden;
 	}
 	.menu-open .logo,
-	.menu-open .top-r > :not(.menu-btn) {
+	.menu-open .top-r > :not(.menu-btn, .sound) {
 		visibility: hidden;
+	}
+	/* the sound toggle stays on the menu sheet, beside Close */
+	.menu-open .sound {
+		position: relative;
+		z-index: 3;
+	}
+	.menu-open .sound:not([aria-pressed="true"]) {
+		background: var(--paper);
 	}
 	.hero {
 		grid-template-columns: minmax(0, 1fr);
@@ -2710,6 +2739,47 @@ body {
 .logo:active {
 	scale: 0.94;
 }
+/* easter egg: holding the logo draws a ring in round it */
+.logo {
+	position: relative;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.logo::after {
+	content: "";
+	position: absolute;
+	inset: -7px;
+	border: 2.5px solid var(--ink);
+	border-radius: 50%;
+	opacity: 0;
+	scale: 1.5;
+	pointer-events: none;
+}
+.logo.hold::after {
+	opacity: 1;
+	scale: 1;
+	transition:
+		scale 1s 0.2s cubic-bezier(0.3, 0, 0.7, 1),
+		opacity 0.3s 0.2s;
+}
+.egg {
+	color: var(--ink-2);
+}
+.egg-t {
+	display: none;
+}
+@media (hover: none) {
+	.egg-k {
+		display: none;
+	}
+	.egg-t {
+		display: inline;
+	}
+}
+html:not(.js) .egg {
+	display: none;
+}
 .if-t {
 	display: none;
 }
@@ -2738,7 +2808,7 @@ body {
 		padding-top: max(96px, calc(env(safe-area-inset-top) + 80px));
 	}
 	.js .nav .nav-foot {
-		bottom: max(28px, env(safe-area-inset-bottom));
+		bottom: calc(max(28px, env(safe-area-inset-bottom)) + max(0px, 100% - var(--ih, 100%)));
 	}
 }
 @media (max-width: 900px) and (min-height: 501px), (max-width: 600px) {
@@ -2988,7 +3058,7 @@ html:not(.gl) .note-look {
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	.stuck .top-r > :not(.menu-btn) {
+	.stuck .top-r > :not(.menu-btn, .sound) {
 		display: none;
 	}
 	.menu-open .top.stuck {
