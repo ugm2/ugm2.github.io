@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page not found — Unai Garay Maestre</title>
     <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#f5eee0" />
+    <link rel="icon" type="image/png" href="/images/unai-favicon.png" sizes="180x180" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="icon"
-      type="image/png"
-      href="/images/unai-favicon.png"
-      sizes="180x180"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..800,0..100,0..1&family=Shantell+Sans:wght@400..700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --accent: #2fb3b3;
-        --accent-hot: #64eaea;
+        --paper: oklch(0.961 0.019 90.5);
+        --ink: oklch(0.26 0.045 165);
+        --pink: oklch(0.693 0.236 350.2);
+        --yellow: oklch(0.921 0.193 102.2);
       }
       * {
         margin: 0;
@@ -28,64 +28,82 @@
         min-height: 100svh;
         display: grid;
         place-items: center;
-        padding: 2rem;
-        background:
-          radial-gradient(
-            50rem 34rem at 18% 10%,
-            rgba(47, 179, 179, 0.12),
-            transparent 60%
-          ),
-          radial-gradient(
-            44rem 30rem at 84% 82%,
-            rgba(70, 100, 200, 0.1),
-            transparent 62%
-          ),
-          #0b0d0f;
-        color: #e8ecee;
-        font-family: "Outfit", system-ui, sans-serif;
-        font-weight: 300;
+        padding: 2rem 1rem;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Shantell Sans", system-ui, sans-serif;
         text-align: center;
       }
+      main {
+        position: relative;
+        max-width: 34rem;
+      }
       .code {
-        color: var(--accent);
+        font-family: "Shantell Sans", system-ui, sans-serif;
+        font-weight: 700;
         font-size: 0.85rem;
-        font-weight: 600;
-        letter-spacing: 0.3em;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
       }
       h1 {
-        margin-top: 0.8rem;
-        color: #fff;
-        font-size: clamp(2rem, 7vw, 3.2rem);
+        position: relative;
+        margin-top: 0.4rem;
+        font-family: Fraunces, Georgia, serif;
+        font-size: clamp(6rem, 30vw, 11rem);
         font-weight: 800;
-        letter-spacing: -0.03em;
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+        font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+        text-shadow: 0.025em 0.02em 0 var(--pink);
+      }
+      h1 i {
+        font-style: normal;
+        color: var(--pink);
+        text-shadow: 0.025em 0.02em 0 var(--yellow);
       }
       p {
-        margin-top: 0.9rem;
-        color: #a2acb0;
-        font-size: 1.05rem;
+        margin-top: 1rem;
+        font-family: Fraunces, Georgia, serif;
+        font-size: 1.25rem;
+        line-height: 1.4;
+        text-wrap: balance;
+      }
+      mark {
+        background: linear-gradient(transparent 58%, var(--yellow) 58%);
+        color: inherit;
       }
       a.home {
         display: inline-flex;
+        align-items: center;
+        min-height: 48px;
         margin-top: 2rem;
-        padding: 0.7em 1.5em;
-        background: var(--accent);
+        padding: 0 1.5rem;
+        border: 2px solid var(--ink);
         border-radius: 999px;
-        color: #04191a;
-        font-weight: 600;
+        background: var(--ink);
+        color: var(--paper);
+        font-weight: 700;
         text-decoration: none;
-        transition: background 0.2s ease;
+        box-shadow: 4px 4px 0 var(--pink);
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
       }
       a.home:hover {
-        background: var(--accent-hot);
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 var(--pink);
+      }
+      a.home:focus-visible {
+        outline: 3px solid var(--pink);
+        outline-offset: 4px;
       }
     </style>
   </head>
   <body>
     <main>
-      <p class="code">Error 404</p>
-      <h1>This page doesn't exist</h1>
-      <p>The link may be old, or I may have moved something.</p>
+      <p class="code">Misprint</p>
+      <h1>404<i>.</i></h1>
+      <p>This page didn't make it through the press. <mark>The link may be old</mark>, or I moved something.</p>
       <a class="home" href="/">Back to the homepage</a>
     </main>
   </body>
