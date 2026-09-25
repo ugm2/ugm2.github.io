@@ -1,1543 +1,660 @@
 <!doctype html>
-<!--
-	Originally based on Photon by HTML5 UP (html5up.net | @ajlkn), CCA 3.0.
-	Since heavily rewritten.
--->
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>Unai Garay Maestre — Senior AI Engineer</title>
+		<meta
+			name="description"
+			content="Unai Garay Maestre, Senior AI Engineer in Alicante, Spain. Agentic RAG and production LLM platforms — guardrails, human-in-the-loop review and the evals that gate every change."
+		/>
+		<link rel="canonical" href="https://ugm2.github.io/" />
+		<meta name="theme-color" content="#f7f2e4" />
+		<meta name="color-scheme" content="light" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://ugm2.github.io/" />
+		<meta property="og:site_name" content="Unai Garay Maestre" />
+		<meta property="og:title" content="Unai Garay Maestre — Senior AI Engineer" />
+		<meta
+			property="og:description"
+			content="Agentic RAG and production LLM platforms — guardrails, human-in-the-loop review and the evals that gate every change."
+		/>
+		<meta property="og:image" content="https://ugm2.github.io/assets/css/images/og-card.jpg" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@ugaray96" />
+		<meta name="twitter:creator" content="@ugaray96" />
+		<meta name="twitter:title" content="Unai Garay Maestre — Senior AI Engineer" />
+		<meta
+			name="twitter:description"
+			content="Agentic RAG and production LLM platforms — guardrails, human-in-the-loop review and the evals that gate every change."
+		/>
+		<meta name="twitter:image" content="https://ugm2.github.io/assets/css/images/og-card.jpg" />
+		<link rel="icon" type="image/png" href="images/unai-favicon.png" />
+		<link rel="apple-touch-icon" href="images/unai-favicon.png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,0..100,0..1;1,9..144,300..800,0..100,0..1&family=Shantell+Sans:wght,BNCE,INFM@300..800,-100..100,0..100&display=swap"
+		/>
+		<link rel="stylesheet" href="assets/css/site.css" />
+		<link rel="preload" as="image" href="images/unai-900.webp" type="image/webp" />
+		<script>
+			(function (d) {
+				var c = d.documentElement.classList;
+				c.add("js");
+				try {
+					var g = window.WebGL2RenderingContext && d.createElement("canvas").getContext("webgl2");
+					if (g) {
+						c.add("gl");
+						var x = g.getExtension("WEBGL_lose_context");
+						if (x) x.loseContext();
+					}
+				} catch (e) {}
+				try {
+					if (localStorage.getItem("riso-sound") === "1") c.add("snd");
+				} catch (e) {}
+				var n = navigator.connection;
+				if (c.contains("gl") && !matchMedia("(prefers-reduced-motion: reduce)").matches && !(n && n.saveData)) c.add("tour");
+				setTimeout(function () {
+					if (!c.contains("m")) c.remove("js", "gl", "tour");
+				}, 6000);
+			})(document);
+		</script>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-6NZE1CYP2P"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+			gtag("config", "G-6NZE1CYP2P");
+		</script>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js",
+					"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/",
+					"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.js": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.min.js"
+				}
+			}
+		</script>
+		<script type="module" src="assets/js/main.js"></script>
+	</head>
+	<body>
+		<a class="skip" href="#main">Skip to content</a>
 
-    <title>
-      Unai Garay Maestre — Senior AI Engineer | Agentic RAG &amp; LLM Systems
-    </title>
-    <meta
-      name="description"
-      content="Unai Garay Maestre is a Senior AI Engineer building agentic RAG systems and production LLM pipelines, with the classical ML, evals and infrastructure underneath. Three US patent filings, published AI research, shipping since 2018."
-    />
-    <meta name="author" content="Unai Garay Maestre" />
-    <link rel="canonical" href="https://ugm2.github.io/" />
-    <meta name="theme-color" content="#0b0d0f" />
+		<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+			<defs>
+				<filter id="f-ink" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+					<feColorMatrix type="matrix" values="0 0 0 0 .04  0 0 0 0 .17  0 0 0 0 .12  -1.3 -2.55 -.5 2.55 0" />
+				</filter>
+				<filter id="f-inkinv" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+					<feColorMatrix type="matrix" values="0 0 0 0 .04  0 0 0 0 .17  0 0 0 0 .12  1.3 2.55 .5 -1.55 0" />
+				</filter>
+				<filter id="f-pink" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+					<feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 .28  0 0 0 0 .69  -.6 -1.2 -.24 1.55 0" />
+				</filter>
+				<filter id="f-pinkc" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+					<feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 .28  0 0 0 0 .69  1.5 -3 1.5 0 0" />
+				</filter>
+				<filter id="f-pinkinv" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+					<feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 .28  0 0 0 0 .69  .6 1.2 .24 -.45 0" />
+				</filter>
+			</defs>
+		</svg>
 
-    <!-- Social sharing -->
-    <meta property="og:type" content="profile" />
-    <meta property="og:url" content="https://ugm2.github.io/" />
-    <meta property="og:site_name" content="Unai Garay Maestre" />
-    <meta
-      property="og:title"
-      content="Unai Garay Maestre — Senior AI Engineer"
-    />
-    <meta
-      property="og:description"
-      content="I build agentic RAG systems and production LLM pipelines: retrieval that retrieves, classical ML where it beats a prompt, and the evals and infrastructure underneath."
-    />
-    <meta
-      property="og:image"
-      content="https://ugm2.github.io/assets/css/images/og-card.jpg"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="Unai Garay Maestre, Senior AI Engineer — agentic RAG and LLM systems."
-    />
-    <meta property="profile:first_name" content="Unai" />
-    <meta property="profile:last_name" content="Garay Maestre" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@ugaray96" />
-    <meta name="twitter:creator" content="@ugaray96" />
-    <meta
-      name="twitter:title"
-      content="Unai Garay Maestre — Senior AI Engineer"
-    />
-    <meta
-      name="twitter:description"
-      content="I build agentic RAG systems and production LLM pipelines: retrieval that retrieves, classical ML where it beats a prompt, and the evals and infrastructure underneath."
-    />
-    <meta
-      name="twitter:image"
-      content="https://ugm2.github.io/assets/css/images/og-card.jpg"
-    />
+		<header class="top">
+			<a class="logo" href="#main" aria-label="Unai Garay — back to top" data-mag>
+				<svg viewBox="0 0 64 64" aria-hidden="true">
+					<circle class="lg-p" cx="34" cy="34" r="27" />
+					<circle class="lg-k" cx="31" cy="31" r="27" />
+					<text x="31" y="40" text-anchor="middle">ug</text>
+				</svg>
+			</a>
+			<span class="here" aria-hidden="true"></span>
+			<nav class="nav" id="nav" aria-label="Sections">
+				<a href="#about" data-roll>About</a>
+				<a href="#work" data-roll>Work</a>
+				<a href="#projects" data-roll>Projects</a>
+				<a href="#research" data-roll>Research</a>
+				<a href="#contact" data-roll>Contact</a>
+				<div class="nav-foot">
+					<a class="nav-mail" href="mailto:unaigaraymaestre@gmail.com" data-copy="unaigaraymaestre@gmail.com">unaigaraymaestre@gmail.com</a>
+					<p class="copied" role="status"></p>
+					<p class="nav-alt">
+						<a href="mailto:unaigaraymaestre@gmail.com">mail app</a> ·
+						<a href="https://mail.google.com/mail/?view=cm&amp;to=unaigaraymaestre@gmail.com">Gmail&nbsp;↗</a>
+					</p>
+				</div>
+			</nav>
+			<div class="top-r">
+				<p class="note note-snd" aria-hidden="true">
+					<span>paper sounds?</span
+					><svg viewBox="0 0 70 40">
+						<path pathLength="1" d="M4 10c14-6 30-4 40 6 6 6 9 12 18 14" />
+						<path pathLength="1" d="M53 22l10 8-12 3" />
+					</svg>
+				</p>
+				<button class="sound" id="sound" type="button" aria-pressed="false" data-mag>
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path class="spk" d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" />
+						<path class="wv" d="M15.5 9c1.2 1.6 1.2 4.4 0 6M18.2 6.8c2.4 3 2.4 7.4 0 10.4" />
+						<path class="x" d="M16 9.5l5 5m0-5l-5 5" />
+					</svg>
+					<span class="sound-l"><span class="s-off">Click to enable sound</span><span class="s-on">Sound on</span></span>
+				</button>
+				<a class="bubble" href="#contact" data-mag><span>Say hi</span></a>
+				<button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-mag>
+					<span class="mb-l">Menu</span><span class="mb-i" aria-hidden="true"></span>
+				</button>
+			</div>
+		</header>
 
-    <link
-      rel="icon"
-      type="image/png"
-      href="images/unai-favicon.png"
-      sizes="180x180"
-    />
-    <link rel="apple-touch-icon" href="images/unai-favicon.png" />
+		<main id="main" tabindex="-1">
+			<section class="hero sheet" aria-labelledby="h1">
+				<div class="hero-copy">
+					<p class="kicker"><span class="dotk" aria-hidden="true"></span>Senior AI Engineer · Alicante, Spain</p>
+					<h1 id="h1" class="h1">
+						<span class="h1-t"
+							>Unai <b>Garay<i>.</i></b></span
+						><span class="h1-p" aria-hidden="true"
+							>Unai <b>Garay<i>.</i></b></span
+						>
+					</h1>
+					<p class="lede">
+						I build <b>agentic RAG systems</b> and <b>production LLM platforms</b> — right now, one that drafts customer SMS behind guardrails, with humans in
+						the loop and <b>evals gating every change</b>.
+					</p>
+					<div class="hero-cta">
+						<a class="btn btn-k" href="#work" data-mag><span>See the work</span></a>
+						<a class="btn" href="unai-garay-maestre-cv.pdf" data-mag
+							><span>CV <small>(PDF)</small></span></a
+						>
+					</div>
+				</div>
 
-    <!-- Marks the document as script-capable, so progressive reveals only ever
-	     hide content when the JS that un-hides it is actually running. -->
-    <script>
-      document.documentElement.className += " js";
-    </script>
+				<figure class="art" id="art">
+					<svg class="print-static" viewBox="0 0 1500 900" role="img" aria-labelledby="art-t">
+						<title id="art-t">
+							Unai as a risograph print: a line drawing of him with a man bun and a beard, head tilted, smiling, over pink and yellow ink.
+						</title>
+						<defs>
+							<path
+								id="p-fig"
+								d="M60 665L128 590C112 560 100 520 112 480C125 420 160 360 190 320C215 260 250 200 300 150C340 120 380 110 405 100C405 60 440 25 500 18C560 15 598 50 600 100C660 115 720 150 760 205C790 250 805 310 798 360C795 385 770 400 755 410C752 470 725 520 705 575C690 610 660 640 625 670C612 690 600 700 575 712C560 740 550 790 560 830C575 850 600 870 610 885A450 450 0 0 1 60 665Z"
+							/>
+							<path
+								id="p-skin"
+								d="M300 330C360 290 440 250 520 238C600 235 680 280 740 350C755 380 755 400 752 420C748 470 725 520 705 575C690 610 660 640 625 670C612 690 600 700 575 712C540 690 480 640 420 610C360 590 320 540 300 480C278 492 228 470 212 400C222 310 260 290 300 330ZM60 665L128 590C170 575 205 570 222 600L230 700C245 780 280 840 330 880A450 450 0 0 1 60 665Z"
+							/>
+							<pattern id="pt-hatch" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+								<rect class="fy" width="3.4" height="11" />
+							</pattern>
+							<pattern id="pt-dots" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+								<circle class="fp" cx="4" cy="4" r="2.7" />
+							</pattern>
+							<filter id="f-line" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+								<feColorMatrix type="matrix" values="0 0 0 0 .04  0 0 0 0 .17  0 0 0 0 .12  -2.4 -4.7 -.9 3.3 0" />
+							</filter>
+							<filter id="f-tone" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+								<feColorMatrix type="matrix" values="-.66 -1.3 -.25 0 1.75  -.66 -1.3 -.25 0 1.75  -.66 -1.3 -.25 0 1.75  0 0 0 1 0" />
+							</filter>
+							<filter id="f-dis" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+								<feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" result="n" />
+								<feComposite in="SourceGraphic" in2="n" operator="arithmetic" k2="1" k3=".9" k4="-.45" />
+								<feComponentTransfer>
+									<feFuncR type="linear" slope="8" intercept="-3.4" />
+									<feFuncG type="linear" slope="8" intercept="-3.4" />
+									<feFuncB type="linear" slope="8" intercept="-3.4" />
+									<feFuncA type="linear" slope="0" intercept="1" />
+								</feComponentTransfer>
+							</filter>
+							<linearGradient id="lg-fade" x1=".52" y1=".7" x2=".4" y2="1">
+								<stop offset="0" stop-color="#fff" />
+								<stop offset="1" stop-color="#000" />
+							</linearGradient>
+							<mask id="m-halo" maskUnits="userSpaceOnUse" x="0" y="0" width="1500" height="900">
+								<rect width="1500" height="900" fill="#fff" />
+								<use href="#p-fig" x="600" fill="#000" stroke="#000" stroke-width="34" stroke-linejoin="round" />
+							</mask>
+							<mask id="m-fig" maskUnits="userSpaceOnUse" x="0" y="0" width="900" height="900">
+								<use href="#p-fig" fill="#fff" stroke="#fff" stroke-width="22" stroke-linejoin="round" />
+							</mask>
+							<mask id="m-hair" maskUnits="userSpaceOnUse" x="0" y="0" width="900" height="900">
+								<use href="#p-fig" fill="#fff" />
+								<use href="#p-skin" fill="#000" />
+							</mask>
+							<mask id="m-tone" maskUnits="userSpaceOnUse" x="0" y="0" width="900" height="900">
+								<image href="images/unai-900.webp" width="900" height="900" filter="url(#f-tone)" />
+							</mask>
+							<mask id="m-fade" maskUnits="userSpaceOnUse" x="0" y="0" width="900" height="900">
+								<rect width="900" height="900" fill="url(#lg-fade)" filter="url(#f-dis)" />
+							</mask>
+						</defs>
+						<rect x="60" y="220" width="1410" height="290" fill="url(#pt-hatch)" mask="url(#m-halo)" />
+						<g transform="translate(600 0)" mask="url(#m-fade)">
+							<rect class="fy" x="-7" y="-5" width="900" height="900" mask="url(#m-hair)" opacity=".95" />
+							<g class="mul" transform="translate(8 6)">
+								<use href="#p-skin" class="fp" opacity=".36" />
+								<g mask="url(#m-fig)">
+									<rect width="900" height="900" fill="url(#pt-dots)" mask="url(#m-tone)" />
+								</g>
+							</g>
+							<g class="fw">
+								<ellipse cx="500" cy="489" rx="37" ry="14" transform="rotate(28.6 500 489)" />
+								<ellipse cx="630" cy="574" rx="28" ry="11" transform="rotate(28.6 630 574)" />
+							</g>
+							<g mask="url(#m-fig)">
+								<image class="mul" href="images/unai-900.webp" width="900" height="900" filter="url(#f-line)" />
+							</g>
+						</g>
+					</svg>
+					<canvas class="print-live" aria-hidden="true"></canvas>
+					<figcaption class="note note-look" aria-hidden="true">
+						<span class="nl-f">move your cursor — I’ll follow it</span><span class="nl-t">tap around — I’ll look</span
+						><span class="nl-p">poke me to reprint</span
+						><svg viewBox="0 0 80 60">
+							<path pathLength="1" d="M76 6C50 4 30 14 22 34c-3 7-4 13-4 18" />
+							<path pathLength="1" d="M8 42l10 12 9-13" />
+						</svg>
+					</figcaption>
+				</figure>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+				<p class="vert" aria-hidden="true">© MMXXVI — Impreso en Alicante</p>
+				<a class="scroll" href="#about"><span class="scroll-t">Scroll</span><span class="scroll-l" aria-hidden="true"></span></a>
+				<div class="regbar" aria-hidden="true">
+					<i class="rb-y"></i><i class="rb-p"></i><i class="rb-o"></i><i class="rb-k"></i><span>3 inks · 3 passes</span>
+				</div>
+			</section>
 
-    <link
-      rel="preload"
-      href="assets/fonts/fa-solid-subset.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="assets/fonts/fa-brands-subset.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+			<div class="bands" aria-hidden="true">
+				<div class="band band-p" data-band="-1">
+					<div class="band-t">
+						<span>Agentic RAG ✺ Production LLM platforms ✺ Guardrails &amp; human review ✺ LLM-as-judge evals ✺ Real-time voice agents ✺&nbsp;</span>
+					</div>
+				</div>
+				<div class="band band-y" data-band="1">
+					<div class="band-t">
+						<span>Retrieval that actually retrieves ✺ Evals gating every change ✺ Classical ML where it beats a prompt ✺ Shipping since 2018 ✺&nbsp;</span>
+					</div>
+				</div>
+			</div>
 
-    <link rel="stylesheet" href="assets/css/icons.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/vibrant.css" />
-    <link rel="stylesheet" href="assets/css/skills.css" />
-    <link rel="stylesheet" href="assets/css/timeline.css" />
-    <link rel="stylesheet" href="assets/css/portfolio.css" />
-    <link rel="stylesheet" href="assets/css/research-patents.css" />
-    <link rel="stylesheet" href="assets/css/footer.css" />
+			<section class="about sheet" id="about" aria-labelledby="about-h">
+				<p class="label"><span class="num">01</span> What I do</p>
+				<h2 id="about-h" class="statement" data-lines>
+					Retrieval that <em>actually</em> retrieves, guardrails with a human in the loop — and <mark>evals that gate every change</mark>.
+				</h2>
+				<div class="about-grid">
+					<div class="about-copy">
+						<p class="big-p">
+							I care about the unglamorous half: evals, guardrails, infrastructure. It’s what decides whether a demo survives contact with real users — and
+							right now it’s most of my job, on an LLM retention platform at Inulti.
+						</p>
+						<p class="proof">
+							Shipping production AI since <b>2018</b> · <b>3</b> US patent filings · published research at <b>CIARP 2018</b> (Springer LNCS).
+						</p>
+						<p class="human">
+							Off the clock: music, bungee jumping, climbing, paddle boarding — and a lot of photography, at
+							<a href="https://www.instagram.com/ugmpictures/">@ugmpictures</a>.
+						</p>
+					</div>
+					<div class="toybox">
+						<div class="toy-head">
+							<h3 class="toy-h">Toolbox</h3>
+							<button class="btn btn-s" id="scatter" type="button" data-mag>
+								<span>Shake the sheet</span>
+							</button>
+						</div>
+						<ul class="sheet-stk" id="stickers" aria-label="Toolbox">
+							<li class="stk s-y s-l">Python</li>
+							<li class="stk s-p s-l">PyTorch</li>
+							<li class="stk s-w">Transformers</li>
+							<li class="stk s-k s-c">RAG</li>
+							<li class="stk s-o">Agents</li>
+							<li class="stk s-y s-l">LLM evals</li>
+							<li class="stk s-w">LLM-as-judge</li>
+							<li class="stk s-p s-c">NLP</li>
+							<li class="stk s-k">Voice · LiveKit</li>
+							<li class="stk s-w">FastAPI</li>
+							<li class="stk s-y">Docker</li>
+							<li class="stk s-o s-c">AWS</li>
+							<li class="stk s-p">ClickHouse</li>
+							<li class="stk s-w s-c">GCP</li>
+							<li class="stk s-p">Airflow</li>
+							<li class="stk s-k">TypeScript / React</li>
+						</ul>
+						<p class="note note-stk" aria-hidden="true">
+							<svg viewBox="0 0 60 50">
+								<path pathLength="1" d="M52 4C30 6 14 18 12 40" />
+								<path pathLength="1" d="M4 32l8 11 9-10" /></svg
+							><span class="ns-f">grab one &amp; throw it!</span><span class="ns-t">hold one &amp; fling it!</span>
+						</p>
+					</div>
+				</div>
+			</section>
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "WebSite",
-            "@id": "https://ugm2.github.io/#website",
-            "url": "https://ugm2.github.io/",
-            "name": "Unai Garay Maestre",
-            "description": "Personal site of Unai Garay Maestre, Senior AI Engineer working on agentic RAG and production LLM systems.",
-            "inLanguage": "en",
-            "publisher": { "@id": "https://ugm2.github.io/#person" }
-          },
-          {
-            "@type": "Person",
-            "@id": "https://ugm2.github.io/#person",
-            "name": "Unai Garay Maestre",
-            "givenName": "Unai",
-            "familyName": "Garay Maestre",
-            "url": "https://ugm2.github.io/",
-            "image": "https://ugm2.github.io/images/unai-900.webp",
-            "jobTitle": "Senior AI Engineer",
-            "email": "mailto:unaigaraymaestre@gmail.com",
-            "description": "Senior AI Engineer building agentic RAG systems and production LLM pipelines, combining large language models with classical ML. Background in medical natural language understanding, neural search, computer vision and applied AI research.",
-            "knowsAbout": [
-              "Retrieval-Augmented Generation",
-              "Agentic RAG",
-              "AI agents",
-              "Large language models",
-              "LLM evaluation",
-              "Neural search",
-              "Natural language processing",
-              "Machine learning",
-              "Computer vision",
-              "Voice AI",
-              "PyTorch",
-              "Python",
-              "FastAPI",
-              "Cloud infrastructure"
-            ],
-            "worksFor": {
-              "@type": "Organization",
-              "name": "Inulti"
-            },
-            "alumniOf": [
-              {
-                "@type": "CollegeOrUniversity",
-                "name": "Valencian International University"
-              },
-              {
-                "@type": "CollegeOrUniversity",
-                "name": "University of Alicante"
-              },
-              {
-                "@type": "CollegeOrUniversity",
-                "name": "Technological University of the Shannon, Athlone Campus"
-              }
-            ],
-            "sameAs": [
-              "https://github.com/ugm2",
-              "https://www.linkedin.com/in/ugm96/",
-              "https://twitter.com/ugaray96",
-              "https://huggingface.co/ugaray96",
-              "https://www.instagram.com/ugaray96"
-            ]
-          },
-          {
-            "@type": "ScholarlyArticle",
-            "name": "Data Augmentation via Variational Auto-Encoders",
-            "url": "https://link.springer.com/chapter/10.1007/978-3-030-13469-3_4",
-            "author": { "@id": "https://ugm2.github.io/#person" },
-            "datePublished": "2019",
-            "isPartOf": {
-              "@type": "Periodical",
-              "name": "CIARP 2018 — Progress in Pattern Recognition, Image Analysis, Computer Vision, and Applications"
-            }
-          },
-          {
-            "@type": "CreativeWork",
-            "additionalType": "https://schema.org/TechArticle",
-            "name": "Feature Engineering With Question Generation",
-            "url": "https://uspto.report/patent/app/20210294781",
-            "author": { "@id": "https://ugm2.github.io/#person" },
-            "publisher": { "@type": "Organization", "name": "Sorcero" }
-          },
-          {
-            "@type": "CreativeWork",
-            "additionalType": "https://schema.org/TechArticle",
-            "name": "Ontology Integration for Document Summarization",
-            "url": "https://uspto.report/patent/app/20210294829",
-            "author": { "@id": "https://ugm2.github.io/#person" },
-            "publisher": { "@type": "Organization", "name": "Sorcero" }
-          },
-          {
-            "@type": "CreativeWork",
-            "additionalType": "https://schema.org/TechArticle",
-            "name": "Cross-context Natural Language Model Generation",
-            "url": "https://uspto.report/patent/app/20220005463",
-            "author": { "@id": "https://ugm2.github.io/#person" },
-            "publisher": { "@type": "Organization", "name": "Sorcero" }
-          }
-        ]
-      }
-    </script>
+			<section class="work sheet" id="work" aria-labelledby="work-h">
+				<p class="label"><span class="num">02</span> Experience, 2018 → now</p>
+				<h2 id="work-h" class="h2" data-lines>Where I’ve shipped<i>.</i></h2>
+				<div class="road" id="road">
+					<div class="road-pin">
+						<div class="road-view" aria-hidden="true">
+							<canvas class="road-gl"></canvas>
+							<p class="note road-wait">inking the drums…</p>
+							<p class="road-tag"></p>
+						</div>
+						<div class="deck">
+							<div class="road-start">
+								<p class="j-when">Start</p>
+								<p class="rs-t">2018 → now, in five stops<i>.</i></p>
+								<p class="rs-d">Scroll to take the road, or jump straight to a stop.</p>
+								<p class="note note-road" aria-hidden="true">
+									<span class="nr-f">pick a stop</span><span class="nr-t">tap a stop</span
+									><svg viewBox="0 0 60 60">
+										<path pathLength="1" d="M8 6c20 4 34 18 38 44" />
+										<path pathLength="1" d="M34 40l12 12 8-14" />
+									</svg>
+								</p>
+							</div>
+							<ol class="jobs">
+								<li class="job job-now" id="stop-inulti" data-n="5" data-at="the retention desk">
+									<p class="j-when"><time datetime="2026-06">Jun 2026</time> → now</p>
+									<h3 class="j-co">Inulti <span class="stamp">Now</span></h3>
+									<p class="j-role">Senior AI Engineer</p>
+									<p class="j-what">
+										An LLM retention platform on AWS, end to end: AI-drafted SMS replies behind safety guardrails with human-in-the-loop review, a CRM over
+										ClickHouse, and LLM-as-judge and synthetic-call eval harnesses gating every prompt and model change. Also: real-time voice agents on LiveKit
+										+ SIP.
+									</p>
+								</li>
+								<li class="job" id="stop-tekever" data-n="4" data-at="the airfield">
+									<p class="j-when">
+										<time datetime="2025-04">Apr 2025</time> →
+										<time datetime="2026-06">Jun 2026</time>
+									</p>
+									<h3 class="j-co">Tekever</h3>
+									<p class="j-role">Senior LLM Engineer / Data Scientist</p>
+									<p class="j-what">
+										A pipeline that turns Signal chats into Jira tickets: semantic and temporal clustering, then LLM-written structured tickets, on Airflow and
+										GCP.
+									</p>
+								</li>
+								<li class="job" id="stop-sorcero" data-n="3" data-at="the medical library">
+									<p class="j-when"><time datetime="2020-03">Mar 2020</time> → 2025</p>
+									<h3 class="j-co">Sorcero</h3>
+									<p class="j-role">Senior AI Engineer</p>
+									<p class="j-what">
+										Led AI R&amp;D for an NLU platform over unstructured medical data — theme tagging, NER, summarization, recommendation and a custom neural
+										search engine with RAG and agents. The work behind the three patents.
+									</p>
+								</li>
+								<li class="job" id="stop-accenture" data-n="2" data-at="the ticket sorter">
+									<p class="j-when">
+										<time datetime="2019-05">May 2019</time> →
+										<time datetime="2020-03">Mar 2020</time>
+									</p>
+									<h3 class="j-co">Accenture</h3>
+									<p class="j-role">Data Scientist</p>
+									<p class="j-what">NLP and topic modelling over ticketing data to speed up resolution; skills-inference tagging for employee selection.</p>
+								</li>
+								<li class="job" id="stop-smartloto" data-n="1" data-at="the lottery kiosk">
+									<p class="j-when">
+										<time datetime="2018-07">Jul 2018</time> →
+										<time datetime="2019-04">Apr 2019</time>
+									</p>
+									<h3 class="j-co">Smartloto</h3>
+									<p class="j-role">AI Engineer</p>
+									<p class="j-what">Deep-learning image validation for lottery tickets on GCP, with on-device inference on Android and iOS.</p>
+								</li>
+							</ol>
+						</div>
+						<nav class="stops" aria-label="Stops on the road">
+							<ol>
+								<li>
+									<a href="#road"><b>Start</b></a>
+								</li>
+								<li>
+									<a href="#stop-smartloto"><i>2018</i><b>Smartloto</b></a>
+								</li>
+								<li>
+									<a href="#stop-accenture"><i>2019</i><b>Accenture</b></a>
+								</li>
+								<li>
+									<a href="#stop-sorcero"><i>2020</i><b>Sorcero</b></a>
+								</li>
+								<li>
+									<a href="#stop-tekever"><i>2025</i><b>Tekever</b></a>
+								</li>
+								<li>
+									<a href="#stop-inulti"><i>Now</i><b>Inulti</b></a>
+								</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+				<div class="edu">
+					<p>
+						<b>Education</b> MSc Artificial Intelligence, Valencian International University (2018–19) · BSc Computer Science, University of Alicante (2014–18)
+						· Erasmus year in Athlone, Ireland (2016–17).
+					</p>
+					<a class="btn" href="unai-garay-maestre-cv.pdf" data-mag
+						><span>The full story: CV <small>(PDF)</small></span></a
+					>
+				</div>
+			</section>
 
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-6NZE1CYP2P"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-6NZE1CYP2P");
-    </script>
-  </head>
+			<section class="projects sheet" id="projects" aria-labelledby="proj-h">
+				<p class="label"><span class="num">03</span> Side projects</p>
+				<h2 id="proj-h" class="h2" data-lines>Made on the side<i>.</i></h2>
+				<ul class="projs">
+					<li class="proj">
+						<div class="tile">
+							<img
+								class="t-c"
+								src="assets/css/images/tile-guexit.webp"
+								alt="Guexit on two phones: a round of the guessing game with AI-generated picture cards."
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
+							<img class="t-p" src="assets/css/images/tile-guexit.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+							<img class="t-k" src="assets/css/images/tile-guexit.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+						</div>
+						<p class="p-no">No. 01</p>
+						<h3 class="p-t">Guexit</h3>
+						<p class="p-d">A multiplayer guessing game played with AI-generated cards.</p>
+						<p class="p-tech">Transformers · Angular · .NET</p>
+						<p class="p-links">
+							<a class="pill" href="https://github.com/Guexit" data-mag><span>Code ↗</span></a
+							><a class="pill" href="https://www.instagram.com/reel/C6gke9usAIr/" data-mag><span>Demo ↗</span></a>
+						</p>
+					</li>
+					<li class="proj">
+						<div class="tile t-rose" style="--z: 1.75; --o: 76% 6%">
+							<img
+								class="t-c"
+								src="assets/css/images/tile-neural.webp"
+								alt="Neural Search: a Streamlit app answering a query with ranked document matches."
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
+							<img class="t-p" src="assets/css/images/tile-neural.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+							<img class="t-k" src="assets/css/images/tile-neural.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+						</div>
+						<p class="p-no">No. 02</p>
+						<h3 class="p-t">Neural Search</h3>
+						<p class="p-d">Semantic document search that reads meaning, not keywords.</p>
+						<p class="p-tech">Haystack · Transformers · Streamlit</p>
+						<p class="p-links">
+							<a class="pill" href="https://github.com/ugm2/neural-search-demo" data-mag><span>Code ↗</span></a
+							><a class="pill" href="https://huggingface.co/spaces/ugaray96/neural-search" data-mag><span>Demo ↗</span></a>
+						</p>
+					</li>
+					<li class="proj">
+						<div class="tile t-rose t-dark" style="--z: 1.3; --o: 50% 58%">
+							<img
+								class="t-c"
+								src="assets/css/images/tile-grocery.webp"
+								alt="Grocery Classifier: the app labelling a jar of garam masala as spices."
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
+							<img class="t-p" src="assets/css/images/tile-grocery.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+							<img class="t-k" src="assets/css/images/tile-grocery.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+						</div>
+						<p class="p-no">No. 03</p>
+						<h3 class="p-t">Grocery Classifier</h3>
+						<p class="p-d">Recognises grocery products and retrains itself in seconds.</p>
+						<p class="p-tech">PyTorch · computer vision</p>
+						<p class="p-links">
+							<a class="pill" href="https://github.com/ugm2/grocery-classifier-demo" data-mag><span>Code ↗</span></a
+							><a class="pill" href="https://huggingface.co/spaces/ugaray96/grocery-classifier-demo" data-mag><span>Demo ↗</span></a>
+						</p>
+					</li>
+					<li class="proj">
+						<div class="tile t-light" style="--z: 1.45; --o: 8% 20%">
+							<img
+								class="t-c"
+								src="assets/css/images/tile-fitness.webp"
+								alt="Marca Tu Ritmo: weekly progress and personal-record screens of the workout app."
+								width="800"
+								height="800"
+								loading="lazy"
+								decoding="async"
+							/>
+							<img class="t-p" src="assets/css/images/tile-fitness.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+							<img class="t-k" src="assets/css/images/tile-fitness.webp" alt="" width="800" height="800" loading="lazy" decoding="async" />
+						</div>
+						<p class="p-no">No. 04</p>
+						<h3 class="p-t">Marca Tu Ritmo</h3>
+						<p class="p-d">A cross-platform workout tracker.</p>
+						<p class="p-tech">React Native · Expo · TypeScript</p>
+						<p class="p-links">
+							<a class="pill" href="https://github.com/ugm2/Marca-Tu-Ritmo" data-mag><span>Code ↗</span></a>
+						</p>
+					</li>
+				</ul>
+			</section>
 
-  <body class="is-preload">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <div id="custom-cursor" aria-hidden="true"></div>
+			<section class="research sheet" id="research" aria-labelledby="res-h">
+				<p class="label"><span class="num">04</span> Research &amp; patents</p>
+				<h2 id="res-h" class="h2" data-lines>On paper<i>.</i></h2>
+				<div class="res-grid">
+					<div class="pubs">
+						<h3 class="res-k">Published</h3>
+						<a class="doc" href="https://link.springer.com/chapter/10.1007/978-3-030-13469-3_4">
+							<span class="doc-m">Paper · CIARP 2018 · Springer LNCS</span>
+							<span class="doc-t">Data Augmentation via Variational Auto-Encoders</span>
+							<span class="doc-a">Read on Springer ↗</span>
+						</a>
+						<a class="doc" href="https://drive.google.com/file/d/1IKyX4RFj6EahwJ1gZZcusx_rIGfGhm0h/view">
+							<span class="doc-m">Review · PDF</span>
+							<span class="doc-t">Spiking Neural Networks: A Review</span>
+							<span class="doc-a">Open the PDF ↗</span>
+						</a>
+					</div>
+					<div class="patents">
+						<h3 class="res-k">US patent filings <span>· Sorcero</span></h3>
+						<ol class="pat">
+							<li>
+								<a href="https://uspto.report/patent/app/20210294781"
+									><span class="pat-n">US 2021/0294781</span><span class="pat-t">Feature Engineering With Question Generation</span
+									><span class="pat-a" aria-hidden="true">↗</span></a
+								>
+							</li>
+							<li>
+								<a href="https://uspto.report/patent/app/20210294829"
+									><span class="pat-n">US 2021/0294829</span><span class="pat-t">Ontology Integration for Document Summarization</span
+									><span class="pat-a" aria-hidden="true">↗</span></a
+								>
+							</li>
+							<li>
+								<a href="https://uspto.report/patent/app/20220005463"
+									><span class="pat-n">US 2022/0005463</span><span class="pat-t">Cross-context Natural Language Model Generation</span
+									><span class="pat-a" aria-hidden="true">↗</span></a
+								>
+							</li>
+						</ol>
+						<svg class="seal" viewBox="0 0 200 200" aria-hidden="true">
+							<defs>
+								<path id="seal-c" d="M100 100m-72 0a72 72 0 1 1 144 0a72 72 0 1 1-144 0" />
+							</defs>
+							<circle cx="100" cy="100" r="92" />
+							<circle cx="100" cy="100" r="56" />
+							<g class="seal-r">
+								<text>
+									<textPath href="#seal-c" textLength="440" lengthAdjust="spacing">three us patent filings ✺ sorcero ✺</textPath>
+								</text>
+							</g>
+							<text class="seal-n" x="100" y="121" text-anchor="middle">3</text>
+						</svg>
+					</div>
+				</div>
+			</section>
 
-    <!-- Section nav: hidden until the hero has scrolled past. -->
-    <nav class="site-nav" id="site-nav" aria-label="Sections">
-      <a class="site-nav__me" href="#top" aria-label="Unai Garay — back to top"
-        ><span>Unai Garay</span></a
-      >
-      <ul class="site-nav__links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#research">Research</a></li>
-      </ul>
-      <a class="site-nav__cta" href="unai-garay-maestre-cv.pdf">Résumé</a>
-    </nav>
+			<section class="contact sheet" id="contact" aria-labelledby="con-h">
+				<p class="label"><span class="num">05</span> Contact</p>
+				<div class="say">
+					<h2 id="con-h" class="say-h" tabindex="-1">Say hi<i>.</i></h2>
+					<p class="say-p">Let’s build something that ships.</p>
+					<a class="say-mail" href="mailto:unaigaraymaestre@gmail.com" data-copy="unaigaraymaestre@gmail.com" data-mag
+						><span>unaigaraymaestre<wbr />@gmail.com</span></a
+					>
+					<p class="copied" role="status"></p>
+					<p class="mail-alt">
+						<span class="ma-hint"><span class="if-f">Click</span><span class="if-t">Tap</span> the address to copy it ·</span>
+						<a href="mailto:unaigaraymaestre@gmail.com">open in mail app</a> ·
+						<a href="https://mail.google.com/mail/?view=cm&amp;to=unaigaraymaestre@gmail.com">Gmail&nbsp;↗</a>
+					</p>
+					<p class="note note-mail" aria-hidden="true">
+						<svg viewBox="0 0 70 50">
+							<path pathLength="1" d="M66 40C52 44 34 42 24 32 18 26 14 20 10 12" />
+							<path pathLength="1" d="M4 22l6-12 12 5" /></svg
+						><span>one click copies it</span>
+					</p>
+				</div>
+				<ul class="links">
+					<li>
+						<a class="pill pill-l" href="https://github.com/ugm2" data-mag><span>GitHub</span></a>
+					</li>
+					<li>
+						<a class="pill pill-l" href="https://www.linkedin.com/in/ugm96/" data-mag><span>LinkedIn</span></a>
+					</li>
+					<li>
+						<a class="pill pill-l" href="https://twitter.com/ugaray96" data-mag><span>X</span></a>
+					</li>
+					<li>
+						<a class="pill pill-l" href="https://www.instagram.com/ugaray96" data-mag><span>Instagram</span></a>
+					</li>
+					<li>
+						<a class="pill pill-l" href="https://www.instagram.com/ugmpictures/" data-mag><span>Photography</span></a>
+					</li>
+					<li>
+						<a class="pill pill-l pill-k" href="unai-garay-maestre-cv.pdf" data-mag><span>CV (PDF)</span></a>
+					</li>
+				</ul>
+			</section>
+		</main>
 
-    <!-- Hero -->
-    <header id="top" class="hero">
-      <canvas id="canvas-bg" aria-hidden="true"></canvas>
-      <div class="hero__inner">
-        <p class="hero__eyebrow">Senior AI Engineer &middot; Alicante, Spain</p>
-        <h1 class="hero__title">
-          Hi
-          <img
-            src="assets/css/images/wave.webp"
-            alt=""
-            width="48"
-            height="47"
-            class="hero__wave"
-            aria-hidden="true"
-          />
-          <br />
-          I'm <strong>Unai Garay</strong>
-        </h1>
-        <p class="hero__lead">
-          I build <b>agentic RAG systems</b> and <b>LLM pipelines</b> that hold
-          up in production — retrieval that actually retrieves, classical ML
-          where it beats a prompt, and the evals and infrastructure underneath.
-        </p>
-
-        <ul class="hero__facts">
-          <li><b>2018</b><span>Shipping production AI since</span></li>
-          <li><b>3</b><span>US patent filings</span></li>
-          <li><b>CIARP 2018</b><span>Published AI research</span></li>
-        </ul>
-
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="mailto:unaigaraymaestre@gmail.com">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i> Get in touch
-          </a>
-          <a class="btn" href="unai-garay-maestre-cv.pdf">
-            <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Résumé
-          </a>
-          <a
-            class="btn"
-            href="https://github.com/ugm2"
-            target="_blank"
-            rel="noopener"
-          >
-            <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
-          </a>
-          <a
-            class="btn"
-            href="https://www.linkedin.com/in/ugm96/"
-            target="_blank"
-            rel="noopener"
-          >
-            <i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn
-          </a>
-        </div>
-      </div>
-      <a
-        href="#about"
-        class="scroll-indicator scrolly"
-        aria-label="Scroll to About"
-      >
-        <span class="mouse" aria-hidden="true"
-          ><span class="wheel"></span
-        ></span>
-      </a>
-    </header>
-
-    <main id="main">
-      <!-- About -->
-      <section id="about" class="main reveal" aria-labelledby="about-h">
-        <div class="container">
-          <header class="major">
-            <h2 id="about-h">About me</h2>
-          </header>
-          <div class="about">
-            <div class="about__copy">
-              <p>
-                Most of my work is <b>agentic RAG and complex LLM systems</b> —
-                retrieval pipelines, agents that call real tools, and the
-                classical ML and NLP that still beat a prompt for clustering,
-                ranking and extraction. Neural search with RAG and agents over
-                unstructured medical data at Sorcero, an LLM-driven ticketing
-                pipeline at Tekever, computer vision at scale before that.
-                Lately that has extended into production voice agents too.
-              </p>
-              <p>
-                What I actually care about is the unglamorous half — the
-                <b>evals, guardrails and infrastructure</b> that decide whether
-                a demo survives contact with real users. I've shipped that half
-                at a startup, a scale-up and a consultancy, and I like the teams
-                I work with to be better for my having been there.
-              </p>
-              <p>
-                Away from the keyboard I'm <b>playing music</b> or outdoors —
-                bungee jumping, climbing, paddle boarding. I also shoot a lot of
-                <b>photography</b>, which lives on
-                <a
-                  href="https://www.instagram.com/ugmpictures/"
-                  target="_blank"
-                  rel="noopener"
-                  >a separate Instagram</a
-                >.
-              </p>
-              <p class="about__links">
-                <a class="btn btn--sm" href="unai-garay-maestre-cv.pdf">
-                  <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Read
-                  the résumé
-                </a>
-                <a class="btn btn--sm" href="#projects">
-                  <i class="fa-solid fa-folder-open" aria-hidden="true"></i> See
-                  the projects
-                </a>
-              </p>
-            </div>
-            <div class="about__portrait">
-              <img
-                src="images/unai-480.webp"
-                srcset="images/unai-480.webp 480w, images/unai-900.webp 900w"
-                sizes="(max-width: 900px) min(260px, 55vw), 38vw"
-                width="900"
-                height="900"
-                loading="lazy"
-                decoding="async"
-                alt="Sketched portrait of Unai Garay Maestre"
-                title="This was AI generated 😏"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Skills -->
-      <section id="skills" class="main reveal" aria-labelledby="skills-h">
-        <div class="container">
-          <header class="major">
-            <h2 id="skills-h">Technical skills</h2>
-          </header>
-          <div class="skills-grid">
-            <div class="skill-category">
-              <h3>
-                <i class="fa-solid fa-brain" aria-hidden="true"></i> AI &amp;
-                machine learning
-              </h3>
-              <ul class="skill-tags">
-                <li class="skill-tag">RAG</li>
-                <li class="skill-tag">Agents</li>
-                <li class="skill-tag">LLMs</li>
-                <li class="skill-tag">LLM evals</li>
-                <li class="skill-tag">NLP</li>
-                <li class="skill-tag">Neural search</li>
-                <li class="skill-tag">Classical ML</li>
-                <li class="skill-tag">Computer vision</li>
-                <li class="skill-tag">PyTorch</li>
-                <li class="skill-tag">Transformers</li>
-                <li class="skill-tag">Voice AI</li>
-              </ul>
-            </div>
-            <div class="skill-category">
-              <h3>
-                <i class="fa-solid fa-code" aria-hidden="true"></i> Engineering
-              </h3>
-              <ul class="skill-tags">
-                <li class="skill-tag">Python</li>
-                <li class="skill-tag">FastAPI</li>
-                <li class="skill-tag">Docker</li>
-                <li class="skill-tag">AWS</li>
-                <li class="skill-tag">Google Cloud</li>
-                <li class="skill-tag">Airflow</li>
-                <li class="skill-tag">React / TypeScript</li>
-                <li class="skill-tag">C# / .NET</li>
-                <li class="skill-tag">Angular</li>
-                <li class="skill-tag">React Native</li>
-              </ul>
-            </div>
-            <div class="skill-category">
-              <h3>
-                <i class="fa-solid fa-flask" aria-hidden="true"></i> Research
-              </h3>
-              <ul class="skill-tags">
-                <li class="skill-tag">Variational autoencoders</li>
-                <li class="skill-tag">Spiking neural networks</li>
-                <li class="skill-tag">Ontology integration</li>
-                <li class="skill-tag">Feature engineering</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Work experience -->
-      <section
-        id="experience"
-        class="main reveal"
-        aria-labelledby="experience-h"
-      >
-        <header class="major">
-          <h2 id="experience-h">Work experience</h2>
-        </header>
-        <div class="timeline-section cd-container">
-          <article class="timeline-block is-current">
-            <div class="timeline-img" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <p class="timeline-badge">Current role</p>
-              <h3>Inulti</h3>
-              <div class="timeline-content-info">
-                <span class="timeline-content-info-title">
-                  <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-                  Senior AI Engineer
-                </span>
-                <span class="timeline-content-info-date">
-                  <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-                  June 2026 &ndash; Present
-                </span>
-              </div>
-              <ul class="timeline-points">
-                <li>
-                  Building production real-time voice AI agents for inbound
-                  sales calls (LiveKit + SIP telephony, Deepgram STT, OpenAI
-                  LLM, ElevenLabs TTS) with sub-second turn latency, warm
-                  transfer to human agents, and PCI-safe payment capture over
-                  voice and phone keypad.
-                </li>
-                <li>
-                  Delivered an LLM retention platform on AWS end to end:
-                  AI-drafted SMS replies with safety guardrails and
-                  human-in-the-loop review, a CRM over ClickHouse, and
-                  LLM-as-judge plus synthetic-call eval harnesses gating every
-                  prompt and model change.
-                </li>
-              </ul>
-              <ul class="content-skills">
-                <li>Python</li>
-                <li>Voice AI</li>
-                <li>LiveKit</li>
-                <li>LLM Agents</li>
-                <li>FastAPI</li>
-                <li>React/TypeScript</li>
-                <li>AWS</li>
-                <li>Docker</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="timeline-block">
-            <div class="timeline-img" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <h3>Tekever</h3>
-              <div class="timeline-content-info">
-                <span class="timeline-content-info-title">
-                  <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-                  Senior LLM Engineer / Data Scientist
-                </span>
-                <span class="timeline-content-info-date">
-                  <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-                  April 2025 &ndash; June 2026
-                </span>
-              </div>
-              <p>
-                Engineered an end-to-end data pipeline that turns Signal chats
-                into Jira tickets automatically, clustering conversations by
-                semantic similarity and temporal proximity and using LLMs to
-                generate the structured ticket data.
-              </p>
-              <ul class="content-skills">
-                <li>Python</li>
-                <li>Airflow</li>
-                <li>Docker</li>
-                <li>LLMs</li>
-                <li>Google Cloud Platform</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="timeline-block">
-            <div class="timeline-img" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <h3>Sorcero</h3>
-              <div class="timeline-content-info">
-                <span class="timeline-content-info-title">
-                  <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-                  Senior AI Engineer
-                </span>
-                <span class="timeline-content-info-date">
-                  <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-                  March 2020 &ndash; 2025
-                </span>
-              </div>
-              <p>
-                Led AI R&amp;D for a natural language understanding platform for
-                unstructured medical data: generative theme tagging, NER,
-                summarization, recommendation, and a custom neural search engine
-                with retrieval-augmented generation and agents. The work behind
-                <a href="#research">three US patent filings</a>.
-              </p>
-              <ul class="content-skills">
-                <li>Python</li>
-                <li>NLP</li>
-                <li>PyTorch</li>
-                <li>spaCy</li>
-                <li>Transformers</li>
-                <li>FastAPI</li>
-                <li>Docker</li>
-                <li>Google Cloud Platform</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="timeline-block">
-            <div class="timeline-img" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <h3>Accenture</h3>
-              <div class="timeline-content-info">
-                <span class="timeline-content-info-title">
-                  <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-                  Data Scientist
-                </span>
-                <span class="timeline-content-info-date">
-                  <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-                  May 2019 &ndash; March 2020
-                </span>
-              </div>
-              <ul class="timeline-points">
-                <li>
-                  Built a tool that applies data analysis, clustering, topic
-                  modelling and other NLP methods to ticketing-system problem
-                  descriptions to speed up ticket resolution.
-                </li>
-                <li>
-                  Built an NLP tagging service that infers people's skills and
-                  interests for an employee selection tool.
-                </li>
-              </ul>
-              <ul class="content-skills">
-                <li>Python</li>
-                <li>NLP</li>
-                <li>Scikit-Learn</li>
-                <li>NLTK</li>
-                <li>spaCy</li>
-                <li>Plotly/Matplotlib</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="timeline-block">
-            <div class="timeline-img" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <h3>Smartloto S.L.</h3>
-              <div class="timeline-content-info">
-                <span class="timeline-content-info-title">
-                  <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-                  AI Engineer
-                </span>
-                <span class="timeline-content-info-date">
-                  <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-                  July 2018 &ndash; April 2019
-                </span>
-              </div>
-              <p>
-                Built an end-to-end image validation system for lottery tickets
-                using deep learning at scale on Google Cloud Platform, with
-                on-device inference on Android and iOS.
-              </p>
-              <ul class="content-skills">
-                <li>Python</li>
-                <li>Flask</li>
-                <li>Computer Vision</li>
-                <li>TensorFlow</li>
-                <li>TensorFlow Lite</li>
-                <li>Google Cloud Platform</li>
-                <li>Android/Java</li>
-                <li>iOS/Swift</li>
-                <li>C#</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Education -->
-      <section id="education" class="main reveal" aria-labelledby="education-h">
-        <header class="major">
-          <h2 id="education-h">Education</h2>
-        </header>
-        <div class="timeline-section cd-container">
-          <article class="timeline-block">
-            <div class="timeline-img" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <h3>Valencian International University</h3>
-              <div class="timeline-content-info">
-                <span class="timeline-content-info-title">
-                  <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-                  MSc Artificial Intelligence
-                </span>
-                <span class="timeline-content-info-date">
-                  <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-                  2018 &ndash; 2019
-                </span>
-              </div>
-              <p>
-                Master's degree in Artificial Intelligence, final grade
-                <b>8.55</b>.
-              </p>
-            </div>
-          </article>
-
-          <article class="timeline-block">
-            <div class="timeline-img" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <h3>University of Alicante</h3>
-              <div class="timeline-content-info">
-                <span class="timeline-content-info-title">
-                  <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-                  BSc Computer Science
-                </span>
-                <span class="timeline-content-info-date">
-                  <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-                  2014 &ndash; 2018
-                </span>
-              </div>
-              <p>
-                Bachelor's degree in Computer Science, part of the
-                <b>High Academic Performance group</b>. Final grade <b>7.43</b>.
-              </p>
-            </div>
-          </article>
-
-          <article class="timeline-block">
-            <div class="timeline-img" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <h3>Technological University of the Shannon, Athlone</h3>
-              <div class="timeline-content-info">
-                <span class="timeline-content-info-title">
-                  <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-                  Computer Engineering &mdash; Erasmus
-                </span>
-                <span class="timeline-content-info-date">
-                  <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-                  2016 &ndash; 2017
-                </span>
-              </div>
-              <p>
-                Erasmus year at AIT (Athlone Institute of Technology), Ireland.
-              </p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Projects -->
-      <section id="projects" class="main reveal" aria-labelledby="projects-h">
-        <header class="major">
-          <h2 id="projects-h">Side projects</h2>
-          <p class="section-lede">
-            Things I built on my own time, mostly to find out whether they'd
-            work.
-          </p>
-        </header>
-        <ul class="grid">
-          <li>
-            <button type="button" class="grid-item" data-modal="guexit-modal">
-              <span
-                class="grid-item__art"
-                aria-hidden="true"
-                style="
-                  background-image: url(&quot;assets/css/images/tile-guexit.webp&quot;);
-                "
-              ></span>
-              <span class="grid-item__body">
-                <img
-                  class="grid-item__mark"
-                  src="assets/css/images/guexit-logo.svg"
-                  alt=""
-                  width="56"
-                  height="56"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span class="grid-item__title">Guexit</span>
-                <span class="grid-item__desc"
-                  >A multiplayer guessing game played with AI-generated
-                  cards.</span
-                >
-                <span class="grid-item__tech"
-                  >Transformers &middot; Angular &middot; .NET</span
-                >
-                <span class="grid-item__more">View project</span>
-              </span>
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              class="grid-item"
-              data-modal="neural-search-modal"
-            >
-              <span
-                class="grid-item__art"
-                aria-hidden="true"
-                style="
-                  background-image: url(&quot;assets/css/images/tile-neural.webp&quot;);
-                "
-              ></span>
-              <span class="grid-item__body">
-                <img
-                  class="grid-item__mark"
-                  src="assets/css/images/icon-neural.webp"
-                  alt=""
-                  width="56"
-                  height="56"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span class="grid-item__title">Neural Search</span>
-                <span class="grid-item__desc"
-                  >Semantic document search that reads meaning, not
-                  keywords.</span
-                >
-                <span class="grid-item__tech"
-                  >Haystack &middot; Transformers &middot; Streamlit</span
-                >
-                <span class="grid-item__more">View project</span>
-              </span>
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              class="grid-item"
-              data-modal="grocery-classifier-modal"
-            >
-              <span
-                class="grid-item__art"
-                aria-hidden="true"
-                style="
-                  background-image: url(&quot;assets/css/images/tile-grocery.webp&quot;);
-                "
-              ></span>
-              <span class="grid-item__body">
-                <img
-                  class="grid-item__mark"
-                  src="assets/css/images/icon-grocery.webp"
-                  alt=""
-                  width="56"
-                  height="56"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span class="grid-item__title">Grocery Classifier</span>
-                <span class="grid-item__desc"
-                  >Recognises grocery products and retrains itself in
-                  seconds.</span
-                >
-                <span class="grid-item__tech"
-                  >PyTorch &middot; Computer Vision</span
-                >
-                <span class="grid-item__more">View project</span>
-              </span>
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              class="grid-item"
-              data-modal="marca-tu-ritmo-modal"
-            >
-              <span
-                class="grid-item__art"
-                aria-hidden="true"
-                style="
-                  background-image: url(&quot;assets/css/images/tile-fitness.webp&quot;);
-                "
-              ></span>
-              <span class="grid-item__body">
-                <img
-                  class="grid-item__mark"
-                  src="assets/css/images/icon-fitness.webp"
-                  alt=""
-                  width="56"
-                  height="56"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span class="grid-item__title">Marca Tu Ritmo</span>
-                <span class="grid-item__desc"
-                  >Cross-platform workout tracker with progress insights.</span
-                >
-                <span class="grid-item__tech"
-                  >React Native &middot; Expo &middot; TypeScript</span
-                >
-                <span class="grid-item__more">View project</span>
-              </span>
-            </button>
-          </li>
-        </ul>
-      </section>
-
-      <!-- Research & patents -->
-      <section id="research" class="main reveal" aria-labelledby="research-h">
-        <div class="container">
-          <header class="major">
-            <h2 id="research-h">Research &amp; patents</h2>
-          </header>
-
-          <h3 class="subhead">Published research</h3>
-          <div class="features">
-            <article class="card">
-              <span class="card__icon"
-                ><i class="fa-solid fa-flask" aria-hidden="true"></i
-              ></span>
-              <h4>
-                <a
-                  href="https://link.springer.com/chapter/10.1007/978-3-030-13469-3_4"
-                  target="_blank"
-                  rel="noopener"
-                  >Data Augmentation via Variational Auto-Encoders</a
-                >
-              </h4>
-              <p class="card__meta">CIARP 2018 &middot; Springer LNCS</p>
-              <p>
-                Author of a paper on overcoming data scarcity with variational
-                auto-encoders, presented at CIARP 2018.
-              </p>
-            </article>
-            <article class="card">
-              <span class="card__icon"
-                ><i class="fa-solid fa-brain" aria-hidden="true"></i
-              ></span>
-              <h4>
-                <a
-                  href="https://drive.google.com/file/d/1IKyX4RFj6EahwJ1gZZcusx_rIGfGhm0h/view"
-                  target="_blank"
-                  rel="noopener"
-                  >Spiking Neural Networks: A Review</a
-                >
-              </h4>
-              <p class="card__meta">Review paper &middot; PDF</p>
-              <p>
-                Review of spiking neural network approaches, with simulations
-                built on the Nengo library.
-              </p>
-            </article>
-          </div>
-
-          <h3 class="subhead">US patent filings</h3>
-          <div class="features features--three">
-            <article class="card">
-              <span class="card__icon"
-                ><i class="fa-solid fa-lightbulb" aria-hidden="true"></i
-              ></span>
-              <h4>
-                <a
-                  href="https://uspto.report/patent/app/20210294781"
-                  target="_blank"
-                  rel="noopener"
-                  >Feature Engineering With Question Generation</a
-                >
-              </h4>
-              <p class="card__meta">Sorcero &middot; US 2021/0294781</p>
-            </article>
-            <article class="card">
-              <span class="card__icon"
-                ><i class="fa-solid fa-lightbulb" aria-hidden="true"></i
-              ></span>
-              <h4>
-                <a
-                  href="https://uspto.report/patent/app/20210294829"
-                  target="_blank"
-                  rel="noopener"
-                  >Ontology Integration for Document Summarization</a
-                >
-              </h4>
-              <p class="card__meta">Sorcero &middot; US 2021/0294829</p>
-            </article>
-            <article class="card">
-              <span class="card__icon"
-                ><i class="fa-solid fa-lightbulb" aria-hidden="true"></i
-              ></span>
-              <h4>
-                <a
-                  href="https://uspto.report/patent/app/20220005463"
-                  target="_blank"
-                  rel="noopener"
-                  >Cross-context Natural Language Model Generation</a
-                >
-              </h4>
-              <p class="card__meta">Sorcero &middot; US 2022/0005463</p>
-            </article>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Project modals -->
-    <div
-      id="guexit-modal"
-      class="project-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="guexit-modal-title"
-      hidden
-    >
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="modal-title">
-            <img
-              src="assets/css/images/guexit-logo.svg"
-              alt=""
-              width="60"
-              height="60"
-              class="modal-logo"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="title-text">
-              <h2 id="guexit-modal-title">Guexit</h2>
-              <span class="subtitle">AI image generation</span>
-            </div>
-          </div>
-          <button type="button" class="close-modal" aria-label="Close dialog">
-            <span class="close-icon" aria-hidden="true"></span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="modal-image">
-            <div
-              class="carousel"
-              role="group"
-              aria-roledescription="carousel"
-              aria-label="Guexit screenshots"
-            >
-              <div class="carousel-container">
-                <img
-                  src="assets/css/images/guexit.webp"
-                  alt="Guexit — AI-generated game cards"
-                  class="carousel-slide active"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/guexit-screenshot.webp"
-                  alt="Guexit — game interface"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/guexit2.webp"
-                  alt="Guexit — generated card"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/guexit3.webp"
-                  alt="Guexit — generated card"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/guexit4.webp"
-                  alt="Guexit — generated card"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/guexit-diagram.webp"
-                  alt="Guexit — system architecture diagram"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <button
-                type="button"
-                class="carousel-button prev"
-                aria-label="Previous image"
-              ></button>
-              <button
-                type="button"
-                class="carousel-button next"
-                aria-label="Next image"
-              ></button>
-              <p class="carousel-status" aria-live="polite"></p>
-            </div>
-          </div>
-          <div class="modal-description">
-            <h3>About the project</h3>
-            <p>
-              Guexit is an AI-driven web guessing game where players compete
-              using cards made from AI-generated art — creativity and deduction
-              in a multiplayer format.
-            </p>
-
-            <h3>Key features</h3>
-            <ul>
-              <li>Text-to-image generation using transformer models</li>
-              <li>Interactive multiplayer card game</li>
-              <li>High-quality AI art generation</li>
-              <li>Scalable cloud architecture</li>
-            </ul>
-
-            <h3>Technologies used</h3>
-            <ul class="tech-stack">
-              <li>Angular</li>
-              <li>.NET</li>
-              <li>Python</li>
-              <li>Transformers</li>
-              <li>FastAPI</li>
-              <li>Docker</li>
-              <li>Azure</li>
-            </ul>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="modal-buttons">
-            <a
-              href="https://github.com/Guexit"
-              target="_blank"
-              rel="noopener"
-              class="visit-button github"
-            >
-              <i class="fa-brands fa-github" aria-hidden="true"></i>
-              View code
-            </a>
-            <a
-              href="https://www.instagram.com/reel/C6gke9usAIr/"
-              target="_blank"
-              rel="noopener"
-              class="visit-button instagram"
-            >
-              <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-              View demo
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      id="neural-search-modal"
-      class="project-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="neural-search-modal-title"
-      hidden
-    >
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="modal-title">
-            <img
-              src="assets/css/images/icon-neural.webp"
-              alt=""
-              width="60"
-              height="60"
-              class="modal-logo"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="title-text">
-              <h2 id="neural-search-modal-title">Neural Search</h2>
-              <span class="subtitle">Semantic document search</span>
-            </div>
-          </div>
-          <button type="button" class="close-modal" aria-label="Close dialog">
-            <span class="close-icon" aria-hidden="true"></span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="modal-image">
-            <div
-              class="carousel"
-              role="group"
-              aria-roledescription="carousel"
-              aria-label="Neural Search screenshots"
-            >
-              <div class="carousel-container">
-                <img
-                  src="assets/css/images/neural_search.webp"
-                  alt="Neural Search — search interface"
-                  class="carousel-slide active"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/neural_search_2.webp"
-                  alt="Neural Search — indexing interface"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/neural_search_3.webp"
-                  alt="Neural Search — home screen"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <button
-                type="button"
-                class="carousel-button prev"
-                aria-label="Previous image"
-              ></button>
-              <button
-                type="button"
-                class="carousel-button next"
-                aria-label="Next image"
-              ></button>
-              <p class="carousel-status" aria-live="polite"></p>
-            </div>
-          </div>
-          <div class="modal-description">
-            <h3>About the project</h3>
-            <p>
-              A semantic document search engine that uses transformer models to
-              understand the meaning behind a query and find the documents that
-              actually answer it.
-            </p>
-
-            <h3>Key features</h3>
-            <ul>
-              <li>Semantic understanding of search queries</li>
-              <li>Context-aware document matching</li>
-              <li>Semantic ranker</li>
-              <li>Multi-language support</li>
-              <li>Audio transcription</li>
-            </ul>
-
-            <h3>Technologies used</h3>
-            <ul class="tech-stack">
-              <li>Python</li>
-              <li>Haystack</li>
-              <li>Streamlit</li>
-              <li>Transformers</li>
-              <li>Hugging Face Spaces</li>
-            </ul>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="modal-buttons">
-            <a
-              href="https://github.com/ugm2/neural-search-demo"
-              target="_blank"
-              rel="noopener"
-              class="visit-button github"
-            >
-              <i class="fa-brands fa-github" aria-hidden="true"></i>
-              View code
-            </a>
-            <a
-              href="https://huggingface.co/spaces/ugaray96/neural-search"
-              target="_blank"
-              rel="noopener"
-              class="visit-button"
-            >
-              <i
-                class="fa-solid fa-arrow-up-right-from-square"
-                aria-hidden="true"
-              ></i>
-              Visit demo
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      id="grocery-classifier-modal"
-      class="project-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="grocery-modal-title"
-      hidden
-    >
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="modal-title">
-            <img
-              src="assets/css/images/icon-grocery.webp"
-              alt=""
-              width="60"
-              height="60"
-              class="modal-logo"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="title-text">
-              <h2 id="grocery-modal-title">Grocery Classifier</h2>
-              <span class="subtitle">AI-powered product recognition</span>
-            </div>
-          </div>
-          <button type="button" class="close-modal" aria-label="Close dialog">
-            <span class="close-icon" aria-hidden="true"></span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="modal-image">
-            <div
-              class="carousel"
-              role="group"
-              aria-roledescription="carousel"
-              aria-label="Grocery Classifier screenshots"
-            >
-              <div class="carousel-container">
-                <img
-                  src="assets/css/images/grocery_classifier.webp"
-                  alt="Grocery Classifier — main interface"
-                  class="carousel-slide active"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/grocery_classifier_2.webp"
-                  alt="Grocery Classifier — user feedback"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/grocery_classifier_3.webp"
-                  alt="Grocery Classifier — submitting feedback"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/grocery_classifier_4.webp"
-                  alt="Grocery Classifier — retraining the model"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/grocery_classifier_5.webp"
-                  alt="Grocery Classifier — corrected prediction"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <button
-                type="button"
-                class="carousel-button prev"
-                aria-label="Previous image"
-              ></button>
-              <button
-                type="button"
-                class="carousel-button next"
-                aria-label="Next image"
-              ></button>
-              <p class="carousel-status" aria-live="polite"></p>
-            </div>
-          </div>
-          <div class="modal-description">
-            <h3>About the project</h3>
-            <p>
-              A computer vision system that identifies and classifies grocery
-              products from photographs, and can be corrected and retrained from
-              the interface itself.
-            </p>
-
-            <h3>Key features</h3>
-            <ul>
-              <li>Grocery item recognition</li>
-              <li>Streamlit interface</li>
-              <li>Retrain the model in seconds</li>
-            </ul>
-
-            <h3>Technologies used</h3>
-            <ul class="tech-stack">
-              <li>Python</li>
-              <li>PyTorch</li>
-              <li>Streamlit</li>
-              <li>Computer Vision</li>
-              <li>Hugging Face Spaces</li>
-            </ul>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="modal-buttons">
-            <a
-              href="https://github.com/ugm2/grocery-classifier-demo"
-              target="_blank"
-              rel="noopener"
-              class="visit-button github"
-            >
-              <i class="fa-brands fa-github" aria-hidden="true"></i>
-              View code
-            </a>
-            <a
-              href="https://huggingface.co/spaces/ugaray96/grocery-classifier-demo"
-              target="_blank"
-              rel="noopener"
-              class="visit-button"
-            >
-              <i
-                class="fa-solid fa-arrow-up-right-from-square"
-                aria-hidden="true"
-              ></i>
-              Visit demo
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      id="marca-tu-ritmo-modal"
-      class="project-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="fitness-modal-title"
-      hidden
-    >
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="modal-title">
-            <img
-              src="assets/css/images/icon-fitness.webp"
-              alt=""
-              width="60"
-              height="60"
-              class="modal-logo"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="title-text">
-              <h2 id="fitness-modal-title">Marca Tu Ritmo</h2>
-              <span class="subtitle">Fitness tracking app</span>
-            </div>
-          </div>
-          <button type="button" class="close-modal" aria-label="Close dialog">
-            <span class="close-icon" aria-hidden="true"></span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="modal-image">
-            <div
-              class="carousel"
-              role="group"
-              aria-roledescription="carousel"
-              aria-label="Marca Tu Ritmo screenshots"
-            >
-              <div class="carousel-container">
-                <img
-                  src="assets/css/images/marca-tu-ritmo.webp"
-                  alt="Marca Tu Ritmo — main interface"
-                  class="carousel-slide active"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/marca-tu-ritmo-2.webp"
-                  alt="Marca Tu Ritmo — progress insights"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/marca-tu-ritmo-3.webp"
-                  alt="Marca Tu Ritmo — workout logs"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src="assets/css/images/marca-tu-ritmo-4.webp"
-                  alt="Marca Tu Ritmo — settings"
-                  class="carousel-slide"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <button
-                type="button"
-                class="carousel-button prev"
-                aria-label="Previous image"
-              ></button>
-              <button
-                type="button"
-                class="carousel-button next"
-                aria-label="Next image"
-              ></button>
-              <p class="carousel-status" aria-live="polite"></p>
-            </div>
-          </div>
-          <div class="modal-description">
-            <h3>About the project</h3>
-            <p>
-              A fitness tracking app for logging workouts and watching progress
-              over time, built with React Native and Expo so one codebase covers
-              both platforms.
-            </p>
-
-            <h3>Key features</h3>
-            <ul>
-              <li>Track workouts and exercises</li>
-              <li>Monitor progress over time</li>
-              <li>Log fitness activities</li>
-              <li>Customisable settings</li>
-              <li>Dark mode support</li>
-            </ul>
-
-            <h3>Technologies used</h3>
-            <ul class="tech-stack">
-              <li>React Native</li>
-              <li>Expo</li>
-              <li>TypeScript</li>
-              <li>React Navigation</li>
-              <li>Expo Router</li>
-            </ul>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="modal-buttons">
-            <a
-              href="https://github.com/ugm2/Marca-Tu-Ritmo"
-              target="_blank"
-              rel="noopener"
-              class="visit-button github"
-            >
-              <i class="fa-brands fa-github" aria-hidden="true"></i>
-              View code
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer id="footer">
-      <div class="footer__inner">
-        <h2 class="footer__title">Let's build something that ships.</h2>
-        <p class="footer__lead">
-          I'm always happy to talk about agentic RAG, LLM systems, or the eval
-          harness nobody wants to write.
-        </p>
-        <p class="footer__mail">
-          <a href="mailto:unaigaraymaestre@gmail.com"
-            >unaigaraymaestre@gmail.com</a
-          >
-        </p>
-        <ul class="icons">
-          <li>
-            <a
-              href="https://www.linkedin.com/in/ugm96/"
-              target="_blank"
-              rel="noopener"
-              aria-label="LinkedIn"
-            >
-              <i class="fa-brands fa-linkedin" aria-hidden="true"></i
-            ></a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/ugm2"
-              target="_blank"
-              rel="noopener"
-              aria-label="GitHub"
-            >
-              <i class="fa-brands fa-github" aria-hidden="true"></i
-            ></a>
-          </li>
-          <li>
-            <a
-              href="https://twitter.com/ugaray96"
-              target="_blank"
-              rel="noopener"
-              aria-label="X (Twitter)"
-            >
-              <i class="fa-brands fa-x-twitter" aria-hidden="true"></i
-            ></a>
-          </li>
-          <li>
-            <a
-              href="https://www.instagram.com/ugaray96"
-              target="_blank"
-              rel="noopener"
-              aria-label="Instagram"
-            >
-              <i class="fa-brands fa-instagram" aria-hidden="true"></i
-            ></a>
-          </li>
-          <li>
-            <a href="mailto:unaigaraymaestre@gmail.com" aria-label="Email">
-              <i class="fa-solid fa-envelope" aria-hidden="true"></i
-            ></a>
-          </li>
-        </ul>
-        <p class="copyright">&copy; Unai Garay Maestre</p>
-      </div>
-    </footer>
-
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/projects.js"></script>
-  </body>
+		<footer class="colophon">
+			<p class="co-1">© 2026 Unai Garay Maestre</p>
+			<p class="co-2">Printed in three inks — fluorescent pink, yellow and hunter green — on warm cream. Set in Fraunces &amp; Shantell Sans.</p>
+			<p class="co-3">
+				<span class="clock-l">In Alicante it’s <time class="clock" id="clock">—</time> ·</span>
+				Edition 2026
+			</p>
+			<a class="co-top" href="#main">Back to top ↑</a>
+		</footer>
+		<div class="pv" aria-hidden="true">
+			<div class="pv-in"><div class="pv-track"></div></div>
+		</div>
+	</body>
 </html>
