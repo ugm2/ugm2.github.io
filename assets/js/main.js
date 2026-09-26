@@ -347,7 +347,7 @@ if (root.classList.contains("gl")) {
 		.then((m) =>
 			m.mountPrint(cv, {
 				src: "images/unai-900.webp",
-				depth: "images/unai-depth.webp",
+				// depth: "images/unai-depth.webp" — off until it is rebuilt from a real depth map
 				fig: $("#p-fig").getAttribute("d"),
 				skin: $("#p-skin").getAttribute("d"),
 				dpr: Math.min(devicePixelRatio || 1, innerWidth < 700 ? 1.25 : 1.5),
