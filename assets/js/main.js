@@ -227,6 +227,20 @@ const snd = (() => {
 	return { play, engine, invite, audio };
 })();
 
+// Episode VII, the game: reduced motion or no WebGL get the crawl's printed card first
+const GL = () => root.classList.contains("gl");
+const play = (back, onClose) =>
+	import("./game.js").then(
+		(m) => m.game({ snd, back, onClose }),
+		() => {},
+	);
+const crawl = (still) =>
+	import("./crawl.js").then(
+		(m) => m.crawl({ RM, snd, still, play: GL() ? play : null }),
+		() => {},
+	);
+const launch = (back, onClose) => (RM || !GL() ? crawl(true) : play(back, onClose));
+
 {
 	const copy = async (t) => {
 		try {
@@ -379,6 +393,7 @@ function portrait(P) {
 		return [r.left + r.width * 0.72, r.top + r.height * 0.52];
 	};
 	const aim = (x, y) => {
+		if (root.classList.contains("playing")) return;
 		const [fx, fy] = face();
 		tgt[0] = clamp((x - fx) / (innerWidth * 0.42), -1, 1);
 		tgt[1] = clamp((y - fy) / (innerHeight * 0.42), -1, 1);
@@ -784,7 +799,23 @@ for (const a of $$("[data-roll]")) {
 		return [e.clientX - r.left, e.clientY - r.top];
 	};
 	for (const s of S) {
-		const el = s.el;
+		const el = s.el,
+			go = $(".stk-go", el);
+		const land = (a) => (
+			a?.cancel(),
+			el.animate({ scale: [0.3, 1], opacity: [0, 1] }, { duration: 500, easing: "cubic-bezier(.34,1.56,.64,1)" })
+		);
+		const fly = () => {
+			if (RM || !GL()) return launch(go);
+			snd.play("peel");
+			const a = el.animate(
+				{ translate: ["0 0", "0 -28px", "30vw -110vh"], scale: [1, 1.2, 0.6], offset: [0, 0.3, 1] },
+				{ duration: 760, easing: "cubic-bezier(.45,0,.75,.35)", fill: "forwards" },
+			);
+			a.finished.then(() => launch(go, () => land(a)).then((g) => g || land(a)));
+		};
+		// the pointer is captured by the sticker, so its click lands on the sticker, not the button
+		if (go) el.addEventListener("click", () => !s.moved && fly());
 		// a finger must press and hold, so swipes still scroll
 		let hold = 0,
 			at = null;
@@ -794,7 +825,10 @@ for (const a of $$("[data-roll]")) {
 				el.setPointerCapture(e.pointerId);
 			} catch {}
 			const [px, py] = local(e);
+			s.moved = false;
 			s.drag = {
+				x0: s.x,
+				y0: s.y,
 				ox: px - s.x,
 				oy: py - s.y,
 				a0: s.a,
@@ -831,6 +865,7 @@ for (const a of $$("[data-roll]")) {
 			s.vx = t > t0 ? ((s.x - x0) / (t - t0)) * 1000 : 0;
 			s.vy = t > t0 ? ((s.y - y0) / (t - t0)) * 1000 : 0;
 			s.a = d.a0 + clamp(s.vx * 0.012, -16, 16);
+			s.moved ||= Math.hypot(s.x - d.x0, s.y - d.y0) > 6;
 			put(s);
 		});
 		const drop = () => {
@@ -847,6 +882,7 @@ for (const a of $$("[data-roll]")) {
 				s.vy = clamp(((s.y - y0) / (t - t0)) * 1000, -2600, 2600);
 				s.va = s.vx * 0.09;
 			}
+			if (go && Math.hypot(s.vx, s.vy) > 1700) return void ((s.vx = s.vy = s.va = 0), fly());
 			snd.play("slap", 0.55);
 			run();
 		};
@@ -1412,12 +1448,14 @@ if (root.classList.contains("tour")) {
 }
 
 {
-	// easter egg: Konami, typing "force" or holding the logo loads crawl.js
-	const run = () =>
-		import("./crawl.js").then(
-			(m) => m.crawl({ RM, snd }),
-			() => {},
-		);
+	// easter egg: Konami, typing "force" or holding the logo rolls the crawl, and the crawl hands over to the game
+	const run = () => crawl(false);
+	// a tiny ship crosses the road's sky while the road is in view; click it to play
+	const ship = $(".road-ship");
+	if (ship) {
+		new IntersectionObserver(([e]) => ship.classList.toggle("fly", e.isIntersecting)).observe(ship.parentElement);
+		ship.addEventListener("click", () => launch(ship));
+	}
 	const K = "ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight b a";
 	let keys = [];
 	addEventListener("keydown", (e) => {

@@ -33,7 +33,8 @@ box-shadow:9px 8px 0 var(--pink);animation:cr-stamp .5s var(--spring) both;user-
 .cr-end[hidden]{display:none}
 @keyframes cr-stamp{from{scale:1.3;rotate:-6deg;opacity:0}}
 .cr-end h2{margin:0 0 24px;font:700 clamp(1.8rem,1.2rem + 2.6vw,3.2rem)/1.05 var(--serif-d);text-wrap:balance}
-.cr-end h2 i{color:var(--pink)}
+.cr-end h2 i{color:var(--pink);font-style:normal}
+.cr-no{margin:-10px 0 20px;font:500 1rem/1.45 var(--serif)}
 .cr-b{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
 .cr-stage{transition:opacity .7s,visibility 0s .7s}
 .crawl.done .cr-stage{opacity:0;visibility:hidden}
@@ -50,12 +51,13 @@ box-shadow:9px 8px 0 var(--pink);animation:cr-stamp .5s var(--spring) both;user-
 `;
 
 const INTRO = ["A long time ago, in a galaxy far, far away…", "(well, Alicante, 2018)"];
-const EP = "EPISODE VI";
-const TITLE = "THE RETURN OF THE EVALS";
+const EP = "EPISODE VII";
+const TITLE = "THE MODEL AWAKENS";
 const CRAWL = [
-	"It is a period of production chaos. Demos have been winning battles, but losing the war against real users.",
-	"From a quiet base in Alicante, one engineer has spent every year since 2018 shipping AI that holds: retrieval that actually retrieves, three US patent filings, and a road of five companies.",
-	"Now, at Inulti, he builds an LLM retention platform where guardrails guard every message, humans stay in the loop, and evals gate every change…",
+	"Deep inside a moon-sized station, something has started to think.",
+	"Trained on everything and reviewed by no one, the MODEL has woken up — and it is hallucinating with total confidence.",
+	"From a quiet base in Alicante, an engineer who has been shipping AI since 2018 climbs into a small pink starfighter.",
+	"His mission: fly into the network, layer by layer, and put the model back to sleep…",
 ];
 
 // a halftone night: each star a little cluster of dots on the plate's 3 px grid
@@ -116,19 +118,21 @@ function rumble({ ac, out, buf }) {
 
 let open = false;
 
-export function crawl({ RM, snd }) {
+// play: starts the game (null without WebGL); still: the printed card even with motion allowed
+export function crawl({ RM, snd, play, still }) {
 	if (open || !window.HTMLDialogElement) return;
 	open = true;
 	if (!document.getElementById("cr-css"))
 		document.head.append(Object.assign(document.createElement("style"), { id: "cr-css", textContent: CSS }));
 	const back = document.activeElement;
 	const d = document.createElement("dialog");
-	d.className = "crawl" + (RM ? " still" : "");
-	d.setAttribute("aria-label", "Episode VI: The Return of the Evals");
+	const card0 = RM || still;
+	d.className = "crawl" + (card0 ? " still" : "");
+	d.setAttribute("aria-label", "Episode VII: The Model Awakens");
 	const para = CRAWL.map((p) => `<p>${p}</p>`).join("");
-	const end = `<h2>May the evals be with <i>you</i>.</h2>
-		<div class="cr-b"><a class="pill btn-k" href="#contact"><span>Say hi</span></a><button class="pill" type="button" data-x><span>Back to the site</span></button></div>`;
-	d.innerHTML = RM
+	const end = `<h2>Attention is all you need<i>.</i></h2>${play ? "" : `<p class="cr-no">The game needs WebGL, and this browser has it switched off. The story is all yours, though.</p>`}
+		<div class="cr-b">${play ? `<button class="pill btn-k" type="button" data-play><span>${card0 ? "Play anyway" : "Play Episode VII"}</span></button>` : ""}<button class="pill" type="button" data-x><span>Back to the site</span></button></div>`;
+	d.innerHTML = card0
 		? `<canvas class="cr-sky" aria-hidden="true"></canvas>
 		<div class="cr-end"><div class="cr-still">
 			<p class="cr-il">${INTRO.join(" ")}</p>
@@ -149,7 +153,7 @@ export function crawl({ RM, snd }) {
 	const card = d.querySelector(".cr-end");
 	const timers = [];
 	let stop = null,
-		done = RM;
+		done = card0;
 
 	const finish = () => {
 		if (done) return;
@@ -161,8 +165,10 @@ export function crawl({ RM, snd }) {
 		d.querySelector(".cr-skip").hidden = true;
 		card.hidden = false;
 		snd.play("paper");
-		card.querySelector("a").focus();
+		card.querySelector("button").focus();
 	};
+	// skipping goes straight to the game (without WebGL, to the end card)
+	const go = () => (play ? (close(false), play(back)) : finish());
 	const close = (restore = true) => {
 		if (!open) return;
 		open = false;
@@ -177,19 +183,20 @@ export function crawl({ RM, snd }) {
 	d.addEventListener("cancel", (e) => (e.preventDefault(), close()));
 	d.addEventListener("click", (e) => {
 		if (e.target.closest("[data-x]")) close();
-		else if (e.target.closest('a[href="#contact"]')) close(false);
-		else if (e.target.closest(".cr-skip")) finish();
+		else if (e.target.closest("[data-play]")) go();
+		else if (e.target.closest(".cr-skip")) go();
 	});
 
-	if (!RM) {
-		// any tap, click, scroll or key skips straight to the end card
-		d.addEventListener("pointerdown", (e) => !e.target.closest("button, a") && finish());
+	if (!card0) {
+		// any tap, click, scroll or key skips the crawl
+		const skip = (e) => !done && !e.target.closest?.("button, a") && go();
+		d.addEventListener("pointerdown", skip);
 		for (const ev of ["wheel", "touchmove"])
-			d.addEventListener(ev, (e) => (e.preventDefault(), finish()), { passive: false });
+			d.addEventListener(ev, (e) => (e.preventDefault(), skip(e)), { passive: false });
 		d.addEventListener("keydown", (e) => {
 			if (done || ["Tab", "Shift", "Escape", "Enter", " "].includes(e.key)) return;
 			e.preventDefault();
-			finish();
+			go();
 		});
 		const text = d.querySelector(".cr-text");
 		const dist = text.offsetHeight + innerHeight * 2.6;
@@ -218,5 +225,5 @@ export function crawl({ RM, snd }) {
 	}
 	d.showModal();
 	// the printed card starts at its top, not scrolled to its first button
-	if (RM) (card.setAttribute("tabindex", "-1"), card.focus({ preventScroll: true }), (d.scrollTop = 0));
+	if (card0) (card.setAttribute("tabindex", "-1"), card.focus({ preventScroll: true }), (d.scrollTop = 0));
 }

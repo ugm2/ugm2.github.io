@@ -116,6 +116,13 @@
 			<symbol id="i-ok" viewBox="0 0 16 16">
 				<path d="M2.8 8.7c1.2 1.1 2.4 2.3 3.6 3.5 2.3-2.8 4.6-5.6 7-8.4" />
 			</symbol>
+			<symbol id="i-ship" viewBox="0 0 48 24">
+				<path d="M19 8l8-6h5l-4 6M19 16l8 6h5l-4-6" style="fill: var(--pink); stroke: var(--ink)" />
+				<rect x="4" y="7.5" width="37" height="9" rx="4.5" style="fill: var(--pink); stroke: var(--ink)" />
+				<path d="M9 11h24v2H9z" style="fill: var(--yellow); stroke: none" />
+				<ellipse cx="30" cy="12" rx="4.5" ry="2.3" style="fill: var(--ink); stroke: none" />
+				<rect x="1" y="9" width="3.5" height="6" rx="1" style="fill: var(--yellow); stroke: var(--ink)" />
+			</symbol>
 		</svg>
 
 		<header class="top">
@@ -359,6 +366,11 @@
 							<li class="stk s-w s-c">GCP</li>
 							<li class="stk s-p">Airflow</li>
 							<li class="stk s-k">TypeScript / React</li>
+							<li class="stk s-ship">
+								<button class="stk-go" type="button" aria-label="Episode VII: play the game">
+									<svg class="ic" aria-hidden="true"><use href="#i-ship" /></svg>Episode VII
+								</button>
+							</li>
 						</ul>
 						<p class="note note-stk" aria-hidden="true">
 							<svg viewBox="0 0 60 50">
@@ -378,6 +390,9 @@
 				<h2 id="work-h" class="h2" data-lines>Where I’ve shipped<i>.</i></h2>
 				<div class="road" id="road">
 					<div class="road-pin">
+						<button class="road-ship" type="button" aria-label="Episode VII: play the game">
+							<svg class="ic" aria-hidden="true"><use href="#i-ship" /></svg><span>play?</span>
+						</button>
 						<div class="road-view" aria-hidden="true">
 							<canvas class="road-gl"></canvas>
 							<p class="note road-wait">inking the drums…</p>
@@ -806,8 +821,10 @@
 			</p>
 			<p class="co-3">
 				<span class="clock-l">In Alicante it’s <time class="clock" id="clock">—</time> ·</span>
-				Edition 2026<span class="egg">
-					· psst: <span class="egg-k">type “force”</span><span class="egg-t">hold the ug</span></span
+				Edition 2026
+				<span class="note note-game"
+					>there’s a game in here — find the ship <svg class="ic" aria-hidden="true"><use href="#i-ne" /></svg> (or type
+					“force”)</span
 				>
 			</p>
 			<a class="co-top" href="#main"
