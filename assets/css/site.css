@@ -2763,21 +2763,112 @@ body {
 		scale 1s 0.2s cubic-bezier(0.3, 0, 0.7, 1),
 		opacity 0.3s 0.2s;
 }
-.egg {
-	color: var(--ink-2);
+/* the game's ways in: a starfighter sticker, a ship across the road's sky, a hand-note in the footer */
+.s-ship {
+	padding: 0;
+	background: var(--ink);
 }
-.egg-t {
-	display: none;
+.stk-go {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45em;
+	padding: 0.5em 1em 0.5em 0.7em;
+	border: 0;
+	border-radius: inherit;
+	background: none;
+	color: var(--yellow);
+	font: inherit;
+	cursor: pointer;
 }
-@media (hover: none) {
-	.egg-k {
-		display: none;
+.stk-go .ic {
+	width: 2.2em;
+	height: 1.1em;
+}
+.road-pin {
+	position: relative;
+}
+.road-ship {
+	position: absolute;
+	z-index: 4;
+	left: 0;
+	top: calc(var(--navh) + 9%);
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	animation: rs-fly 40s linear infinite paused;
+}
+.road-ship .ic {
+	width: 46px;
+	height: 23px;
+}
+.road-ship::before {
+	content: "";
+	position: absolute;
+	right: calc(100% - 10px);
+	top: 50%;
+	width: 110px;
+	height: 10px;
+	margin-top: -5px;
+	background: radial-gradient(circle, var(--pink) 1.6px, #0000 2.2px) 0 50% / 8px 10px;
+	-webkit-mask: linear-gradient(90deg, #0000, #000);
+	mask: linear-gradient(90deg, #0000, #000);
+}
+.road-ship span {
+	padding: 2px 7px;
+	border: 2px solid var(--ink);
+	border-radius: 4px;
+	background: var(--yellow);
+	color: var(--ink);
+	font: 700 0.75rem/1.2 var(--hand);
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	rotate: -6deg;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+.road-ship:is(:hover, :focus-visible) span {
+	opacity: 1;
+}
+.road-ship.fly {
+	animation-play-state: running;
+}
+.road-ship:hover {
+	animation-play-state: paused;
+}
+.road-ship:focus-visible {
+	animation: none;
+	translate: 24px 0;
+}
+@keyframes rs-fly {
+	0% {
+		translate: -150px 14px;
 	}
-	.egg-t {
-		display: inline;
+	24%,
+	100% {
+		translate: calc(100vw + 40px) -26px;
 	}
 }
-html:not(.js) .egg {
+.note-game {
+	display: block;
+	margin-top: 4px;
+	font-size: 0.95rem;
+	rotate: -2deg;
+}
+@media (prefers-reduced-motion: reduce) {
+	.road-ship {
+		animation: none;
+		left: auto;
+		right: 8%;
+	}
+	.road-ship span {
+		opacity: 1;
+	}
+}
+html:not(.js) :is(.road-ship, .s-ship, .note-game) {
 	display: none;
 }
 .if-t {

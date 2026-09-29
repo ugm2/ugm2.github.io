@@ -42,7 +42,7 @@ const SHAPES = {
 	l: () => new THREE.CapsuleGeometry(0.5, 1, 4 * fine, 12 * fine),
 };
 const flat = (g) => (g.index ? g.toNonIndexed() : g);
-const shape = (g) => (typeof g === "string" ? (UNIT[g] ||= flat(SHAPES[g]())) : flat(g));
+const shape = (g) => (typeof g === "string" ? (UNIT[g + fine] ||= flat(SHAPES[g]())) : flat(g));
 const _m = new M4();
 const _n = new THREE.Matrix3();
 const _q = new THREE.Quaternion();
@@ -691,6 +691,9 @@ const STOPS = [
 	[0.73, airfield],
 	[0.895, hq],
 ];
+
+// the game prints with the same parts kit and G-buffer
+export { kit, geo, SV, SF, PV };
 
 export async function mountRoad(canvas, { light, dpr, onLost }) {
 	fine = light ? 1 : 2;
